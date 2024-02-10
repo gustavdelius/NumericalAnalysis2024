@@ -1,0 +1,6 @@
+# Linear Algebra {#sec-linearalgebra}
+
+> *You cannot learn too much linear algebra.*\
+> -- Every mathematician
+
+Coming in week 5.

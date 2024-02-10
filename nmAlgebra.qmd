@@ -1,0 +1,6 @@
+# Algebra {#sec-algebra}
+
+> *Success is the sum of small efforts, repeated day in and day out.*\
+> --[Zeno of Elea](https://en.wikipedia.org/wiki/Zeno_of_Elea)
+
+Coming in week 2

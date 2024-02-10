@@ -1,0 +1,6 @@
+# Calculus {#sec-calculus}
+
+> *The calculus was the first achievement of modern mathematics and it is difficult to overestimate its importance.*\
+> --[Hungarian-American Mathematician John von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann)
+
+Coming in week 3.

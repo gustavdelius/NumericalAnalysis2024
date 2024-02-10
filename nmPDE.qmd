@@ -1,0 +1,6 @@
+# Partial Differential Equations {#sec-pde}
+
+> *When you open the toolkit of differential equations you see the hammers and saws of engineering and physics for the past two centuries and for the foreseeable future.*\
+> --[Benoit Mandelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot)
+
+Coming in week 9.

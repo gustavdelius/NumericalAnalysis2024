@@ -1,0 +1,6 @@
+# Ordinary Differential Equations {#sec-ode}
+
+> *The mathematical discipline of differential equations furnishes the explanation of all those elementary manifestations of nature which involve time.*\
+> --[Norwegian Mathematician Sophus Lie](https://en.wikipedia.org/wiki/Sophus_Lie)
+
+Coming in week 7.

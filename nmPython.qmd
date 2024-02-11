@@ -376,6 +376,8 @@ print("y = ", y)
 ```
 :::
 
+There are other important data structures in Python that we will not cover in this module. These include dictionaries and sets. We will not cover these because they are not necessary for our work in numerical analysis. We are trying to keep things simple. If you are interested in learning more about these data structures, you can find a lot of information about them in the Python documentation.
+
 ### Control Flow: Loops and If Statements
 
 Any time you need to do some repetitive task with a programming language you can use a loop. Just like in other programming languages, we can do loops and conditional statements in very easy ways in Python. The thing to keep in mind is that the Python language is very white-space-dependent. This means that your indentations need to be correct in order for a loop to work. You could get away with sloppy indention in other languages but not so in Python. Also, in some languages (like R and Java) you need to wrap your loops in curly braces. Again, not so in Python.
@@ -1576,6 +1578,33 @@ Plot the function $f(x) = x^3$ for $x \in [0,1]$ on linearly scaled axes, logari
 :::
 
 ------------------------------------------------------------------------
+
+## Dataframes with Pandas {#sec:pandas}
+
+The Pandas package provides Python with the ability to work with tables of data similar to what R provides via its dataframes. As we will not work with data in this module, we do not need to dive deep into the Pandas package. We will only use it to collect computational results into tables for easier display.
+
+::: {#exm-A.50}
+In this example we will build a simple dataframe with Pandas. We will build a table of the first 10 natural numbers and their squares and. We will then display the table.
+
+```{python}
+#| label: tab-A.1
+#| tab-cap: A simple dataframe
+#| tab-alt: A simple dataframe
+
+import pandas as pd
+import numpy as np
+
+# Calculate the columns for the table
+n = np.arange(1,11)
+n2 = n**2
+n3 = n**3
+
+# Combine the columns into a data frame with headers
+df = pd.DataFrame({'n': n, 'n^2': n2, 'n^3': n3})
+df
+```
+
+:::
 
 ## Problems {#sec-python_exercises}
 

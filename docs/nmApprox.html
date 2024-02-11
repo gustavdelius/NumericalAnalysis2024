@@ -554,7 +554,7 @@ In particular, now that you know about how numbers are stored in a computer, how
 <p><span class="theorem-title"><strong>Example 2.5</strong></span> Consider the expression <span class="math display">\[
 (10^{10} + 0.123456789) - 10^{10}.
 \]</span> Mathematically the two terms of <span class="math inline">\(10^{10}\)</span> simply cancel out leaving just <span class="math inline">\(0.123456789\)</span>. However, let us evaluate this in Python:</p>
-<div id="710d834f" class="cell" data-execution_count="1">
+<div id="710d834f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="op">**</span><span class="dv">10</span> <span class="op">+</span> <span class="fl">0.123456789</span> <span class="op">-</span> <span class="dv">10</span><span class="op">**</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>0.12345695495605469</code></pre>
@@ -634,7 +634,7 @@ x = \frac{2c}{-b-\sqrt{b^2-4ac}}.
 </ol></li>
 <li><p>Write Python code to build a plot like <a href="#fig-1.1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>. This plot shows <span class="math inline">\(f(x) = e^x\)</span>, our first approximation <span class="math inline">\(g(x) = 1\)</span> and our second approximation <span class="math inline">\(g(x) = 1+x\)</span>. You may want to refer back to <a href="nmPython.html#exr-A.19" class="quarto-xref">Exercise&nbsp;<span>1.22</span></a> in the Python chapter.</p></li>
 </ol>
-<div id="cell-fig-1.1" class="cell page-columns page-full" data-execution_count="2">
+<div id="cell-fig-1.1" class="cell page-columns page-full" data-execution_count="3">
 <div class="cell-output cell-output-display page-columns page-full">
 <div id="fig-1.1" class="quarto-figure quarto-figure-left quarto-float anchored page-columns page-full" alt="The first two polynomial approximations of the exponential function.">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -722,7 +722,7 @@ e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} +
 f(x) = f\left( \frac{\pi}{2} \right) + f'\left( \frac{\pi}{2} \right)\left( x - \frac{\pi}{2} \right) + \frac{f''\left( \frac{\pi}{2} \right)}{2!}\left( x - \frac{\pi}{2} \right)^2 + \frac{f'''\left( \frac{\pi}{2} \right)}{3!}\left( x - \frac{\pi}{2} \right)^3 + \cdots
 \end{equation}\]</span></p>
 <p>Write the first several terms of the Taylor Series for <span class="math inline">\(f(x) = \sin(x)\)</span> centred at <span class="math inline">\(x_0 = \frac{\pi}{2}\)</span>. Then write Python code to build the plot below showing successive approximations for <span class="math inline">\(f(x) = \sin(x)\)</span> centred at <span class="math inline">\(\pi/2\)</span>.</p>
-<div id="cell-fig-1.2" class="cell page-columns page-full" data-execution_count="3">
+<div id="cell-fig-1.2" class="cell page-columns page-full" data-execution_count="4">
 <div class="cell-output cell-output-display page-columns page-full">
 <div id="fig-1.2" class="quarto-figure quarto-figure-left quarto-float anchored page-columns page-full" alt="Taylor series approximation of the sine function.">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -750,7 +750,7 @@ f(x) = \frac{1}{1-x}.
 \end{equation}\]</span> If we build a Taylor Series centred at <span class="math inline">\(x_0 = 0\)</span> it is not too hard to show that we get <span class="math display">\[\begin{equation}
 f(x) = 1 + x + x^2 + x^3 + x^4 + x^5 + \cdots
 \end{equation}\]</span> (you should stop now and verify this!). However, if we plot the function <span class="math inline">\(f(x)\)</span> along with several successive approximations for <span class="math inline">\(f(x)\)</span> we find that beyond <span class="math inline">\(x=1\)</span> we do not get the correct behaviour of the function (see <a href="#fig-1.3" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). More specifically, we cannot get the Taylor Series to change behaviour across the vertical asymptote of the function at <span class="math inline">\(x=1\)</span>. This example is meant to point out the fact that a Taylor Series will only ever make sense <em>near</em> the point at which you centre the expansion. For the function <span class="math inline">\(f(x) = \frac{1}{1-x}\)</span> centred at <span class="math inline">\(x_0 = 0\)</span> we can only get good approximations within the interval <span class="math inline">\(x \in (-1,1)\)</span> and no further.</p>
-<div id="cell-fig-1.3" class="cell page-columns page-full" data-execution_count="4">
+<div id="cell-fig-1.3" class="cell page-columns page-full" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -849,9 +849,9 @@ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots + \frac{
 \end{equation}\]</span> meaning that we expect the error to be of the order of <span class="math inline">\(x^{n+1}\)</span>.</p>
 <hr>
 <div id="exr-1.38" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.36</strong></span> Let us make the previous discussion a bit more concrete. We know the Taylor Series for <span class="math inline">\(f(x) = e^x\)</span> around <span class="math inline">\(x=0\)</span> quite well at this point so let us use it to approximate the values of <span class="math inline">\(f(0.1) = e^{0.1}\)</span> and <span class="math inline">\(f(0.2)=e^{0.2}\)</span> by truncating the Taylor series at different orders. Notice that <span class="math inline">\(x=0.1\)</span> and <span class="math inline">\(x=0.2\)</span> are pretty close to the centre of the Taylor Series <span class="math inline">\(x_0 = 0\)</span> so this sort of approximation is reasonable.</p>
+<p><span class="theorem-title"><strong>Exercise 2.36</strong></span> Now make the previous discussion a bit more concrete. You know the Taylor Series for <span class="math inline">\(f(x) = e^x\)</span> around <span class="math inline">\(x=0\)</span> quite well at this point so use it to approximate the values of <span class="math inline">\(f(0.1) = e^{0.1}\)</span> and <span class="math inline">\(f(0.2)=e^{0.2}\)</span> by truncating the Taylor series at different orders. Because <span class="math inline">\(x=0.1\)</span> and <span class="math inline">\(x=0.2\)</span> are pretty close to the centre of the Taylor Series <span class="math inline">\(x_0 = 0\)</span>, this sort of approximation is reasonable.</p>
 <p>Then compare your approximate values to Python’s values <span class="math inline">\(f(0.1)=e^{0.1} \approx\)</span> <code>np.exp(0.1)</code> <span class="math inline">\(=1.1051709180756477\)</span> and <span class="math inline">\(f(0.2)=e^{0.2} \approx\)</span> <code>np.exp(0.2)</code> <span class="math inline">\(=1.2214027581601699\)</span> to calculate the truncation errors <span class="math inline">\(\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|\)</span> and <span class="math inline">\(\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|\)</span>.</p>
-<p>Fill in the blanks in the table.</p>
+<p>Fill in the blanks in the table. If you want to create the table in your jupyter notebook, you can use Pandas as described in <span class="quarto-unresolved-ref">?sec-pandas</span></p>
 <table class="table">
 <colgroup>
 <col style="width: 19%">
@@ -872,21 +872,21 @@ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots + \frac{
 <tbody>
 <tr class="odd">
 <td>0</td>
-<td><span class="math inline">\(1\)</span></td>
-<td><span class="math inline">\(0.10517091807564771\)</span></td>
-<td><span class="math inline">\(1\)</span></td>
-<td><span class="math inline">\(0.22140275816016985\)</span></td>
+<td>1</td>
+<td>1.051709e-01</td>
+<td>1</td>
+<td>2.214028e-01</td>
 </tr>
 <tr class="even">
 <td>1</td>
-<td><span class="math inline">\(1.1\)</span></td>
-<td><span class="math inline">\(0.005170918075647624\)</span></td>
-<td><span class="math inline">\(1.2\)</span></td>
+<td>1.1</td>
+<td>5.170918e-03</td>
+<td>1.2</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>2</td>
-<td><span class="math inline">\(1.105\)</span></td>
+<td>1.105</td>
 <td></td>
 <td></td>
 <td></td>
@@ -938,13 +938,13 @@ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots + \frac{
 <tbody>
 <tr class="odd">
 <td>0</td>
-<td><span class="math inline">\(0.10517091807564771\)</span></td>
-<td><span class="math inline">\(0.22140275816016985\)</span></td>
-<td></td>
+<td>1.051709e-01</td>
+<td>2.214028e-01</td>
+<td>2.105171</td>
 </tr>
 <tr class="even">
 <td>1</td>
-<td><span class="math inline">\(0.005170918075647624\)</span></td>
+<td>5.170918e-03</td>
 <td></td>
 <td></td>
 </tr>
@@ -978,57 +978,51 @@ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots + \frac{
 </div>
 <hr>
 <div id="exr-1.39" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.38</strong></span> To test your conjecture examine the approximation error for the sine function near <span class="math inline">\(x_0 = 0\)</span>. You know that the sine function has the Taylor Series centred at <span class="math inline">\(x_0 = 0\)</span> as <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 2.38</strong></span> To test your conjecture, examine the truncation error for the sine function near <span class="math inline">\(x_0 = 0\)</span>. You know that the sine function has the Taylor Series centred at <span class="math inline">\(x_0 = 0\)</span> as <span class="math display">\[\begin{equation}
 f(x) = \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots.
-\end{equation}\]</span> So there are only approximations of odd order. Use the truncated Taylor series to approximate <span class="math inline">\(f(0.2)=\sin(0.2)\)</span> and $f(0.1)=(0.2).</p>
+\end{equation}\]</span> So there are only approximations of odd order. Use the truncated Taylor series to approximate <span class="math inline">\(f(0.1)=\sin(0.1)\)</span> and <span class="math inline">\(f(0.2)=\sin(0.2)\)</span> and use Python’s values <code>np.sin(0.1)</code> and <code>np.sin(0.2)</code> to calculate the truncation errors <span class="math inline">\(\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|\)</span> and <span class="math inline">\(\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|\)</span>.</p>
 <p>Complete the following table:</p>
 <table class="table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 7%">
+<col style="width: 19%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Order <span class="math inline">\(n\)</span></th>
-<th><span class="math inline">\(f_n(0.2)\)</span></th>
+<th><span class="math inline">\(\epsilon_n(0.1)\)</span></th>
 <th><span class="math inline">\(\epsilon_n(0.2)\)</span></th>
-<th><span class="math inline">\(f_n(0.3)\)</span></th>
-<th><span class="math inline">\(\epsilon_n(0.3)\)</span></th>
-<th><span class="math inline">\(\epsilon_n(0.3)/ \epsilon_n(0.2)\)</span></th>
+<th><span class="math inline">\(\epsilon_n(0.2)/ \epsilon_n(0.1)\)</span></th>
+<th>Your Conjecture</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><span class="math inline">\(0.1\)</span></td>
-<td><span class="math inline">\(0.10517091807564771\)</span></td>
-<td><span class="math inline">\(0.2\)</span></td>
-<td><span class="math inline">\(0.22140275816016985\)</span></td>
+<td>1.665834e-04</td>
+<td>1.330669e-03</td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>3</td>
-<td><span class="math inline">\(1.1\)</span></td>
-<td><span class="math inline">\(0.005170918075647624\)</span></td>
-<td><span class="math inline">\(1.2\)</span></td>
+<td>8.331349e-08</td>
+<td>2.664128e-06</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td><span class="math inline">\(1.105\)</span></td>
-<td></td>
+<td>1.983852e-11</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>7</td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -1040,14 +1034,20 @@ f(x) = \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots.
 <td></td>
 <td></td>
 <td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The entry in the last row of the table will almost certainly not agree with your conjecture. That is okay! That discrepancy has a different explanation. Can you figure out what it is? Hint: does <code>np.sin(x)</code> give you the exact value of <span class="math inline">\(\sin(x)\)</span>?</p>
 <hr>
 <div id="exr-1.40" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.39</strong></span> Perform a similar analysis of the truncation error when approximating <span class="math inline">\(\log(1.1)\)</span> and <span class="math inline">\(\log(1.2)\)</span> from the truncated Taylor series around <span class="math inline">\(x=1\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 2.39</strong></span> Perform another check of your conjecture by approximating <span class="math inline">\(\log(1.02)\)</span> and <span class="math inline">\(\log(1.1)\)</span> from truncations of the Taylor series around <span class="math inline">\(x=1\)</span>: <span class="math display">\[
+\log(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \frac{x^5}{5} - \cdots.
+\]</span></p>
+</div>
+<hr>
+<div id="exr-1.40" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.40</strong></span> Write down your observations about how the truncation error at order <span class="math inline">\(n\)</span> changes as <span class="math inline">\(x\)</span> changes. Explain this in terms of the form of the remainder of the truncated Taylor series.</p>
 </div>
 <hr>
 </section>
@@ -1056,7 +1056,7 @@ f(x) = \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots.
 <p>These problem exercises will let you consolidate what you have learned so far and combine it with the coding skills you picked up in <a href="nmPython.html" class="quarto-xref"><span>Chapter 1</span></a>.</p>
 <hr>
 <div id="exr-1.51" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.40</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
+<p><span class="theorem-title"><strong>Exercise 2.41</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
 Sometimes floating point arithmetic does not work like we would expect (and hope) as compared to by-hand mathematics. In each of the following problems we have a mathematical problem that the computer gets wrong. Explain why the computer is getting these wrong.</p>
 <ol type="1">
 <li><p>Mathematically we know that <span class="math inline">\(\sqrt{5}^2\)</span> should just give us 5 back. In Python type <code>np.sqrt(5)**2 == 5</code>. What do you get and why do you get it?</p></li>
@@ -1067,7 +1067,7 @@ Sometimes floating point arithmetic does not work like we would expect (and hope
 </div>
 <hr>
 <div id="exr-1.52" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.41</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
+<p><span class="theorem-title"><strong>Exercise 2.42</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
 In the 1999 film <em>Office Space</em>, a character creates a program that takes fractions of cents that are truncated in a bank’s transactions and deposits them to his own account. This idea has been attempted in the past and now banks look for this sort of thing. In this problem you will build a simulation of the program to see how long it takes to become a millionaire.</p>
 <p><strong>Assumptions:</strong></p>
 <ul>
@@ -1091,7 +1091,7 @@ In the 1999 film <em>Office Space</em>, a character creates a program that takes
 </div>
 <hr>
 <div id="exr-1.53" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.42</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
+<p><span class="theorem-title"><strong>Exercise 2.43</strong></span> (This problem is modified from <span class="citation" data-cites="Greenbaum">(<a href="references.html#ref-Greenbaum" role="doc-biblioref">Greenbaum and Chartier 2012</a>)</span>)<br>
 In the 1991 Gulf War, the Patriot missile defence system failed due to roundoff error. The troubles stemmed from a computer that performed the tracking calculations with an internal clock whose integer values in tenths of a second were converted to seconds by multiplying by a 24-bit binary approximation to <span class="math inline">\(\frac{1}{10}\)</span>: <span class="math display">\[\begin{equation}
 0.1_{10} \approx 0.00011001100110011001100_2.
 \end{equation}\]</span></p>
@@ -1104,11 +1104,11 @@ In the 1991 Gulf War, the Patriot missile defence system failed due to roundoff 
 </div>
 <hr>
 <div id="exr-1.54" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.43</strong></span> Find the Taylor Series for <span class="math inline">\(f(x) = \frac{1}{\log(x)}\)</span> centred at the point <span class="math inline">\(x_0 = e\)</span>. Then use the Taylor Series to approximate the number <span class="math inline">\(\frac{1}{\log(3)}\)</span> to 4 decimal places.</p>
+<p><span class="theorem-title"><strong>Exercise 2.44</strong></span> Find the Taylor Series for <span class="math inline">\(f(x) = \frac{1}{\log(x)}\)</span> centred at the point <span class="math inline">\(x_0 = e\)</span>. Then use the Taylor Series to approximate the number <span class="math inline">\(\frac{1}{\log(3)}\)</span> to 4 decimal places.</p>
 </div>
 <hr>
 <div id="exr-1.55" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.44</strong></span> In this problem we will use Taylor Series to build approximations for the irrational number <span class="math inline">\(\pi\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 2.45</strong></span> In this problem we will use Taylor Series to build approximations for the irrational number <span class="math inline">\(\pi\)</span>.</p>
 <ol type="1">
 <li><p>Write the Taylor series centred at <span class="math inline">\(x_0=0\)</span> for the function <span class="math display">\[\begin{equation}
 f(x) = \frac{1}{1+x}.
@@ -1132,7 +1132,7 @@ f(x) = \frac{1}{1+x}.
 </div>
 <hr>
 <div id="exr-1.56" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.45</strong></span> In this problem we will prove the famous (and the author’s favourite) formula <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 2.46</strong></span> In this problem we will prove the famous (and the author’s favourite) formula <span class="math display">\[\begin{equation}
 e^{i\theta} = \cos(\theta) + i \sin(\theta).
 \end{equation}\]</span> This is known as Euler’s formula after the famous mathematician Leonard Euler. Show all of your work for the following tasks.</p>
 <ol type="1">
@@ -1146,7 +1146,7 @@ e^{i\theta} = \cos(\theta) + i \sin(\theta).
 </div>
 <hr>
 <div id="exr-1.57" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.46</strong></span> In physics, the <em>relativistic energy</em> of an object is defined as <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 2.47</strong></span> In physics, the <em>relativistic energy</em> of an object is defined as <span class="math display">\[\begin{equation}
 E_{rel} = \gamma mc^2
 \end{equation}\]</span> where <span class="math display">\[\begin{equation}
 \gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}.
@@ -1164,7 +1164,7 @@ E_{rel} = mc^2 + \frac{1}{2} mv^2
 </div>
 <hr>
 <div id="exr-1.58" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.47 (The Python Caret Operator)</strong></span> Now that you’re used to using Python to do some basic computations you are probably comfortable with the fact that the caret, <code>^</code>, does NOT do exponentiation like it does in many other programming languages. But what does the caret operator do? That’s what we explore here.</p>
+<p><span class="theorem-title"><strong>Exercise 2.48 (The Python Caret Operator)</strong></span> Now that you’re used to using Python to do some basic computations you are probably comfortable with the fact that the caret, <code>^</code>, does NOT do exponentiation like it does in many other programming languages. But what does the caret operator do? That’s what we explore here.</p>
 <ol type="1">
 <li><p>Consider the numbers <span class="math inline">\(9\)</span> and <span class="math inline">\(5\)</span>. Write these numbers in binary representation. We are going to use four bits to represent each number (it is OK if the first bit happens to be zero). <span class="math display">\[\begin{equation}
 \begin{aligned} 9 &amp;=&amp; \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \\ 5 &amp;=&amp; \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \, \underline{\hspace{0.2in}} \end{aligned}

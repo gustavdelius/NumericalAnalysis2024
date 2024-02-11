@@ -799,17 +799,17 @@ meaning that we expect the error to be of the order of $x^{n+1}$.
 ------------------------------------------------------------------------
 
 ::: {#exr-1.38}
-Let us make the previous discussion a bit more concrete. We know the Taylor Series for $f(x) = e^x$ around $x=0$ quite well at this point so let us use it to approximate the values of $f(0.1) = e^{0.1}$ and $f(0.2)=e^{0.2}$ by truncating the Taylor series at different orders. Notice that $x=0.1$ and $x=0.2$ are pretty close to the centre of the Taylor Series $x_0 = 0$ so this sort of approximation is reasonable.
+Now make the previous discussion a bit more concrete. You know the Taylor Series for $f(x) = e^x$ around $x=0$ quite well at this point so use it to approximate the values of $f(0.1) = e^{0.1}$ and $f(0.2)=e^{0.2}$ by truncating the Taylor series at different orders. Because $x=0.1$ and $x=0.2$ are pretty close to the centre of the Taylor Series $x_0 = 0$, this sort of approximation is reasonable.
 
 Then compare your approximate values to Python's values $f(0.1)=e^{0.1} \approx$ `np.exp(0.1)` $=1.1051709180756477$ and $f(0.2)=e^{0.2} \approx$ `np.exp(0.2)` $=1.2214027581601699$ to calculate the truncation errors $\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|$ and $\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|$.
 
-Fill in the blanks in the table.
+Fill in the blanks in the table. If you want to create the table in your jupyter notebook, you can use Pandas as described in @sec-pandas
 
 | Order $n$ | $f_n(0.1)$     | $\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|$ | $f_n(0.2)$     | $\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|$ |
 |----------------|-----------------|-----------------|-----------------|-----------------|
-| 0 | $1$  | $0.10517091807564771$   | $1$ | $0.22140275816016985$ |          
-| 1 | $1.1$             | $0.005170918075647624$   | $1.2$| |
-| 2 | $1.105$ |  |  |
+| 0 | 1  | 1.051709e-01   | 1 | 2.214028e-01 |          
+| 1 | 1.1 | 5.170918e-03   | 1.2| |
+| 2 | 1.105 |  |  |
 | 3 |  |  |  |
 | 4 |  |  |  |
 | 5 |  |  |  |
@@ -826,8 +826,8 @@ To investigate the dependence of the truncation error $\epsilon_n(x)$ on $n$ and
 
 | Order $n$ | $\epsilon_n(0.1)$ | $\epsilon_n(0.2)$ | $\epsilon_n(0.2) / \epsilon_n(0.1)$ |
 |----------------|-----------------|-----------------|-----------------|
-| 0 | $0.10517091807564771$   | $0.22140275816016985$ | |
-| 1 | $0.005170918075647624$   | | |
+| 0 | 1.051709e-01   | 2.214028e-01 | 2.105171 |
+| 1 | 5.170918e-03   | | |
 | 2 |  |  |  |
 | 3 |  |  |  |
 | 4 |  |  |  |
@@ -839,28 +839,39 @@ Formulate a conjecture about how $\epsilon_n$ changes as $x$ changes.
 ------------------------------------------------------------------------
 
 ::: {#exr-1.39}
-To test your conjecture examine the approximation error for the sine function near $x_0 = 0$. You know that the sine function has the Taylor Series centred at $x_0 = 0$ as 
+To test your conjecture, examine the truncation error for the sine function near $x_0 = 0$. You know that the sine function has the Taylor Series centred at $x_0 = 0$ as 
 \begin{equation}
  f(x) = \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots. 
 \end{equation}
-So there are only approximations of odd order. Use the truncated Taylor series to approximate $f(0.2)=\sin(0.2)$ and $f(0.1)=\sin(0.2).
+So there are only approximations of odd order. Use the truncated Taylor series to approximate $f(0.1)=\sin(0.1)$ and $f(0.2)=\sin(0.2)$ and use Python's values `np.sin(0.1)` and `np.sin(0.2)` to calculate the truncation errors $\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|$ and $\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|$.
 
 Complete the following table:
 
-| Order $n$ | $f_n(0.2)$     | $\epsilon_n(0.2)$ | $f_n(0.3)$     | $\epsilon_n(0.3)$ |  $\epsilon_n(0.3)/ \epsilon_n(0.2)$|
-|----------------|-----------------|-----------------|-----------------|-----------------|-------|
-| 1 | $0.1$  | $0.10517091807564771$   | $0.2$ | $0.22140275816016985$ | |
-| 3 | $1.1$             | $0.005170918075647624$   | $1.2$| | |
-| 5 | $1.105$ |  |  | |
+| Order $n$ | $\epsilon_n(0.1)$ | $\epsilon_n(0.2)$ |  $\epsilon_n(0.2)/ \epsilon_n(0.1)$| Your Conjecture |
+|----------------|-----------------|-----------------|-----------------|-----------------|
+| 1 | 1.665834e-04   | 1.330669e-03 | | |
+| 3 | 8.331349e-08   | 2.664128e-06| | |
+| 5 | 1.983852e-11 |  |  | |
 | 7 |  |  |  | |
 | 9 |  |  |  | |
 
 :::
 
+The entry in the last row of the table will almost certainly not agree with your conjecture. That is okay! That discrepancy has a different explanation. Can you figure out what it is? Hint: does `np.sin(x)` give you the exact value of $\sin(x)$?
+
 ------------------------------------------------------------------------
 
 ::: {#exr-1.40}
-Perform a similar analysis of the truncation error when approximating $\log(1.1)$ and $\log(1.2)$ from the truncated Taylor series around $x=1$.
+Perform another check of your conjecture by approximating $\log(1.02)$ and $\log(1.1)$ from truncations of the Taylor series around $x=1$:
+$$
+\log(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \frac{x^5}{5} - \cdots.
+$$
+:::
+
+------------------------------------------------------------------------
+
+::: {#exr-1.40}
+Write down your observations about how the truncation error at order $n$ changes as $x$ changes. Explain this in terms of the form of the remainder of the truncated Taylor series.
 :::
 
 ------------------------------------------------------------------------

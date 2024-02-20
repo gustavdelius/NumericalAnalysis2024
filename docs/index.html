@@ -8,7 +8,7 @@
 
 <meta name="author" content="Gustav Delius">
 <meta name="author" content="Eric Sullivan">
-<meta name="dcterms.date" content="2024-02-11">
+<meta name="dcterms.date" content="2024-02-19">
 
 <title>Numerical Analysis</title>
 <style>
@@ -324,7 +324,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 11, 2024</p>
+      <p class="date">February 19, 2024</p>
     </div>
   </div>
   
@@ -351,7 +351,7 @@ window.Quarto = {
 <section id="example-from-algebra" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="example-from-algebra">Example from Algebra</h3>
 <p>Solve the equation <span class="math inline">\(\log(x) = \sin(x)\)</span> for <span class="math inline">\(x\)</span> in the interval <span class="math inline">\(x \in (0,\pi)\)</span>. Stop and think about all of the algebra that you ever learned. you will quickly realize that there are no by-hand techniques that can solve this problem! A numerical approximation, however, is not so hard to come by. The following graph shows that there is a unique solution to this equation in the interval <span class="math inline">\((0,\pi)\)</span>.</p>
-<div id="cell-fig-lnsin" class="cell page-columns page-full" data-execution_count="1">
+<div id="cell-fig-lnsin" class="cell page-columns page-full" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the function cos(x) and the line y=x</span></span>
@@ -383,7 +383,7 @@ Figure&nbsp;1: The functions <span class="math inline">\(\log(x)\)</span> and <s
 <p><span class="math display">\[
     \int_0^\pi \sin(x^2) dx?
 \]</span></p>
-<div id="cell-fig-int_sin_x_squared" class="cell page-columns page-full" data-execution_count="2">
+<div id="cell-fig-int_sin_x_squared" class="cell page-columns page-full" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -435,7 +435,7 @@ Figure&nbsp;2: Visual representation of the integral of <span class="math inline
 </div>
 </div>
 <p>Again, trying to use any of the possible techniques for using the Fundamental Theorem of Calculus, and hence finding an antiderivative, on the function <span class="math inline">\(\sin(x^2)\)</span> is completely hopeless. Substitution, integration by parts, and all of the other techniques that you know will all fail. Again, a numerical approximation is not so difficult and is very fast and gives the value</p>
-<div id="bb89e3f8" class="cell" data-execution_count="3">
+<div id="bb89e3f8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Simpson's rule to approximate the integral of sin(x^2) from 0 to pi</span></span>
@@ -457,7 +457,7 @@ Figure&nbsp;2: Visual representation of the integral of <span class="math inline
 <p>Say we needed to solve the differential equation</p>
 <p><span class="math display">\[\frac{dy}{dt} = \sin(y^2) + t.\]</span></p>
 <p>The nonlinear nature of the problem precludes us from using most of the typical techniques (e.g.&nbsp;separation of variables, undetermined coefficients, Laplace Transforms, etc). However, computational methods that result in a plot of an approximate solution can be made very quickly and likely give enough of a solution to be usable. Here is a plot of the solution up to time <span class="math inline">\(t=2.5\)</span> with initial condition <span class="math inline">\(y(0)=0.1\)</span>:</p>
-<div id="cell-fig-diffeq" class="cell page-columns page-full" data-execution_count="4">
+<div id="cell-fig-diffeq" class="cell page-columns page-full" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -505,7 +505,7 @@ Figure&nbsp;3: Plot of numerical solution of <span class="math inline">\(dy/dt=\
 </div>
 </div>
 <p>This was an artificial example, but differential equations are central to modelling the real world in order to predict the future. They are the closest thing we have to a crystal ball. Here is a plot of a numerical solution of the SIR model of the evolution of an epidemic over time:</p>
-<div id="cell-fig-SIRintro" class="cell page-columns page-full" data-execution_count="5">
+<div id="cell-fig-SIRintro" class="cell page-columns page-full" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -618,9 +618,10 @@ Figure&nbsp;4: Plot of a numerical solution of the SIR model
 <section id="assessment" class="level2">
 <h2 class="anchored" data-anchor-id="assessment">Assessment</h2>
 <p>Unfortunately, your learning in the module also needs to be assessed. The final mark will be made up of 40% coursework and 60% final exam.</p>
-<p>The <strong>40% coursework</strong> mark will come from 10 short quizzes that will take place during the “Computer practical” in weeks 2 to 11. Answering each quiz should take less than 5 minutes but you will be given 10 minutes to complete it to give you a large safety margin and remove stress. The quizzes will be based on exercises that you will already have worked through and for which you will have had time to discuss them in class, so they will be really easy if you have engaged with the exercises as intended. There will be a practice quiz in the computer practical in week 1.</p>
+<p>The <strong>40% coursework</strong> mark will come from 10 short quizzes that will take place during the “Computer practical” in weeks 2 to 11. Answering each quiz should take less than 5 minutes but you will be given 10 minutes to complete it to give you a large safety margin and remove stress. The quizzes will be based on exercises that you will already have worked through and for which you will have had time to discuss them in class, so they will be really easy if you have engaged with the exercises as intended. Each quiz will be worth 5 points. There will be a practice quiz in the computer practical in week 1 and another one at the start of the practical in week 2.</p>
 <p>During the assessment quizzes you will be required to work exclusively on a classroom PC rather than your own machine. You will do your work in a Colab notebook that will be shared with you at the start of the quiz via Moodle. You will then need to save your work, download the Colab notebook to the PC and upload it to Moodle before the end of the quiz. You can find more info on the use of <a href="./nmPython.html#google-colab">Colab notebooks</a> in this module in the <a href="./nmPython.html">Essential Python</a> chapter of the Numerical Analysis Learning Guide.</p>
 <p>While working on the quiz on the classroom PC you are only allowed to use a web browser, and the only pages you are allowed to have open are this guide, the course home page on Moodle and any of your notebooks on Google Colab. You are not allowed to use any AI assistants or other web pages. Besides your online notebooks you may also use any hand-written notes as long as you have written them yourself.</p>
+<p>Late submissions will be accepted but there will be one penalty point deduction for each minute or fraction thereof that your submission is late. In other words, the number of points deducted will be the number of minutes late rounded up to the next minute. Given that each quiz is worth 5 points, this means that if you are more than 5 minutes late you will get 0 points.</p>
 <p>To allow for the fact that there may be weeks in which you are ill or otherwise prevented from performing to your best in the assessment quizzes, your final coursework mark will be calculated as the average over your 8 best marks. If exceptional circumstances affect more than two of the 10 quizzes then you would need to submit an exceptional circumstances claim.</p>
 <p>The <strong>60% final exam</strong> will be a 2 hour exam of the usual closed-book form in an exam room during the exam period. I will make a practice exam available at the end of the module.</p>
 </section>

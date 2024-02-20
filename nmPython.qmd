@@ -1579,7 +1579,7 @@ Plot the function $f(x) = x^3$ for $x \in [0,1]$ on linearly scaled axes, logari
 
 ------------------------------------------------------------------------
 
-## Dataframes with Pandas {#sec:pandas}
+## Dataframes with Pandas {#sec-pandas}
 
 The Pandas package provides Python with the ability to work with tables of data similar to what R provides via its dataframes. As we will not work with data in this module, we do not need to dive deep into the Pandas package. We will only use it to collect computational results into tables for easier display.
 

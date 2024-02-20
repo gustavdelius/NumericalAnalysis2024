@@ -803,7 +803,7 @@ Now make the previous discussion a bit more concrete. You know the Taylor Series
 
 Then compare your approximate values to Python's values $f(0.1)=e^{0.1} \approx$ `np.exp(0.1)` $=1.1051709180756477$ and $f(0.2)=e^{0.2} \approx$ `np.exp(0.2)` $=1.2214027581601699$ to calculate the truncation errors $\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|$ and $\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|$.
 
-Fill in the blanks in the table. If you want to create the table in your jupyter notebook, you can use Pandas as described in @sec-pandas
+Fill in the blanks in the table. If you want to create the table in your jupyter notebook, you can use Pandas as described in @sec-pandas. Alternatively feel free to use a spreadsheet instead of using Python.
 
 | Order $n$ | $f_n(0.1)$     | $\epsilon_n(0.1)=|f(0.1)-f_n(0.1)|$ | $f_n(0.2)$     | $\epsilon_n(0.2)=|f(0.2)-f_n(0.2)|$ |
 |----------------|-----------------|-----------------|-----------------|-----------------|

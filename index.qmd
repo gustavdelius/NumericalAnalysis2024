@@ -274,7 +274,7 @@ During the assessment quizzes you will be required to work exclusively on a clas
 
 While working on the quiz on the classroom PC you are only allowed to use a web browser, and the only pages you are allowed to have open are this guide, the course home page on Moodle and any of your notebooks on Google Colab. You are not allowed to use any AI assistants or other web pages. Besides your online notebooks you may also use any hand-written notes as long as you have written them yourself.
 
-Late submissions will be accepted but there will be one penalty point deduction for each minute or fraction thereof that your submission is late. In other words, the number of points deducted will be the number of minutes late rounded up to the next minute. Given that each quiz is worth 5 points, this means that if you are more than 5 minutes late you will get 0 points.
+Late submissions will be accepted until 5 minutes after the deadline but there will be one penalty point deduction for a late submission. Submissions that are more than 5 minutes late will get 0 points.
 
 To allow for the fact that there may be weeks in which you are ill or otherwise prevented from performing to your best in the assessment quizzes, your final coursework mark will be calculated as the average over your 8 best marks. If exceptional circumstances affect more than two of the 10 quizzes then you would need to submit an exceptional circumstances claim.
 

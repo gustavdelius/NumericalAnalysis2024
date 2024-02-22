@@ -56,8 +56,7 @@ fig.tight_layout()
 plt.show()
 ```
 
-On the left-hand side of @fig-2.1 we see the solutions as the intersections of the graph of $3\sin(x) + 9$ with the graph of $x^2 - \cos(x)$, and on the right-hand side we see the solutions as the intersections of the graph of  
-$\left( 3\sin(x)+9 \right) - \left( x^2 - \cos(x) \right)$ with the $x$ axis.
+On the left-hand side of @fig-2.1 we see the solutions as the intersections of the graph of $3\sin(x) + 9$ with the graph of $x^2 - \cos(x)$, and on the right-hand side we see the solutions as the intersections of the graph of  $\left( 3\sin(x)+9 \right) - \left( x^2 - \cos(x) \right)$ with the $x$ axis.
  From either plot we can read off the approximate solutions: $x_1 \approx -2.55$ and $x_2 \approx 2.88$. @fig-2.1 should demonstrate what we mean when we say that solving equations of the form $\ell(x) = r(x)$ will give the same answer as finding the roots of $f(x) = \ell(x)-r(x)$. 
 
 We now have one way to view every equation-solving problem. As we will see in this chapter, if $f(x)$ has certain properties then different numerical techniques for solving the equation will apply -- and some will be much faster and more accurate than others. In the following sections you will develop several different techniques for solving equations of the form $f(x) = 0$. You will start with the simplest techniques to implement and then move to the more powerful techniques that use some ideas from Calculus to understand and analyse. Throughout this chapter you will also work to quantify the amount of error that one makes when using these techniques.
@@ -218,12 +217,10 @@ def Bisection(f , a , b , tol):
 # a is the lower end of the interval
 # b is the upper end of the interval
 # tol is an optional tolerance for the accuracy of the root
-
-# if the user does not define a tolerance we need 
-# code to create a default
+#   if the user does not define a tolerance, provide a default
 
 # check that a and b have opposite signs
-# if not we should return an error and break the code
+# if not, return an error and stop
 
 # next calculate the midpoint m = (a+b)/2
 
@@ -233,10 +230,10 @@ def Bisection(f , a , b , tol):
 #   # elif ...
 #   # elif ...
 
-#   # we should check that the while loop is not running away
+#   # we should check that the while loop does not run idefinitely
 
 # end the while loop
-# define and return the root
+# return the root
 ```
  
 :::
@@ -350,7 +347,7 @@ Discussion: Does the bisection method work if the Intermediate Value Theorem doe
 ------------------------------------------------------------------------
 
 ::: {#exr-2.16}
-If there is a root of a continuous function $f(x)$ between $x=a$ and $x=b$ will the bisection method always be able to find it? Why / why not?
+If there is a root of a continuous function $f(x)$ between $x=a$ and $x=b$, will the bisection method always be able to find it? Why / why not?
 
 :::
 
@@ -485,7 +482,7 @@ Without @thm-2.2 it would be rather hard to tell what the exact behaviour is in 
 
 ```{python}
 #| label: fig-2.3
-#| fig-cap: Iteration number vs the base-2 logarithm of the absolute error.  Notice the slope of $-1$ indicating that the error is divided by 1 factor of 2 at each step of the algorithm.
+#| fig-cap: Iteration number vs the base-2 logarithm of the absolute error.  Notice the slope of $-1$ indicating that the error is divided by a factor of 2 at each step of the algorithm.
 #| fig-alt: Iteration number vs the base-2 logarithm of the absolute error.
 #| code-fold: true
 #| column: page-right
@@ -541,7 +538,7 @@ There will be times later in this course where we will not have a nice theorem l
 
 1.  The trend is linear since logarithms and exponential functions are inverses. Hence, applying a logarithm to an exponential will give a linear function.
 
-2.  The slope of the resulting linear function should be $-1$ in this case since we are dividing by 1 power of 2 each iteration. Visually verify that the slope in the plot below follows this trend (the red dashed line in the plot is shown to help you see the slope).
+2.  The slope of the resulting linear function should be $-1$ in this case since we are dividing by a factor of 2 each iteration. Visually verify that the slope in the plot below follows this trend (the red dashed line in the plot is shown to help you see the slope).
 
 :::
 
@@ -744,7 +741,7 @@ The plot that emerges in @fig-fixed is known as a cobweb diagram, for obvious re
 ------------------------------------------------------------------------
 
 ::: {#exr-costrig}
-The animation in @fig-fixed is a graphical representation of the fixed point iteration $x_{n} = \cos(x_{n-1})$. Use Python to calculate the first 10 iterations of this sequence with $x_0=2$. Use that to get an estimate of the solution to the equation $\cos(x)-x=0$.
+The animation in @fig-fixed is a graphical representation of the fixed point iteration $x_{n} = \cos(x_{n-1})$. Use Python to calculate the first 10 iterations of this sequence with $x_0=0.2$. Use that to get an estimate of the solution to the equation $\cos(x)-x=0$.
 :::
 
 ------------------------------------------------------------------------
@@ -771,7 +768,7 @@ So there is much for you to investigate!
 
 ::: {#exr-cobweb2}
 
-Copy the two plots in @fig-cobweb2 to a piece of paper and draw the first few iterations of the fixed point iteration $x_{n} = g(x_{n-1})$ on each of them. In the first plot start with $x_0=0.2$ and in the second plot start with $x_0=1.5$ and in the second plot start with $x=0.9 What do you observe about the convergence of the sequence in each case?
+Copy the two plots in @fig-cobweb2 to a piece of paper and draw the first few iterations of the fixed point iteration $x_{n} = g(x_{n-1})$ on each of them. In the first plot start with $x_0=0.2$ and in the second plot start with $x_0=1.5$ and in the second plot start with $x=0.9$ What do you observe about the convergence of the sequence in each case?
 
 ```{python}
 #| label: fig-cobweb2

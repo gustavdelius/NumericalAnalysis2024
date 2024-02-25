@@ -773,6 +773,7 @@ Copy the two plots in @fig-cobweb2 to a piece of paper and draw the first few it
 ```{python}
 #| label: fig-cobweb2
 #| fig-cap: Two plots for practicing your cobweb skills.
+#| fig-alt: Two plots for practicing your cobweb skills.
 #| echo: false
 # Define the x range
 x = np.linspace(0, 2, 400)

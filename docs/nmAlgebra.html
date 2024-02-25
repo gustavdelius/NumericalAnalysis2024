@@ -374,8 +374,7 @@ Figure&nbsp;3.1: Two ways to visualise the same root finding problem
 </div>
 </div>
 </div>
-<p>On the left-hand side of <a href="#fig-2.1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> we see the solutions as the intersections of the graph of <span class="math inline">\(3\sin(x) + 9\)</span> with the graph of <span class="math inline">\(x^2 - \cos(x)\)</span>, and on the right-hand side we see the solutions as the intersections of the graph of<br>
-<span class="math inline">\(\left( 3\sin(x)+9 \right) - \left( x^2 - \cos(x) \right)\)</span> with the <span class="math inline">\(x\)</span> axis. From either plot we can read off the approximate solutions: <span class="math inline">\(x_1 \approx -2.55\)</span> and <span class="math inline">\(x_2 \approx 2.88\)</span>. <a href="#fig-2.1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> should demonstrate what we mean when we say that solving equations of the form <span class="math inline">\(\ell(x) = r(x)\)</span> will give the same answer as finding the roots of <span class="math inline">\(f(x) = \ell(x)-r(x)\)</span>.</p>
+<p>On the left-hand side of <a href="#fig-2.1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> we see the solutions as the intersections of the graph of <span class="math inline">\(3\sin(x) + 9\)</span> with the graph of <span class="math inline">\(x^2 - \cos(x)\)</span>, and on the right-hand side we see the solutions as the intersections of the graph of <span class="math inline">\(\left( 3\sin(x)+9 \right) - \left( x^2 - \cos(x) \right)\)</span> with the <span class="math inline">\(x\)</span> axis. From either plot we can read off the approximate solutions: <span class="math inline">\(x_1 \approx -2.55\)</span> and <span class="math inline">\(x_2 \approx 2.88\)</span>. <a href="#fig-2.1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> should demonstrate what we mean when we say that solving equations of the form <span class="math inline">\(\ell(x) = r(x)\)</span> will give the same answer as finding the roots of <span class="math inline">\(f(x) = \ell(x)-r(x)\)</span>.</p>
 <p>We now have one way to view every equation-solving problem. As we will see in this chapter, if <span class="math inline">\(f(x)\)</span> has certain properties then different numerical techniques for solving the equation will apply – and some will be much faster and more accurate than others. In the following sections you will develop several different techniques for solving equations of the form <span class="math inline">\(f(x) = 0\)</span>. You will start with the simplest techniques to implement and then move to the more powerful techniques that use some ideas from Calculus to understand and analyse. Throughout this chapter you will also work to quantify the amount of error that one makes when using these techniques.</p>
 </section>
 <section id="sec-bisection" class="level2 page-columns page-full" data-number="3.2">
@@ -482,25 +481,23 @@ Figure&nbsp;3.1: Two ways to visualise the same root finding problem
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a is the lower end of the interval</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b is the upper end of the interval</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># tol is an optional tolerance for the accuracy of the root</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># if the user does not define a tolerance we need </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># code to create a default</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># check that a and b have opposite signs</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># if not we should return an error and break the code</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   if the user does not define a tolerance, provide a default</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># check that a and b have opposite signs</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># if not, return an error and stop</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># next calculate the midpoint m = (a+b)/2</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># next calculate the midpoint m = (a+b)/2</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># start a while loop</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   # in the while loop we need an if statement</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   # if ...</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   # elif ...</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   # elif ...</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># start a while loop</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   # in the while loop we need an if statement</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   # if ...</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   # elif ...</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   # elif ...</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   # we should check that the while loop does not run indefinitely</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   # we should check that the while loop is not running away</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># end the while loop</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># define and return the root</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># end the while loop</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># return the root</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <div id="exr-2.13" class="theorem exercise">
@@ -701,36 +698,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation page-columns page-full">
-  <img id="_anim_img66ae1ff2cc724fc7a65611ac232a2a6d" class="figure-img column-page-right">
+  <img id="_anim_imga6239059547945949bfd81425c53197f" class="figure-img column-page-right">
   <div class="anim-controls">
-    <input id="_anim_slider66ae1ff2cc724fc7a65611ac232a2a6d" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim66ae1ff2cc724fc7a65611ac232a2a6d.set_frame(parseInt(this.value));">
+    <input id="_anim_slidera6239059547945949bfd81425c53197f" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anima6239059547945949bfd81425c53197f.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anima6239059547945949bfd81425c53197f.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anima6239059547945949bfd81425c53197f.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anima6239059547945949bfd81425c53197f.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anima6239059547945949bfd81425c53197f.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anima6239059547945949bfd81425c53197f.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anima6239059547945949bfd81425c53197f.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anima6239059547945949bfd81425c53197f.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anima6239059547945949bfd81425c53197f.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim66ae1ff2cc724fc7a65611ac232a2a6d.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anima6239059547945949bfd81425c53197f.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select66ae1ff2cc724fc7a65611ac232a2a6d" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_66ae1ff2cc724fc7a65611ac232a2a6d" checked="">
-      <label for="_anim_radio1_66ae1ff2cc724fc7a65611ac232a2a6d">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_66ae1ff2cc724fc7a65611ac232a2a6d">
-      <label for="_anim_radio2_66ae1ff2cc724fc7a65611ac232a2a6d">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_66ae1ff2cc724fc7a65611ac232a2a6d">
-      <label for="_anim_radio3_66ae1ff2cc724fc7a65611ac232a2a6d">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selecta6239059547945949bfd81425c53197f" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_a6239059547945949bfd81425c53197f" checked="">
+      <label for="_anim_radio1_a6239059547945949bfd81425c53197f">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_a6239059547945949bfd81425c53197f">
+      <label for="_anim_radio2_a6239059547945949bfd81425c53197f">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_a6239059547945949bfd81425c53197f">
+      <label for="_anim_radio3_a6239059547945949bfd81425c53197f">Reflect</label>
     </form>
   </div>
 </div>
@@ -740,9 +737,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img66ae1ff2cc724fc7a65611ac232a2a6d";
-    var slider_id = "_anim_slider66ae1ff2cc724fc7a65611ac232a2a6d";
-    var loop_select_id = "_anim_loop_select66ae1ff2cc724fc7a65611ac232a2a6d";
+    var img_id = "_anim_imga6239059547945949bfd81425c53197f";
+    var slider_id = "_anim_slidera6239059547945949bfd81425c53197f";
+    var loop_select_id = "_anim_loop_selecta6239059547945949bfd81425c53197f";
     var frames = new Array(7);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -3952,7 +3949,7 @@ iIiISK8YQImIiIhIrxhAiYiIiEiv/g8AohpSwdZqdQAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim66ae1ff2cc724fc7a65611ac232a2a6d = new Animation(frames, img_id, slider_id, 1000.0,
+        anima6239059547945949bfd81425c53197f = new Animation(frames, img_id, slider_id, 1000.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -3984,7 +3981,7 @@ Figure&nbsp;3.2: An animation of the bisection method in action on the equation 
 </div>
 <hr>
 <div id="exr-2.16" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.16</strong></span> If there is a root of a continuous function <span class="math inline">\(f(x)\)</span> between <span class="math inline">\(x=a\)</span> and <span class="math inline">\(x=b\)</span> will the bisection method always be able to find it? Why / why not?</p>
+<p><span class="theorem-title"><strong>Exercise 3.16</strong></span> If there is a root of a continuous function <span class="math inline">\(f(x)\)</span> between <span class="math inline">\(x=a\)</span> and <span class="math inline">\(x=b\)</span>, will the bisection method always be able to find it? Why / why not?</p>
 </div>
 <hr>
 <p>Next we will focus on a deeper mathematical analysis that will allow us to determine exactly how fast the bisection method actually converges to within a pre-set tolerance. Work through the next problem to develop a formula that tells you exactly how many steps the bisection method needs to take before it gets close enough to the true solution.</p>
@@ -4181,7 +4178,7 @@ Figure&nbsp;3.3: The evolution of the absolute error when solving the equation <
 <img src="nmAlgebra_files/figure-html/fig-2.3-output-1.png" alt="Iteration number vs the base-2 logarithm of the absolute error." width="596" height="449" class="figure-img column-page-right">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.4: Iteration number vs the base-2 logarithm of the absolute error. Notice the slope of <span class="math inline">\(-1\)</span> indicating that the error is divided by 1 factor of 2 at each step of the algorithm.
+Figure&nbsp;3.4: Iteration number vs the base-2 logarithm of the absolute error. Notice the slope of <span class="math inline">\(-1\)</span> indicating that the error is divided by a factor of 2 at each step of the algorithm.
 </figcaption>
 </figure>
 </div>
@@ -4190,7 +4187,7 @@ Figure&nbsp;3.4: Iteration number vs the base-2 logarithm of the absolute error.
 <p>There will be times later in this course where we will not have a nice theorem like <a href="#thm-2.2" class="quarto-xref">Theorem&nbsp;<span>3.2</span></a> and instead we will need to deduce the relationship from plots like these.</p>
 <ol type="1">
 <li><p>The trend is linear since logarithms and exponential functions are inverses. Hence, applying a logarithm to an exponential will give a linear function.</p></li>
-<li><p>The slope of the resulting linear function should be <span class="math inline">\(-1\)</span> in this case since we are dividing by 1 power of 2 each iteration. Visually verify that the slope in the plot below follows this trend (the red dashed line in the plot is shown to help you see the slope).</p></li>
+<li><p>The slope of the resulting linear function should be <span class="math inline">\(-1\)</span> in this case since we are dividing by a factor of 2 each iteration. Visually verify that the slope in the plot below follows this trend (the red dashed line in the plot is shown to help you see the slope).</p></li>
 </ol>
 </div>
 <hr>
@@ -4484,36 +4481,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation page-columns page-full">
-  <img id="_anim_img5d878291b5df4ee28b3101cf6d59c6bc" class="figure-img column-page-right">
+  <img id="_anim_imgddfe52c8b0f944aa8fc30c5ccfb4bd03" class="figure-img column-page-right">
   <div class="anim-controls">
-    <input id="_anim_slider5d878291b5df4ee28b3101cf6d59c6bc" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim5d878291b5df4ee28b3101cf6d59c6bc.set_frame(parseInt(this.value));">
+    <input id="_anim_sliderddfe52c8b0f944aa8fc30c5ccfb4bd03" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="animddfe52c8b0f944aa8fc30c5ccfb4bd03.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim5d878291b5df4ee28b3101cf6d59c6bc.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animddfe52c8b0f944aa8fc30c5ccfb4bd03.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select5d878291b5df4ee28b3101cf6d59c6bc" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_5d878291b5df4ee28b3101cf6d59c6bc" checked="">
-      <label for="_anim_radio1_5d878291b5df4ee28b3101cf6d59c6bc">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_5d878291b5df4ee28b3101cf6d59c6bc">
-      <label for="_anim_radio2_5d878291b5df4ee28b3101cf6d59c6bc">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_5d878291b5df4ee28b3101cf6d59c6bc">
-      <label for="_anim_radio3_5d878291b5df4ee28b3101cf6d59c6bc">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectddfe52c8b0f944aa8fc30c5ccfb4bd03" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_ddfe52c8b0f944aa8fc30c5ccfb4bd03" checked="">
+      <label for="_anim_radio1_ddfe52c8b0f944aa8fc30c5ccfb4bd03">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_ddfe52c8b0f944aa8fc30c5ccfb4bd03">
+      <label for="_anim_radio2_ddfe52c8b0f944aa8fc30c5ccfb4bd03">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_ddfe52c8b0f944aa8fc30c5ccfb4bd03">
+      <label for="_anim_radio3_ddfe52c8b0f944aa8fc30c5ccfb4bd03">Reflect</label>
     </form>
   </div>
 </div>
@@ -4523,9 +4520,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img5d878291b5df4ee28b3101cf6d59c6bc";
-    var slider_id = "_anim_slider5d878291b5df4ee28b3101cf6d59c6bc";
-    var loop_select_id = "_anim_loop_select5d878291b5df4ee28b3101cf6d59c6bc";
+    var img_id = "_anim_imgddfe52c8b0f944aa8fc30c5ccfb4bd03";
+    var slider_id = "_anim_sliderddfe52c8b0f944aa8fc30c5ccfb4bd03";
+    var loop_select_id = "_anim_loop_selectddfe52c8b0f944aa8fc30c5ccfb4bd03";
     var frames = new Array(9);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -8846,7 +8843,7 @@ uNX/AwQwujetxNrGAAAAAElFTkSuQmCC\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim5d878291b5df4ee28b3101cf6d59c6bc = new Animation(frames, img_id, slider_id, 200.0,
+        animddfe52c8b0f944aa8fc30c5ccfb4bd03 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -8864,7 +8861,7 @@ Figure&nbsp;3.6: Fixed point iteration <span class="math inline">\(x_{n} = \cos(
 </div>
 <hr>
 <div id="exr-costrig" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.23</strong></span> The animation in <a href="#fig-fixed" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> is a graphical representation of the fixed point iteration <span class="math inline">\(x_{n} = \cos(x_{n-1})\)</span>. Use Python to calculate the first 10 iterations of this sequence with <span class="math inline">\(x_0=2\)</span>. Use that to get an estimate of the solution to the equation <span class="math inline">\(\cos(x)-x=0\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 3.23</strong></span> The animation in <a href="#fig-fixed" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> is a graphical representation of the fixed point iteration <span class="math inline">\(x_{n} = \cos(x_{n-1})\)</span>. Use Python to calculate the first 10 iterations of this sequence with <span class="math inline">\(x_0=0.2\)</span>. Use that to get an estimate of the solution to the equation <span class="math inline">\(\cos(x)-x=0\)</span>.</p>
 </div>
 <hr>
 <p>Why is the sequence <span class="math inline">\((x_n)\)</span> expected to approximate a fixed point? Suppose for a moment that the sequence <span class="math inline">\((x_n)\)</span> converges to some number <span class="math inline">\(p\)</span>, and that <span class="math inline">\(g\)</span> is continuous. Then <span id="eq-pfixed"><span class="math display">\[
@@ -8878,13 +8875,13 @@ g\left(\lim_{n\to\infty}x_{n-1}\right)=g(p).
 <p>So there is much for you to investigate!</p>
 <hr>
 <div id="exr-cobweb2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.24</strong></span> Copy the two plots in <a href="#fig-cobweb2" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> to a piece of paper and draw the first few iterations of the fixed point iteration <span class="math inline">\(x_{n} = g(x_{n-1})\)</span> on each of them. In the first plot start with <span class="math inline">\(x_0=0.2\)</span> and in the second plot start with <span class="math inline">\(x_0=1.5\)</span> and in the second plot start with $x=0.9 What do you observe about the convergence of the sequence in each case?</p>
+<p><span class="theorem-title"><strong>Exercise 3.24</strong></span> Copy the two plots in <a href="#fig-cobweb2" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> to a piece of paper and draw the first few iterations of the fixed point iteration <span class="math inline">\(x_{n} = g(x_{n-1})\)</span> on each of them. In the first plot start with <span class="math inline">\(x_0=0.2\)</span> and in the second plot start with <span class="math inline">\(x_0=1.5\)</span> and in the second plot start with <span class="math inline">\(x=0.9\)</span> What do you observe about the convergence of the sequence in each case?</p>
 <div id="cell-fig-cobweb2" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
-<div id="fig-cobweb2" class="quarto-figure quarto-figure-left quarto-float anchored">
+<div id="fig-cobweb2" class="quarto-figure quarto-figure-left quarto-float anchored" alt="Two plots for practicing your cobweb skills.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cobweb2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="nmAlgebra_files/figure-html/fig-cobweb2-output-1.png" width="1142" height="566" class="figure-img">
+<img src="nmAlgebra_files/figure-html/fig-cobweb2-output-1.png" alt="Two plots for practicing your cobweb skills." width="1142" height="566" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cobweb2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.7: Two plots for practicing your cobweb skills.

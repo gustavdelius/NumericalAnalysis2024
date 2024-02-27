@@ -9010,7 +9010,7 @@ Figure&nbsp;3.8: Using successive tangent line approximations to find the root o
 </div>
 <hr>
 <div id="exr-2.34b" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.30</strong></span> Sketch some other function $f(x) with a root and choose an initial point <span class="math inline">\(x_0\)</span> and graphically perform the Newton iteration a few times, similar to <a href="#fig-2.8" class="quarto-xref">Figure&nbsp;<span>3.8</span></a>. Does the algorithm appear to converge to the root in your example? Do you think that this will generally take more or fewer steps than the Bisection Method?</p>
+<p><span class="theorem-title"><strong>Exercise 3.30</strong></span> Sketch some other function <span class="math inline">\(f(x)\)</span> with a root and choose an initial point <span class="math inline">\(x_0\)</span> and graphically perform the Newton iteration a few times, similar to <a href="#fig-2.8" class="quarto-xref">Figure&nbsp;<span>3.8</span></a>. Does the algorithm appear to converge to the root in your example? Do you think that this will generally take more or fewer steps than the Bisection Method?</p>
 </div>
 <hr>
 <div id="exr-2.34c" class="theorem exercise">
@@ -9292,6 +9292,16 @@ Figure&nbsp;3.11: Another surprising Newton’s Method failure.
 x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
 \end{equation}\]</span> If we replace <span class="math inline">\(f'(x_n)\)</span> with an approximation of the derivative then we may have a method that is <em>close</em> to Newton’s method in terms of convergence rate but is less troublesome to compute. Any method that replaces the derivative in Newton’s method with an approximation is called a <strong>Quasi-Newton Method</strong>.</p>
 <p>The first, and most obvious, way to approximate the derivative is just to use the slope of a secant line instead of the slope of the tangent line in the Newton iteration. If we choose two starting points that are quite close to each other then the slope of the secant line through those points will be approximately the same as the slope of the tangent line.</p>
+<div id="fig-secant" class="quarto-figure quarto-figure-left quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-secant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Algebra/secant.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-secant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.12: Using successive secant line approximations to find the root of a function
+</figcaption>
+</figure>
+</div>
 <hr>
 <div id="exr-2.46" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.43</strong></span> Use the backward difference <span class="math display">\[\begin{equation}
@@ -9380,7 +9390,7 @@ x_{n+1} = x_n - \frac{f(x_n)\left( x_n - x_{n-1} \right)}{f(x_n) - f(x_{n-1})}.
 <img src="figures/Algebra/ErrorsExercise2.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2.12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.12: Six Error Plots
+Figure&nbsp;3.13: Six Error Plots
 </figcaption>
 </figure>
 </div>
@@ -9468,14 +9478,14 @@ Find the local extrema for the function <span class="math inline">\(f(x) = x^3(x
 <li><p>Colour the starting point according to the root that it converges to.</p></li>
 <li><p>Repeat this process for many many starting points so you get a coloured picture of the <span class="math inline">\(x\)</span> axis showing where the starting points converge to.</p></li>
 </ul>
-<p>The set of points that are all the same colour are called the <strong>basin of attraction</strong> for the root associated with that colour. In <a href="#fig-2.13" class="quarto-xref">Figure&nbsp;<span>3.13</span></a> there is an image of a sample basin of attraction image.</p>
+<p>The set of points that are all the same colour are called the <strong>basin of attraction</strong> for the root associated with that colour. In <a href="#fig-2.13" class="quarto-xref">Figure&nbsp;<span>3.14</span></a> there is an image of a sample basin of attraction image.</p>
 <div id="fig-2.13" class="quarto-figure quarto-figure-left quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2.13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figures/Algebra/ProjectBasin.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2.13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.13: A sample basin of attraction image for a cubic function.
+Figure&nbsp;3.14: A sample basin of attraction image for a cubic function.
 </figcaption>
 </figure>
 </div>

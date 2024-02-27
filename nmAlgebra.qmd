@@ -1019,7 +1019,7 @@ If we had started not at $x_0$ in @fig-2.8 but instead at the very end of the x-
 ------------------------------------------------------------------------
 
 ::: {#exr-2.34b}
-Sketch some other function $f(x) with a root and choose an initial point $x_0$ and graphically perform the Newton iteration a few times, similar to @fig-2.8. Does the algorithm appear to converge to the root in your example? Do you think that this will generally take more or fewer steps than the Bisection Method?
+Sketch some other function $f(x)$ with a root and choose an initial point $x_0$ and graphically perform the Newton iteration a few times, similar to @fig-2.8. Does the algorithm appear to converge to the root in your example? Do you think that this will generally take more or fewer steps than the Bisection Method?
 
 :::
 
@@ -1206,7 +1206,7 @@ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
  
 The first, and most obvious, way to approximate the derivative is just to use the slope of a secant line instead of the slope of the tangent line in the Newton iteration. If we choose two starting points that are quite close to each other then the slope of the secant line through those points will be approximately the same as the slope of the tangent line.
 
-
+![Using successive secant line approximations to find the root of a function](figures/Algebra/secant.png){#fig-secant alt="Using successive secant line approximations to find the root of a function"}
 
 ------------------------------------------------------------------------
 

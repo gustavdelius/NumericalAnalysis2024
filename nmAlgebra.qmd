@@ -566,7 +566,6 @@ Another plot that numerical analysts use quite frequently for determining how an
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Redefining the functions as the execution environment has been reset
 def f(x):
     return x**2 - 2
 
@@ -970,7 +969,7 @@ Further reading: Section 2.2 of [@Burden_Faires].
 
 ## Newton's Method {#sec-newtons_method}
 
-In the [Bisection Method -@sec-bisection] we had used only the sign of of the function at the guessed points. We will now investigate how we can use also the value and the slope (derivative) of the function to get a much improved method.
+In the Bisection Method (@sec-bisection) we had used only the sign of of the function at the guessed points. We will now investigate how we can use also the value and the slope (derivative) of the function to get a much improved method.
 
 ### Intuition and Implementation
 
@@ -1170,7 +1169,7 @@ Newton's Method is known to have a *quadratic convergence rate*. This means that
 \end{equation}
  where $x_*$ is the root that we are hunting for.
 
-The quadratic convergence implies that if we plot the error in the new iterate on the $y$-axis and the error in the old iterate on the $x$ axis of a log-log plot then we will see a constant slope of 2. To see this we can take the log (base 10) of both sides of the previous equation to get 
+The quadratic convergence implies that if we plot the error in the new iterate on the $y$-axis and the error in the old iterate on the $x$ axis of a log-log plot then we will see a constant slope of 2. To see this we can take the log of both sides of the previous equation to get 
 \begin{equation}
 \log(|x_{k+1} - x_*|) = \log(C) + 2 \log(|x_{k} - x_*|),
 \end{equation}
@@ -1215,7 +1214,7 @@ Use the backward difference
 \begin{equation}
 f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}}
 \end{equation}
- to approximate the derivative of $f$ at $x_n$.  Discuss why this approximates the derivative. Use this approximation of $f'(n)$ in the expression for $x_{n+1}$ of Newton's method.
+ to approximate the derivative of $f$ at $x_n$.  Discuss why this approximates the derivative. Use this approximation of $f'(x_n)$ in the expression for $x_{n+1}$ of Newton's method.
 Show that that the result simplifies to 
 \begin{equation}
 x_{n+1} = x_n - \frac{f(x_n)\left( x_n - x_{n-1} \right)}{f(x_n) - f(x_{n-1})}.
@@ -1345,8 +1344,6 @@ c.  In the plots below you will see six different log-log plots of the new error
 
 ![Six Error Plots](figures/Algebra/ErrorsExercise2.png){#fig-2.12 alt="Six Error Plots"}
 
-Figure 2.12: Six Error Plots
-
 d.  In your own words, what does it mean for a root finding method to have a "first order convergence rate?" "Second order convergence rate?" etc.
 
 :::
@@ -1384,15 +1381,15 @@ f(x) \approx y = f(x_0) + \sum_{n=1}^N \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n
 ------------------------------------------------------------------------
 
 ::: {#exr-2.61}
-(modified from [@Burden_Faires]) An object falling vertically through the air is subject to friction due to air resistance as well as gravity. The function describing the position of such a function is 
+(modified from [@Burden_Faires]) An object falling vertically through the air is subject to friction due to air resistance as well as gravity. The function describing the position of such an object is 
 \begin{equation}
 s(t) = s_0 - \frac{mg}{k} t + \frac{m^2 g}{k^2}\left( 1- e^{-kt/m} \right),
 \end{equation}
  where $m$ is the mass measured in kg, $g$ is gravity measured in meters per second per second, $s_0$ is the initial position measured in meters, and $k$ is the coefficient of air resistance.
 
-1.  What are the units of the parameter $k$?
+1.  What are the dimensions of the parameter $k$?
 
-2.  If $m = 1$kg, $g=9.8$m/s$^2$, $k=0.1$, and $s_0 = 100$m how long will it take for the object to hit the ground? Find your answer to within 0.01 seconds.
+2.  If $m = 1$kg, $g=9.8$m/s$^2$, $k=0.1kg/s$, and $s_0 = 100$m how long will it take for the object to hit the ground? Find your answer to within 0.01 seconds.
 
 3.  The value of $k$ depends on the aerodynamics of the object and might be challenging to measure. We want to perform a sensitivity analysis on your answer to part (b) subject to small measurement errors in $k$. If the value of $k$ is only known to within 10% then what are your estimates of when the object will hit the ground?
 

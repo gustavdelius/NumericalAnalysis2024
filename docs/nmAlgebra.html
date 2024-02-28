@@ -8973,7 +8973,7 @@ x&amp;=g(x)=x-(x^{2}-2), &amp;
 </section>
 <section id="sec-newtons_method" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-newtons_method"><span class="header-section-number">3.4</span> Newton’s Method</h2>
-<p>In the <a href="#sec-bisection" class="quarto-xref">Bisection Method&nbsp;<span>3.2</span></a> we had used only the sign of of the function at the guessed points. We will now investigate how we can use also the value and the slope (derivative) of the function to get a much improved method.</p>
+<p>In the Bisection Method (<a href="#sec-bisection" class="quarto-xref"><span>Section 3.2</span></a>) we had used only the sign of of the function at the guessed points. We will now investigate how we can use also the value and the slope (derivative) of the function to get a much improved method.</p>
 <section id="intuition-and-implementation-1" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="intuition-and-implementation-1"><span class="header-section-number">3.4.1</span> Intuition and Implementation</h3>
 <p>Root finding is really the process of finding the <span class="math inline">\(x\)</span>-intercept of the function. If the function is complicated (e.g.&nbsp;highly nonlinear or does not lend itself to traditional by-hand techniques) then we can approximate the <span class="math inline">\(x\)</span>-intercept by creating a Taylor Series approximation of the function at a nearby point and then finding the <span class="math inline">\(x\)</span>-intercept of that simpler Taylor Series. The simplest non-trivial Taylor Series is a linear function – a tangent line!</p>
@@ -9267,7 +9267,7 @@ Figure&nbsp;3.11: Another surprising Newton’s Method failure.
 <p>Newton’s Method is known to have a <em>quadratic convergence rate</em>. This means that there is some constant <span class="math inline">\(C\)</span> such that <span class="math display">\[\begin{equation}
 |x_{k+1} - x_*| \leq C |x_{k} - x_*|^2,
 \end{equation}\]</span> where <span class="math inline">\(x_*\)</span> is the root that we are hunting for.</p>
-<p>The quadratic convergence implies that if we plot the error in the new iterate on the <span class="math inline">\(y\)</span>-axis and the error in the old iterate on the <span class="math inline">\(x\)</span> axis of a log-log plot then we will see a constant slope of 2. To see this we can take the log (base 10) of both sides of the previous equation to get <span class="math display">\[\begin{equation}
+<p>The quadratic convergence implies that if we plot the error in the new iterate on the <span class="math inline">\(y\)</span>-axis and the error in the old iterate on the <span class="math inline">\(x\)</span> axis of a log-log plot then we will see a constant slope of 2. To see this we can take the log of both sides of the previous equation to get <span class="math display">\[\begin{equation}
 \log(|x_{k+1} - x_*|) = \log(C) + 2 \log(|x_{k} - x_*|),
 \end{equation}\]</span> and we see that this is a linear function (on a log-log plot) and the slope is 2. We created plots like this back in <a href="#exm-3.1b" class="quarto-xref">Example&nbsp;<span>3.2</span></a>.</p>
 <hr>
@@ -9306,7 +9306,7 @@ Figure&nbsp;3.12: Using successive secant line approximations to find the root o
 <div id="exr-2.46" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.43</strong></span> Use the backward difference <span class="math display">\[\begin{equation}
 f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}}
-\end{equation}\]</span> to approximate the derivative of <span class="math inline">\(f\)</span> at <span class="math inline">\(x_n\)</span>. &nbsp;Discuss why this approximates the derivative. Use this approximation of <span class="math inline">\(f'(n)\)</span> in the expression for <span class="math inline">\(x_{n+1}\)</span> of Newton’s method. Show that that the result simplifies to <span class="math display">\[\begin{equation}
+\end{equation}\]</span> to approximate the derivative of <span class="math inline">\(f\)</span> at <span class="math inline">\(x_n\)</span>. &nbsp;Discuss why this approximates the derivative. Use this approximation of <span class="math inline">\(f'(x_n)\)</span> in the expression for <span class="math inline">\(x_{n+1}\)</span> of Newton’s method. Show that that the result simplifies to <span class="math display">\[\begin{equation}
 x_{n+1} = x_n - \frac{f(x_n)\left( x_n - x_{n-1} \right)}{f(x_n) - f(x_{n-1})}.
 \end{equation}\]</span></p>
 </div>
@@ -9394,7 +9394,6 @@ Figure&nbsp;3.13: Six Error Plots
 </figcaption>
 </figure>
 </div>
-<p>Figure 2.12: Six Error Plots</p>
 <ol start="4" type="a">
 <li>In your own words, what does it mean for a root finding method to have a “first order convergence rate?” “Second order convergence rate?” etc.</li>
 </ol>
@@ -9418,12 +9417,12 @@ f(x) \approx y = f(x_0) + \sum_{n=1}^N \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n
 </div>
 <hr>
 <div id="exr-2.61" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.57</strong></span> (modified from <span class="citation" data-cites="Burden_Faires">(<a href="references.html#ref-Burden_Faires" role="doc-biblioref">Burden and Faires 2010</a>)</span>) An object falling vertically through the air is subject to friction due to air resistance as well as gravity. The function describing the position of such a function is <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 3.57</strong></span> (modified from <span class="citation" data-cites="Burden_Faires">(<a href="references.html#ref-Burden_Faires" role="doc-biblioref">Burden and Faires 2010</a>)</span>) An object falling vertically through the air is subject to friction due to air resistance as well as gravity. The function describing the position of such an object is <span class="math display">\[\begin{equation}
 s(t) = s_0 - \frac{mg}{k} t + \frac{m^2 g}{k^2}\left( 1- e^{-kt/m} \right),
 \end{equation}\]</span> where <span class="math inline">\(m\)</span> is the mass measured in kg, <span class="math inline">\(g\)</span> is gravity measured in meters per second per second, <span class="math inline">\(s_0\)</span> is the initial position measured in meters, and <span class="math inline">\(k\)</span> is the coefficient of air resistance.</p>
 <ol type="1">
-<li><p>What are the units of the parameter <span class="math inline">\(k\)</span>?</p></li>
-<li><p>If <span class="math inline">\(m = 1\)</span>kg, <span class="math inline">\(g=9.8\)</span>m/s<span class="math inline">\(^2\)</span>, <span class="math inline">\(k=0.1\)</span>, and <span class="math inline">\(s_0 = 100\)</span>m how long will it take for the object to hit the ground? Find your answer to within 0.01 seconds.</p></li>
+<li><p>What are the dimensions of the parameter <span class="math inline">\(k\)</span>?</p></li>
+<li><p>If <span class="math inline">\(m = 1\)</span>kg, <span class="math inline">\(g=9.8\)</span>m/s<span class="math inline">\(^2\)</span>, <span class="math inline">\(k=0.1kg/s\)</span>, and <span class="math inline">\(s_0 = 100\)</span>m how long will it take for the object to hit the ground? Find your answer to within 0.01 seconds.</p></li>
 <li><p>The value of <span class="math inline">\(k\)</span> depends on the aerodynamics of the object and might be challenging to measure. We want to perform a sensitivity analysis on your answer to part (b) subject to small measurement errors in <span class="math inline">\(k\)</span>. If the value of <span class="math inline">\(k\)</span> is only known to within 10% then what are your estimates of when the object will hit the ground?</p></li>
 </ol>
 </div>

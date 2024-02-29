@@ -1465,14 +1465,10 @@ f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}
 </tr>
 </tbody>
 </table>
-<p>You can download the data directly from the textbook’s github page with the code below.</p>
+<p>You can download the data directly from the github repository for this course with the code below.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>URL1 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/NumericalMethodsSullivan'</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>URL2 <span class="op">=</span> <span class="st">'/NumericalMethodsSullivan.github.io/master/data/'</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> URL1<span class="op">+</span>URL2</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array( pd.read_csv(URL<span class="op">+</span><span class="st">'Exercise3_waterflow.csv'</span>) )</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercise3_waterflow.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(pd.read_csv(<span class="st">'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/waterflow.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>The department of transportation finds that the rate at which cars cross a bridge can be approximated by the function <span class="math display">\[\begin{equation}
 f(t) = \frac{22.8 }{3.5 + 7(t-1.25)^4} ,
@@ -1554,11 +1550,7 @@ f(t) = \frac{22.8 }{3.5 + 7(t-1.25)^4} ,
 <p>You can download the data with the following code.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>URL1 <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/NumericalMethodsSullivan'</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>URL2 <span class="op">=</span> <span class="st">'/NumericalMethodsSullivan.github.io/master/data/'</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> URL1<span class="op">+</span>URL2</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array( pd.read_csv(URL<span class="op">+</span><span class="st">'Exercise3_bikespeed.csv'</span>) )</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercise3_bikespeed.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(pd.read_csv(<span class="st">'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/bikespeed.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -1571,11 +1563,7 @@ f(t) = \frac{22.8 }{3.5 + 7(t-1.25)^4} ,
 <p>For this project we will be analysing the galaxy “ngc 1275.” The black hole at the centre of this galaxy is often referred to as the “Galactic Spaghetti Monster” since the magnetic field “sustains a mammoth network of spaghetti-like gas filaments around it.” You can download the data file associated with this project with the following Python code.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>URL1<span class="op">=</span><span class="st">'https://raw.githubusercontent.com/NumericalMethodsSullivan'</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>URL2<span class="op">=</span><span class="st">'/NumericalMethodsSullivan.github.io/master/data/'</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> URL1<span class="op">+</span>URL2</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ngc1275 <span class="op">=</span> np.array( pd.read_csv(URL<span class="op">+</span><span class="st">'ngc1275.csv'</span>) )</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ngc1275.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ngc1275 <span class="op">=</span> np.array(pd.read_csv(<span class="st">'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/ngc1275.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the data you will see the spectral data measuring the light intensity from ncg 1275 at several different wavelengths (measured in Angstroms ). You will notice in this data set that there are several emission lines at various wavelengths. Of particular interest are the peaks near <span class="math inline">\(3800\)</span> Angstroms, <span class="math inline">\(5100\)</span> Angstroms, <span class="math inline">\(6400\)</span> Angstroms, and the two peaks around <span class="math inline">\(6700\)</span> Angstroms. The data set contains 1,727 data points at different wavelengths. Your first job will be to transform the wavelength data to frequency via the formula <span class="math display">\[\begin{equation}
 \lambda = \frac{c}{f},
 \end{equation}\]</span> where <span class="math inline">\(\lambda\)</span> is the wavelength, <span class="math inline">\(c\)</span> is the speed of light, and <span class="math inline">\(f\)</span> is the frequency (measured in Hertz). Be sure to double check the units. Given the inverse relationship between frequency and wavelength you should see the emission lines flip to the other side of the plot (right-to-left or left-to-right).</p>

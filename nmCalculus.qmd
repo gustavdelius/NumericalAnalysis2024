@@ -1242,16 +1242,12 @@ To prove that each of the formulas is true you will need to write the Taylor ser
 |---------------------|-------|-------|--------|--------|--------|--------|--------|
 | flow rate (gal/sec) | 316   | 309   | 296    | 298    | 305    | 314    | 322    |
 
-You can download the data directly from the textbook's github page with the code below.
+You can download the data directly from the github repository for this course with the code below.
 
 ``` python         
 import numpy as np
 import pandas as pd
-URL1 = 'https://raw.githubusercontent.com/NumericalMethodsSullivan'
-URL2 = '/NumericalMethodsSullivan.github.io/master/data/'
-URL = URL1+URL2
-data = np.array( pd.read_csv(URL+'Exercise3_waterflow.csv') )
-# Exercise3_waterflow.csv
+data = np.array(pd.read_csv('https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/waterflow.csv'))
 ```
 
 2.  The department of transportation finds that the rate at which cars cross a bridge can be approximated by the function 
@@ -1313,11 +1309,7 @@ You can download the data with the following code.
 ``` python         
 import numpy as np
 import pandas as pd
-URL1 = 'https://raw.githubusercontent.com/NumericalMethodsSullivan'
-URL2 = '/NumericalMethodsSullivan.github.io/master/data/'
-URL = URL1+URL2
-data = np.array( pd.read_csv(URL+'Exercise3_bikespeed.csv') )
-# Exercise3_bikespeed.csv
+data = np.array(pd.read_csv('https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/bikespeed.csv'))
 ```
 
 :::
@@ -1338,11 +1330,7 @@ For this project we will be analysing the galaxy "ngc 1275." The black hole at t
 ``` python         
 import numpy as np
 import pandas as pd
-URL1='https://raw.githubusercontent.com/NumericalMethodsSullivan'
-URL2='/NumericalMethodsSullivan.github.io/master/data/'
-URL = URL1+URL2
-ngc1275 = np.array( pd.read_csv(URL+'ngc1275.csv') )
-# ngc1275.csv
+ngc1275 = np.array(pd.read_csv('https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Calculus/ngc1275.csv'))
 ```
 
 In the data you will see the spectral data measuring the light intensity from ncg 1275 at several different wavelengths (measured in Angstroms ). You will notice in this data set that there are several emission lines at various wavelengths. Of particular interest are the peaks near $3800$ Angstroms, $5100$ Angstroms, $6400$ Angstroms, and the two peaks around $6700$ Angstroms. The data set contains 1,727 data points at different wavelengths. Your first job will be to transform the wavelength data to frequency via the formula 

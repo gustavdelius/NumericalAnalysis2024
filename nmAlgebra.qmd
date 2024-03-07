@@ -569,6 +569,8 @@ import matplotlib.pyplot as plt
 def f(x):
     return x**2 - 2
 
+x_exact = sqrt(2)
+
 def bisection(a, b, tol):
     errors = []
     while (b - a) / 2.0 > tol:
@@ -579,7 +581,7 @@ def bisection(a, b, tol):
             b = midpoint
         else:
             a = midpoint
-        error = abs(f(midpoint))
+        error = abs(midpoint - x_exact)
         errors.append(error)
     return errors
 

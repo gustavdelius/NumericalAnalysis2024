@@ -564,7 +564,7 @@ f'(1) \approx \frac{f(1+h) - f(1)}{h}=:\Delta f(1).
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      err_reduction_factor <span class="op">=</span> AbsError[<span class="op">-</span><span class="dv">2</span>]<span class="op">/</span>AbsError[<span class="op">-</span><span class="dv">1</span>]</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"h="</span>,h,<span class="st">"</span><span class="ch">\t</span><span class="st"> Absolute Error="</span>, AbsError[<span class="op">-</span><span class="dv">1</span>],</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>              <span class="st">"with error reduction"</span>,err_reduction_factor)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.loglog(H,AbsError,<span class="st">'b-*'</span>) <span class="co"># Why are we build a loglog plot?</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.loglog(H,AbsError,<span class="st">'b-*'</span>) <span class="co"># Why are we building a loglog plot?</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -650,8 +650,8 @@ f'(1) \approx \frac{f(1+h) - f(1)}{h}=:\Delta f(1).
 <ol type="1">
 <li><p>What will we get if we evaluate the code <code>y[1:]</code>?</p></li>
 <li><p>What will we get if we evaluate the code <code>y[:-1]</code>?</p></li>
-<li><p>What will we give if we evaluate the code <code>y[1:] - y[:-1]</code>?</p></li>
-<li><p>What will we give if we evaluate the code <code>(y[1:] - y[:-1]) / h</code>?</p></li>
+<li><p>What will we get if we evaluate the code <code>y[1:] - y[:-1]</code>?</p></li>
+<li><p>What will we get if we evaluate the code <code>(y[1:] - y[:-1]) / h</code>?</p></li>
 </ol></li>
 <li><p>Use the insight from part (1) to simplify your first order first derivative function to look like the code below.</p></li>
 </ol>
@@ -797,7 +797,7 @@ f'(1) \approx \frac{f(1+h) - f(1-h)}{2h}=:\delta f(1).
 <li><p>There was nothing really special in part (1) about powers of 2. Use your spreadsheet to build similar tables for the following sequences of <span class="math inline">\(h\)</span>: <span class="math display">\[\begin{equation}
 \begin{aligned} h &amp;= 3^{-1}, \, 3^{-2}, \, 3^{-3}, \, \ldots \\ h &amp;= 5^{-1}, \, 5^{-2}, \, 5^{-3}, \, \ldots \\ h &amp;= 10^{-1}, \, 10^{-2}, \, 10^{-3}, \, \ldots \\ h &amp;= \pi^{-1}, \, \pi^{-2}, \, \pi^{-3}, \, \ldots. \end{aligned}
 \end{equation}\]</span></p></li>
-<li><p>Observation: If you calculate a numerical derivative with a centred difference and calculate the resulting absolute error with a fixed value of <span class="math inline">\(h\)</span>, then what do you expect to happen to the absolute error if you divide the value of <span class="math inline">\(h\)</span> by some positive constant <span class="math inline">\(M\)</span>? It may be helpful to include a column in your table that tracks the error reduction factor as we decrease <span class="math inline">\(h\)</span>.</p></li>
+<li><p>Observation: If you calculate a numerical derivative with a central difference and calculate the resulting absolute error with a fixed value of <span class="math inline">\(h\)</span>, then what do you expect to happen to the absolute error if you divide the value of <span class="math inline">\(h\)</span> by some positive constant <span class="math inline">\(M\)</span>? It may be helpful to include a column in your table that tracks the error reduction factor as we decrease <span class="math inline">\(h\)</span>.</p></li>
 <li><p>What does your answer to part (c) have to do with the approximation order of the numerical derivative method that you used?</p></li>
 </ol>
 </div>
@@ -958,13 +958,13 @@ f''(x) = \frac{?? - 2 \cdot ?? + ??}{h^2} + \underline{\hspace{1in}}.
 <td><span class="math inline">\(1^{st}\)</span></td>
 <td><span class="math inline">\(f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}\)</span></td>
 <td><span class="math inline">\(\mathcal{O}(h^2)\)</span></td>
-<td>Centred Difference</td>
+<td>Central Difference</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(2^{nd}\)</span></td>
 <td><span class="math inline">\(f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}\)</span></td>
 <td><span class="math inline">\(\mathcal{O}(h^2)\)</span></td>
-<td>Centred Difference</td>
+<td>Central Difference</td>
 </tr>
 </tbody>
 </table>

@@ -297,7 +297,7 @@ for h in H:
       err_reduction_factor = AbsError[-2]/AbsError[-1]
       print("h=",h,"\t Absolute Error=", AbsError[-1],
               "with error reduction",err_reduction_factor)
-plt.loglog(H,AbsError,'b-*') # Why are we build a loglog plot?
+plt.loglog(H,AbsError,'b-*') # Why are we building a loglog plot?
 plt.grid()
 plt.show()
 ```
@@ -403,9 +403,9 @@ plt.show()
 
     3.  What will we get if we evaluate the code `y[:-1]`?
 
-    5.  What will we give if we evaluate the code `y[1:] - y[:-1]`?
+    5.  What will we get if we evaluate the code `y[1:] - y[:-1]`?
 
-    6.  What will we give if we evaluate the code `(y[1:] - y[:-1]) / h`?
+    6.  What will we get if we evaluate the code `(y[1:] - y[:-1]) / h`?
 
 2.  Use the insight from part (1) to simplify your first order first derivative function to look like the code below.
 
@@ -535,7 +535,7 @@ b.  There was nothing really special in part (1) about powers of 2. Use your spr
 \end{equation}
 
 
-c.  Observation: If you calculate a numerical derivative with a centred difference and calculate the resulting absolute   error with a fixed value of $h$, then what do you expect to happen to the absolute   error if you divide the value of $h$ by some positive constant $M$? It may be helpful to include a column in your table that tracks the error reduction factor as we decrease $h$.
+c.  Observation: If you calculate a numerical derivative with a central difference and calculate the resulting absolute   error with a fixed value of $h$, then what do you expect to happen to the absolute   error if you divide the value of $h$ by some positive constant $M$? It may be helpful to include a column in your table that tracks the error reduction factor as we decrease $h$.
 
 d.  What does your answer to part (c) have to do with the approximation order of the numerical derivative method that you used?
 
@@ -698,8 +698,8 @@ The table below summarizes the formulas that we have for derivatives thus far. T
 |----------------|--------------------------------------------------------|----------------------|---------------------|
 | $1^{st}$     | $f'(x) \approx \frac{f(x+h) - f(x)}{h}$              | $\mathcal{O}(h)$   | Forward Difference  |
 | $1^{st}$     | $f'(x) \approx \frac{f(x) - f(x-h)}{h}$              | $\mathcal{O}(h)$   | Backward Difference |
-| $1^{st}$     | $f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}$           | $\mathcal{O}(h^2)$ | Centred Difference |
-| $2^{nd}$     | $f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$ | $\mathcal{O}(h^2)$ | Centred Difference |
+| $1^{st}$     | $f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}$           | $\mathcal{O}(h^2)$ | Central Difference |
+| $2^{nd}$     | $f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$ | $\mathcal{O}(h^2)$ | Central Difference |
 
 
 ------------------------------------------------------------------------

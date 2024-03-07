@@ -974,7 +974,7 @@ f''(x) = \frac{?? - 2 \cdot ?? + ??}{h^2} + \underline{\hspace{1in}}.
 <ol type="1">
 <li><p>Johnny used a numerical first derivative scheme with <span class="math inline">\(h = 0.1\)</span> to approximate <span class="math inline">\(f'(1.74)\)</span> and found an absolute error of 3.28. He then used <span class="math inline">\(h=0.01\)</span> and found an absolute error of 0.328. What was the order of the error in his first derivative scheme? How can you tell?</p></li>
 <li><p>Betty used a numerical first derivative scheme with <span class="math inline">\(h = 0.2\)</span> to approximate <span class="math inline">\(f'(1.74)\)</span> and found an absolute error of 4.32. She then used <span class="math inline">\(h=0.1\)</span> and found an absolute error of 1.08. What numerical first derivative scheme did she likely use?</p></li>
-<li><p>Harry wants to compute <span class="math inline">\(f''(1.74)\)</span> to within 1% using a central difference scheme. He tries <span class="math inline">\(h=0.25\)</span> and gets an absolute percentage error of 3.71%. What <span class="math inline">\(h\)</span> should he try next so that his absolute percentage error close to 1%?</p></li>
+<li><p>Harry wants to compute <span class="math inline">\(f''(1.74)\)</span> to within 1% using a central difference scheme. He tries <span class="math inline">\(h=0.25\)</span> and gets an absolute percentage error of 3.71%. What <span class="math inline">\(h\)</span> should he try next so that his absolute percentage error is close to 1%?</p></li>
 </ol>
 </div>
 <hr>
@@ -1237,16 +1237,16 @@ A_j = \frac{1}{2} \left[ f(x_j) + f(x_{j-1}) \right]\left(x_j - x_{j-1} \right).
 <div id="exr-3.42" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.36</strong></span> Follow these steps to find <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, and <span class="math inline">\(A_3\)</span>.</p>
 <ol type="1">
-<li><p>Prove that <span class="math display">\[\begin{equation}
+<li><p>Verify that <span class="math display">\[\begin{equation}
 \int_a^b 1 dx = b-a = A_1 + A_2 + A_3.
 \end{equation}\]</span></p></li>
-<li><p>Prove that <span class="math display">\[\begin{equation}
+<li><p>Verify that <span class="math display">\[\begin{equation}
 \int_a^b x dx = \frac{b^2 - a^2}{2} = A_1 a + A_2 \left( \frac{a+b}{2} \right) + A_3 b.
 \end{equation}\]</span></p></li>
-<li><p>Prove that <span class="math display">\[\begin{equation}
+<li><p>Verify that <span class="math display">\[\begin{equation}
 \int_a^b x^2 dx = \frac{b^3 - a^3}{3} = A_1 a^2 + A_2 \left( \frac{a+b}{2} \right)^2 + A_3 b^2.
 \end{equation}\]</span></p></li>
-<li><p>Now solve the linear system of equations to prove that <span class="math display">\[\begin{equation}
+<li><p>Verify that the above linear system of equations has the solution <span class="math display">\[\begin{equation}
 A_1 = \frac{b-a}{6}, \quad A_2 = \frac{4(b-a)}{6}, \quad \text{and} \quad A_3 = \frac{b-a}{6}.
 \end{equation}\]</span></p></li>
 </ol>
@@ -1261,7 +1261,7 @@ A_1 = \frac{b-a}{6}, \quad A_2 = \frac{4(b-a)}{6}, \quad \text{and} \quad A_3 = 
 \end{equation}\]</span></p>
 <ol type="1">
 <li><p>Use the method described above to approximate the area under the curve <span class="math inline">\(f(x) = (1/5) x^2 (5-x)\)</span> on the interval <span class="math inline">\([1,4]\)</span>. To be clear, you will be using the points <span class="math inline">\(a=1, m=2.5\)</span>, and <span class="math inline">\(b=4\)</span> in the above derivation.</p></li>
-<li><p>Next find the exact area under the curve <span class="math inline">\(g(x) = (-1/2)x^2 +3.3x -2\)</span> on the interval <span class="math inline">\([1,4]\)</span>.</p></li>
+<li><p>Next find the exact area under the curve <span class="math inline">\(f(x) = (1/5) x^2 (5-x)\)</span> on the interval <span class="math inline">\([1,4]\)</span>.</p></li>
 <li><p>What do you notice about the two areas? What does this sample exercise tell you about the formula that we derived above?</p></li>
 </ol>
 </div>

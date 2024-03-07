@@ -711,7 +711,7 @@ The table below summarizes the formulas that we have for derivatives thus far. T
 
 2.  Betty used a numerical first derivative scheme with $h = 0.2$ to approximate $f'(1.74)$ and found an absolute error of 4.32. She then used $h=0.1$ and found an absolute   error of 1.08. What numerical first derivative scheme did she likely use?
 
-4.  Harry wants to compute $f''(1.74)$ to within 1% using a central difference scheme. He tries $h=0.25$ and gets an absolute percentage  error of 3.71%. What $h$ should he try next so that his absolute percentage  error close to 1%?
+4.  Harry wants to compute $f''(1.74)$ to within 1% using a central difference scheme. He tries $h=0.25$ and gets an absolute percentage  error of 3.71%. What $h$ should he try next so that his absolute percentage  error is close to 1%?
 
 :::
 
@@ -923,25 +923,25 @@ We want to find constants $A_1$, $A_2$, and $A_3$ such that the integral $\int_a
 ::: {#exr-3.42}
  Follow these steps to find $A_1$, $A_2$, and $A_3$.
 
-1.  Prove that 
+1.  Verify that 
 \begin{equation}
 \int_a^b 1 dx = b-a = A_1 + A_2 + A_3.
 \end{equation}
 
 
-2.  Prove that 
+2.  Verify that 
 \begin{equation}
 \int_a^b x dx = \frac{b^2 - a^2}{2} = A_1 a + A_2 \left( \frac{a+b}{2} \right) + A_3 b.
 \end{equation}
 
 
-3.  Prove that 
+3.  Verify that 
 \begin{equation}
 \int_a^b x^2 dx = \frac{b^3 - a^3}{3} = A_1 a^2 + A_2 \left( \frac{a+b}{2} \right)^2 + A_3 b^2.
 \end{equation}
 
 
-4.  Now solve the linear system of equations to prove that 
+4.  Verify that the above linear system of equations has the solution 
 \begin{equation}
 A_1 = \frac{b-a}{6}, \quad A_2 = \frac{4(b-a)}{6}, \quad \text{and} \quad A_3 = \frac{b-a}{6}.
 \end{equation}
@@ -966,7 +966,7 @@ Verify the previous sentence by integrating $f(x) = 1$, $f(x) = x$ and $f(x) = x
 
 1.  Use the method described above to approximate the area under the curve $f(x) = (1/5) x^2 (5-x)$ on the interval $[1,4]$. To be clear, you will be using the points $a=1, m=2.5$, and $b=4$ in the above derivation.
 
-2.  Next find the exact area under the curve $g(x) = (-1/2)x^2 +3.3x -2$ on the interval $[1,4]$.
+2.  Next find the exact area under the curve $f(x) = (1/5) x^2 (5-x)$ on the interval $[1,4]$.
 
 3.  What do you notice about the two areas? What does this sample exercise tell you about the formula that we derived above?
 

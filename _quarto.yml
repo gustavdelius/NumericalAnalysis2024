@@ -37,9 +37,10 @@ book:
     - nmApprox.qmd
     - nmAlgebra.qmd
     - nmCalculus.qmd
-    - nmLinAlg.qmd
+    - nmOptimization.qmd
     - nmODE.qmd
     - nmPDE.qmd
+    - nmLinAlg.qmd
     - references.qmd
 
 bibliography: references.bib

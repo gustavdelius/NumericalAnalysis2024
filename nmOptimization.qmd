@@ -253,7 +253,7 @@ def gradient_descent(df, x0, learning_rate,
 
 ::: {#exr-3.56}
 Compare an contrast the methods you came up with in @exr-3.51 with the
-methods proposed in exr-3.51b and @exr-3.53.
+methods proposed in @exr-3.51b and @exr-3.53.
 
 1.  What are the advantages to each of the methods proposed?
 
@@ -266,6 +266,10 @@ methods proposed in exr-3.51b and @exr-3.53.
 :::
 
 ------------------------------------------------------------------------
+
+::: {#exr-3.54}
+Make a plot of the log of the absolute error at iteration $k+1$ agains the log of the absolute error at iteration $k$, similar to @fig-2.4 for several methods and several choices of function. What do you observe?
+:::
 
 ::: {#exr-3.56b}
 Try out your algorithms to find the maximum of the function 

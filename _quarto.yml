@@ -3,6 +3,8 @@ project:
   output-dir: docs
   preview: 
     browser: true
+    port: 4321
+    watch-inputs: true
 
 book:
   title: "Numerical Analysis"
@@ -21,6 +23,7 @@ book:
   repo-url: https://github.com/gustavdelius/NumericalAnalysis2024/
   repo-branch: main
   repo-actions: edit
+  favicon: faviconNA.webp
   twitter-card: true
   open-graph: true
   sidebar:

@@ -976,7 +976,7 @@ Verify the previous sentence by integrating $f(x) = 1$, $f(x) = x$ and $f(x) = x
 
 To make the punchline of the previous exercises a bit more clear, using the formula 
 \begin{equation}
-\int_a^b f(x) dx \approx \left( \frac{a-b}{6} \right) \left( f(a) + 4 f(m) + f(b) \right)
+\int_a^b f(x) dx \approx \left( \frac{b-a}{6} \right) \left( f(a) + 4 f(m) + f(b) \right)
 \end{equation}
  is the same as fitting a parabola to the three points $(a,f(a))$, $(m,f(m))$, and $(b,f(b))$ and finding the area under the parabola exactly. That is exactly the step up from the trapezoid rule and Riemann sums that we were after:
 

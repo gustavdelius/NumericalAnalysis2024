@@ -442,29 +442,31 @@ You may recognize this as the basic question of regression from statistics. What
 import numpy as np
 import matplotlib.pyplot as plt
 xdata = np.array([0, 1, 2, 3])
-ydata = np.array([1.07, 3.9, 14.8, 26.8])
+ydata = np.array([2.37, 4.14, 12.22, 23.68])
 a = # conjecture a value of a
 b = # conjecture a value of b
 c = # conjecture a value of c
 x = # build an x domain starting at 0 and going through 4 
 guess = a*x**2 + b*x + c
-# make a plot of the data
-# make a plot of your function on top of the data
+# make a plot of the data with `plt.scatter()`
+# add a plot of your function on top of the data with `plt.plot()`
 ```
 
-![Initial attempt at matching data with a quadratic.](figures/Optimization/DataMatch.png){#fig-3.11 alt="Initial attempt at matching data with a quadratic."}
-
-As an alternative to loading the data manually we could download the data from this guide's github page. All datasets in the text can be loaded in this way. We will be using the `pandas` library to load the `.csv` files.
-
-``` python         
-import numpy as np
-import pandas as pd
-URL = 'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Optimization/'
-data = np.array( pd.read_csv(URL+'Exercise3_datafit1.csv') )
-# Exercise3_datafit1.csv
-xdata = data[:,0]
-ydata = data[:,1]
+```{python}
+#| label: fig-3.11
+#| fig-cap: Initial attempt at matching data with a quadratic.
+#| fig-alt: Initial attempt at matching data with a quadratic.
+#| echo: false
+xdata = np.array([0, 1, 2, 3])
+ydata = np.array([2.37, 4.14, 12.22, 23.68])
+plt.plot(xdata,ydata,'bo', label='Data')
+x = np.linspace(0,4,100)
+f = lambda x: x**2 + x
+plt.plot(x,f(x),'r--', label='Guess')
+plt.grid()
+plt.legend()
 ```
+
 
 :::
 
@@ -477,22 +479,17 @@ ydata = data[:,1]
 
 2.  Square all four of your errors and add them up. (Pause, ponder, and discuss: why are we squaring the errors before we sum them?)
 
-3.  Now change your value of $a$ to several different values and record the sum of the square errors for each of your values of $a$. It may be worth while to use a spreadsheet to keep track of your work here.
+3.  Now change your value of $a$ to several different values and record the sum of the square errors for each of your values of $a$. 
 
 4.  Make a plot with the value of $a$ on the horizontal axis and the value of the sum of the square errors on the vertical axis. Use your plot to defend the optimal choice for $a$.
 
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-3.83}
- We are going to revisit part (3) of the previous exercise. Write a loop that tries many values of $a$ in very small increments and calculates the sum of the squared errors. The following partial Python code should help you get started. In the resulting plot you should see a clear local minimum. What does that minimum tell you about solving this problem?
+Clearly the above is calling for some Python code to automate this exploration. Write a loop that tries many values of $a$ in very small increments and calculates the sum of the squared errors. The following partial Python code should help you get started. In the resulting plot you should see a clear local minimum. What does that minimum tell you about solving this problem?
 
 ``` python         
 import numpy as np
 import matplotlib.pyplot as plt
 xdata = np.array([0, 1, 2, 3])
-ydata = np.array([1.07, 3.9, 14.8, 26.8])
+ydata = np.array([2.37, 4.14, 12.22, 23.68])
 b = 2
 c = 0.75
 A = # give a numpy array of values for a
@@ -514,9 +511,8 @@ plt.show()
 
 Now let us formalize the process that we have described in the previous exercises.
 
-::: {#def-3.10}
 
-#### Least Squares Regression
+### Least Squares Regression {.unnumbered}
 Let 
 \begin{equation}
 S = \{ (x_0, y_0), \, (x_1, y_1), \, \ldots, \, (x_n, y_n) \}
@@ -539,19 +535,18 @@ S = \{ (x_0, y_0), \, (x_1, y_1), \, \ldots, \, (x_n, y_n) \}
 
 4.  Change the parameters $a_0, a_1, \ldots$ so as to minimize the sum of the square errors.
 
-:::
 
 ------------------------------------------------------------------------
 
 ::: {#exr-3.84}
- In @exr-3.10 the last step is a bit vague. That was purposeful since there are many techniques that could be used to minimize the sum of the square errors. However, if we just think about the sum of the squared residuals as a function then we can apply `scipy.optimize.minimize()` to that function in order to return the values of the parameters that best minimize the sum of the squared residuals. The following blocks of Python code implement the idea in a very streamlined way. Go through the code and comment each line to describe exactly what it does.
+The last step above is a bit vague. That was purposeful since there are many techniques that could be used to minimize the sum of the square errors. However, if we just think about the sum of the squared residuals as a function then we can apply `scipy.optimize.minimize()` to that function in order to return the values of the parameters that best minimize the sum of the squared residuals. The following blocks of Python code implement the idea in a very streamlined way. Go through the code and comment each line to describe exactly what it does.
 
 ``` python         
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize 
 xdata = np.array([0, 1, 2, 3])
-ydata = np.array([1.07, 3.9, 14.8, 26.8])
+ydata = np.array([2.37, 4.14, 12.22, 23.68])
 
 def SSRes(parameters):
   # In the next line of code we want to build our 
@@ -565,14 +560,14 @@ def SSRes(parameters):
   return np.sum(residuals**2)
 
 
-BestParameters = minimize(SSRes,[2,2,0.75])
+BestParameters = minimize(SSRes,[1,1,1])
 print("The best values of a, b, and c are: \n",BestParameters.x)
 # If you want to print the diagnositc then use the line below:
 # print("The minimization diagnostics are: \n",BestParameters)
 ```
 
 ``` python         
-plt.plot(xdata,ydata,'bo',markersize=5)
+plt.plot(xdata,ydata,'bo')
 x = np.linspace(0,4,100)
 y = BestParameters.x[0]*x**2 + \
     BestParameters.x[1]*x + \
@@ -585,66 +580,79 @@ plt.title('Best Fit Quadratic')
 plt.show()
 ```
 
-![Best fit quadratic function.](figures/Optimization/BestQuadratic.png){#fig-3.12 alt="Best fit quadratic function."}
 :::
 
 ------------------------------------------------------------------------
 
+::: {#exr-3.85b}
+
+Now I'll let you in on a little secret: the data that you have fitted the quadratic function to above was not real data. I created it with the following script.
+
+```{python}
+import numpy as np
+# Set a seed for the random number generator
+np.random.seed(1)
+# Use a quadratic function to generate some fake data
+a, b, c = 2, 2, 0.75
+f = lambda x: a*x**2 + b*x + c
+# Choose 4 equally-spaced x-values
+xdata = np.linspace(0,3,4)
+# Add normally distributed errors to the y values
+ydata = f(xdata) + np.random.normal(0,1,4)
+# round to two digits
+ydata = np.around(ydata, 2)
+print(xdata)
+print(ydata)
+```
+Such fake data that is generated from a know function with known distribution of the error is referred to as "synthetic data" and is very useful for testing parameter fitting methods.
+
+You will notice that the parameters that we estimated with the Least Squares method are not at all the same as the parameters that I used to generate the data. This is because we had only 4 noise data points to estimate 3 parameters. 
+
+Adjust the above script so that it generates 100 $x$ values between 0 and 3 and corresponding noise $y$ values. Then try to estimate the parameters of the quadratic function that generated the data. Does the estimate get closer to the original parameter values?
+:::
+
+
+-----------------------------------------------------------------------
+
 ::: {#exr-3.85}
-In your group choose a function and then choose 10 points on that function. Add a small bit of error into the $y$-values of your points. Give your 10 points to another group. Upon receiving your new points:
+In your group choose a function with a small number of parameters and choose parameter values and then evaluate 50 points on that function. Add a small bit of error into the $y$-values of your points. Give your 50 points to another group together with the definition of the function. Upon receiving your new points:
 
 -   Plot your points.
 
--   Make a guess about the basic form of the function that might best fit the data. Your general form will likely have several parameters (just like the quadratic had the parameters $a$, $b$, and $c$).
+-   Make a guess about the basic form of the function that might best fit the data.
 
--   Modify the code from above to find the best collection of parameters minimize the sum of the squares of the residuals between your function and the data.
+-   Modify the code from above to find the best collection of parameters to minimize the sum of the squares of the residuals between the function and the data.
 
--   Plot the data along with your best fit function. If you are not satisfied with how it fit then make another guess on the type of function and repeat the process.
+-   Plot the data along with your best fit function. 
 
--   Finally, go back to the group who gave you your points and check your work.
+-   Go back to the group who gave you your points and check your work.
 
 :::
 
 ------------------------------------------------------------------------
 
-::: {#exr-3.86}
- For each dataset associated with this exercise give a functional form that might be a good model for the data. Be sure to choose the most general form of your guess. For example, if you choose "quadratic" then your functional guess is $f(x) = ax^2 + bx + c$, if you choose "exponential" then your functional guess should be something like $f(x) = ae^{b(x-c)}+d$, or if you choose "sinusoidal" then your guess should be something like $f(x) = a\sin(bx) + c\cos(dx) + e$. Once you have a guess of the function type create a plot showing your data along with your guess for a reasonable set of parameters. Then write a function that leverages `scipy.optimize.minimize()` to find the best set of parameters so that your function best fits the data. Note that if `scipy.optimize.minimize()` does not converge then try the alternative `scipy` function `scipy.optimize.fmin()`. Also note that you likely need to be very close to the optimal parameters to get the optimizer to work properly.
-
-You can load the data with the following script.
-
-``` python         
-import numpy as np
-import pandas as pd
-URL = 'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Optimization/'
-datasetA = np.array( pd.read_csv(URL+'Exercise3_datafit2.csv') )
-datasetB = np.array( pd.read_csv(URL+'Exercise3_datafit3.csv') )
-datasetC = np.array( pd.read_csv(URL+'Exercise3_datafit4.csv') )
-# Exercise3_datafit1.csv, 
-# Exercise3_datafit2.csv, 
-# Exercise3_datafit3.csv
-```
-
-As a nudge in the right direction, in the left-hand pane of @fig-3.13 the function appears to be exponential. Hence we should choose a function of the form $f(x) = ae^{b(x-c)}+d$. Moreover, we need to pick good approximations of the parameters to start the optimization process. In the left-hand pane of @fig-3.13 the data appears to start near $x=1970$ so our initial guess for $c$ might be $c \approx 1970$. To get initial guesses for $a$, $b$, and $d$ we can observe that the expected best fit curve will approximately go through the points $(1970,15000)$, $(1990,40000)$, and $(2000,75000)$. With this information we get the equations $a+d \approx 15000$, $ae^{20b}+d \approx 40000$ and $ae^{30b}+d \approx 75000$ and work to get reasonable approximations for $a,b,$ and $d$ to feed into the `scipy.optimize.minimize()` command.
-
-![Raw data for least squares function matching problems.](figures/Optimization/datamatching.png){#fig-3.13 alt="Raw data for least squares function matching problems."}
-
-:::
+Using the method of least squares to fit a function to data is not always the right thing to do. It is appropriate if the measurement error in the data is normally distributed with the same variance for all data points and if the errors are independent of each other. If the errors are not normally distributed or if they are not independent of each other then the method of least squares is not appropriate. In such cases a more sophisticated method of fitting the data is needed. This is a large and active area of research and we will not go into more detail here.
 
 ------------------------------------------------------------------------
 
 ## Algorithm Summaries
 
-
-
 ::: {#exr-3.94}
-Explain in clear language how the gradient descent optimization method works.
+Explain in clear language how the Golden Section Search method works.
+
+:::
+
+------------------------------------------------------------------------
+
+::: {#exr-3.94b}
+Explain in clear language how the Gradient Descent method works.
 
 :::
 
 ------------------------------------------------------------------------
 
 ::: {#exr-3.96}
-Explain in clear language how you find the optimal set of parameters given a set of data and a proposed general function type.
+Explain in clear language how you use the method of Least Squares to fit a function to data.
 
 :::
 

@@ -53,14 +53,14 @@ x(1) \approx \underline{\hspace{1in}}
 
 b.  Use your answer from part (a) for time $t=1$ to approximate the $x$ value at time $t=2$. Then use that value to approximate the value at time $t=3$. Repeat the process to approximate the value of $x$ at times $t=2, 3, 4, 5, \ldots, 10$. Record your answers in the table below. Then find the analytic solution to this differential equation and record the $x$ values at the appropriate times.
 
-| $t$                     | **0** | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** | **9** | **10** |
-|---------------------------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|--------|
-| Approximation of $x(t)$ | 6     |       |       |       |       |       |       |       |       |       |        |
-| Exact value of $x(t)$   | 6     |       |       |       |       |       |       |       |       |       |        |
+| $t$                     | **0** | **1** | **2** | **3** | **4** | **5** | **6** |
+|-------------------------|-------|-------|-------|-------|-------|-------|-------|
+| Approximation of $x(t)$ | 6     |       |       |       |       |       |       |
+| Exact value of $x(t)$   | 6     |       |       |       |       |       |       | 
 
 c.  The "approximations of $x$" that you found in part (b) are a **numerical approximation** of the solution to the differential equation. You should notice that your numerical solution is pretty far off from the actual solution for most values of $t$. Why? What could be the sources of this error and how could we fix it? Once you have an idea of how to fix it, put your idea into action and devise some measurement of error to analyse your results.
 
-d.  In @fig-5.1 you will see a slope field and the exact solution to the differential equation $x' = -0.5x$ with $x(0) = 6$. Mark your approximate solutions at times $t=1$, $t=2$, $\ldots$, $t=10$ on the plot and connect them with straight lines.
+d.  In @fig-5.1 you will see a slope field and the exact solution to the differential equation $x' = -0.5x$ with $x(0) = 6$. Mark your approximate solutions at times $t=1$, $t=2$, $\ldots$, $t=6$ on the plot and connect them with straight lines.
 
     1.  Why are we using straight lines to connect the points?
 
@@ -119,14 +119,14 @@ x'(t) = \frac{x(t+h) - x(t)}{h} + \mathcal{O}(h)
 
 ------------------------------------------------------------------------
 
-A way to think about Euler's method is that at a given point, the slope is approximated by the value of the right-hand side of the differential equation and then we step forward $h$ units in time following that slope. @fig-5.3 shows a depiction of the idea. Notice in the figure that in regions of high curvature Euler's method will overshoot the exact solution to the differential equation. However, taking the limit as $h$ tends to $0$ theoretically gives the exact solution at the trade off of needing infinite computational resources.
+A way to think about Euler's method is that at a given point, the slope is approximated by the value of the right-hand side of the differential equation and then we step forward $h$ units in time following that slope. @fig-5.3 shows a depiction of the idea. Notice in the figure that in regions of high curvature Euler's method will deviate a lot from the exact solution to the differential equation. However, taking the limit as $h$ tends to $0$ theoretically gives the exact solution at the trade off of needing infinite computational resources.
 
 ![Numerical solutions to a differential equation using Euler's method.](figures/ODE/Euler.png){#fig-5.3 alt="Numerical solutions to a differential equation using Euler's method."}
 
 ------------------------------------------------------------------------
 
 ::: {#exr-5.11}
-Why would Euler's method overshoot the exact solution in regions where the solution exhibits high curvature?
+Why would Euler's method do poorly in regions where the solution exhibits high curvature?
 
 :::
 
@@ -138,7 +138,7 @@ Write code to implement Euler's method for initial value problems. Your function
 ``` python         
 def euler1d(f,x0,t0,tmax,dt):
     t = # set up the domain based on t0, tmax, and dt
-    # next set up an array for x that is the same size a t
+    # next set up an array for x that is the same size as t
     x = np.zeros_like(t)
     x[0] = # fill in the initial condition
     for n in range( ??? ): # think about how far we should loop
@@ -186,7 +186,22 @@ x(t) = \frac{1}{10} \left( 19 e^{-t/3} + 3\sin(t) - 9\cos(t) \right).
 
 1.  Write code that gives the maximum point-wise error between your numerical solution and the analytic solution given a value of $\Delta t$.
 
-2.  Using your code from part (1), build a plot with the value of $\Delta t$ on the horizontal axis and the value of the associated error on the vertical axis. You should use a log-log plot. Obviously you will need to run your code many times at many different values of $\Delta t$ to build your data set.
+2.  Using your code from part (1), build a plot with the value of $\Delta t$ on the horizontal axis and the value of the associated error on the vertical axis. You should use a log-log plot. Obviously you will need to run your code many times at many different values of $\Delta t$ to build your data set. The following incomplete code will get you started.
+
+``` python
+# Create vector with different step sizes
+H = 10**(-np.linspace(0,4,50))
+# Create vector for holding the errors
+errors = np.zeros_like(H)
+# Loop over the different step sizes
+for i in range(H.size):
+    # Approximate the solution with Euler's method
+    t, x = euler1d(f,x0,t0,tmax,H[i])
+    errors[i] = # Calculate maximum absolute error
+# Plot the errors with logarithmic axes
+plt.loglog(H, errors)
+plt.grid()
+```
 
 3.  In general, if you were to cut your value of $\Delta t$ in half, what would that do to the value of the error? What about dividing $\Delta t$ by 10? 100? 1000?
 
@@ -195,7 +210,7 @@ x(t) = \frac{1}{10} \left( 19 e^{-t/3} + 3\sin(t) - 9\cos(t) \right).
 ------------------------------------------------------------------------
 
 ::: {#exr-5.15}
-Shelby solved a first order ODE $x' = f(t,x)$ using Euler's method with a step size of $dt = 0.1$ on a domain $t \in [0,3]$. To test her code she used a differential equation where she new the exact analytic solution and she found the maximum absolute error on the interval to be $0.15$. Jackson then solves the exact same differential equation, on the same interval, with the same initial condition using Euler's method and a step size of $dt = 0.01$. What is Jackson's expected maximum absolute error?
+Shelby solved a first order ODE $x' = f(t,x)$ using Euler's method with a step size of $dt = 0.1$ on a domain $t \in [0,3]$. To test her code she used a differential equation where she new the exact analytic solution and she found the maximum absolute error on the interval to be $0.15$. Jackson then solves the exact same differential equation, on the same interval, with the same initial condition using Euler's method and a step size of $dt = 0.01$. What would be your best estimate of Jackson's maximum absolute error?
 
 :::
 
@@ -230,13 +245,13 @@ If a mass is hanging from a spring then Newton's second law, $\sum F=ma$, gives 
 
 3.  Put your answers to parts (1) and (2) together and simplify to form a second-order differential equation for position: 
 \begin{equation}
- \underline{\hspace{0.25in}} x'' + \underline{\hspace{0.25in}} x' + \underline{\hspace{0.25in}} x = 0 
+ \underline{\hspace{0.25in}} x'' = \underline{\hspace{0.25in}} x' + \underline{\hspace{0.25in}} x
 \end{equation}
 
 
 4.  If we want to solve a second order differential equation numerically we need to convert it to first order differential equations (Euler's method is only designed to deal with first order differential equations, not second order). To do so we can introduce a new variable, $x_1$, such that $x_1 = x'$. For the sake of notational consistency we define $x_0 = x$. The result is a system of first-order differential equations. 
 \begin{equation}
-\begin{aligned} x_0' &= x_1 \\ x_1' &= \underline{\hspace{2in}} \end{aligned}
+\begin{aligned} x_0' &= x_1 \\ x_1' &= \underline{\hspace{2in}}\end{aligned}
 \end{equation}
 
 
@@ -270,7 +285,7 @@ def euler(F,x0,t0,tmax,dt):
     # Next we set up x so that it is an array where the columns 
     # are the different dimensions of the problem.  For example, 
     # in this problem there will be 2 columns and len(t) rows
-    x = np.zeros( (len(t), len(x0)) ) 
+    x = np.zeros((len(t), len(x0))) 
     x[0,:] = x0 # store the initial condition in the first row
     for n in range(len(t)-1):
         x[n+1,:] = x[ ??? , ??? ] + dt*F(t[ ??? ], x[ ??? , ??? ])

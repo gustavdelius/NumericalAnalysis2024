@@ -646,8 +646,8 @@ Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\l
 <div id="exr-wgrad" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.12</strong></span> In your group, answer each of the following questions to remind yourselves of multivariable calculus.</p>
 <ol type="1">
-<li><p>What is a partial derivative (explain geometrically). For the function <span class="math inline">\(f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right)\)</span> what is <span class="math inline">\(\frac{\partial f}{\partial x}\)</span> and what is <span class="math inline">\(\frac{\partial f}{\partial y}\)</span>?</p></li>
-<li><p>What is the gradient of a function? What does it tell us physically or geometrically? If <span class="math inline">\(f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right)\)</span> then what is <span class="math inline">\(\nabla f\)</span>?</p></li>
+<li><p>What is a partial derivative (explain geometrically). For the function <span class="math inline">\(f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right)\)</span> what is <span class="math inline">\(\frac{\partial f}{\partial x}\)</span> and what is <span class="math inline">\(\frac{\partial f}{\partial y}\)</span>?</p></li>
+<li><p>What is the gradient of a function? What does it tell us physically or geometrically? If <span class="math inline">\(f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right)\)</span> then what is <span class="math inline">\(\nabla f\)</span>?</p></li>
 </ol>
 </div>
 <hr>
@@ -706,7 +706,7 @@ Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\l
 <p>You may recognize this as the basic question of regression from statistics. What we will do here is pose the statistical question of which curve best fits a data set as an optimization problem. Then we will use the tools that we have built so far to solve the optimization problem.</p>
 <hr>
 <div id="exr-3.80" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.17</strong></span> Consider the function <span class="math inline">\(f(x)\)</span> that goes exactly through the points <span class="math inline">\((0,1)\)</span>, <span class="math inline">\((1,4)\)</span>, and <span class="math inline">\((2,13)\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 5.17</strong></span> Consider the function <span class="math inline">\(f(x)\)</span> that goes exactly through the points <span class="math inline">\((0,2)\)</span>, <span class="math inline">\((1,4)\)</span>, and <span class="math inline">\((2,12)\)</span>.</p>
 <ol type="1">
 <li><p>Find a function that goes through these points exactly. Be able to defend your work.</p></li>
 <li><p>Is your function unique? That is to say, is there another function out there that also goes exactly through these points?</p></li>
@@ -714,7 +714,7 @@ Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\l
 </div>
 <hr>
 <div id="exr-3.81" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.18</strong></span> Now let us make a minor tweak to the previous exercise. Let us say that we have the data points <span class="math inline">\((0,1.07)\)</span>, <span class="math inline">\((1,3.9)\)</span>, <span class="math inline">\((2,14.8)\)</span>, and <span class="math inline">\((3,26.8)\)</span>. Notice that these points are <em>close</em> to the points we had in the previous exercise, but all of the <span class="math inline">\(y\)</span> values have a little noise in them and we have added a fourth point. If we suspect that a function <span class="math inline">\(f(x)\)</span> that <em>best</em> fits this data is quadratic then <span class="math inline">\(f(x) = ax^2 + bx + c\)</span> for some constants <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 5.18</strong></span> Now let us make a minor tweak to the previous exercise. Let us say that we have the data points <span class="math inline">\((0,2.37)\)</span>, <span class="math inline">\((1,4.14)\)</span>, <span class="math inline">\((2,12.22)\)</span>, and <span class="math inline">\((3,23.68\)</span>. Notice that these points are <em>close</em> to the points we had in the previous exercise, but all of the <span class="math inline">\(y\)</span> values have a little noise in them and we have added a fourth point. If we suspect that a function <span class="math inline">\(f(x)\)</span> that <em>best</em> fits this data is quadratic then <span class="math inline">\(f(x) = ax^2 + bx + c\)</span> for some constants <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>.</p>
 <ol type="1">
 <li><p>Plot the four points along with the function <span class="math inline">\(f(x)\)</span> for arbitrarily chosen values of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>.</p></li>
 <li><p>Work with your group to systematically change <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span> so that you get a good visual match to the data. The Python code below will help you get started.</p></li>

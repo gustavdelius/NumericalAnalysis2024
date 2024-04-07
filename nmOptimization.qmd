@@ -83,7 +83,7 @@ Clearly there is no difference between finding the maximum of a function and fin
 The preceding thought exercises have given you intuition about finding extrema in a two-dimensional landscape. But first we will reduce back to one-dimensional optimization problems before generalising to multiple dimensions in the next section.
 
 ::: {#exr-3.51}
-Try to turn your intuitions into algorithms. If $f(x)$ is the function that you are trying to maximize then turn your ideas from the previous exercises into step-by-step algorithms which could be coded. Then try out your codes on the function 
+Try to turn your intuitions into algorithms. If $f(x)$ is the function that you are trying to minimize then turn your ideas from the previous exercises into step-by-step algorithms which could be coded. Then try out your codes on the function 
 \begin{equation}
 f(x) = -e^{-x^2} - \sin(x^2)
 \end{equation}
@@ -272,7 +272,7 @@ Make a plot of the log of the absolute error at iteration $k+1$ agains the log o
 :::
 
 ::: {#exr-3.56b}
-Try out your algorithms to find the maximum of the function 
+Try out your algorithms to find the minimum of the function 
 $$f(x) = (\sin(4x)+1)((x-5)^2-25)$$
 on the domain $0 \le x \le 8$. 
 ```{python}
@@ -299,10 +299,10 @@ Now let us look at multi-variable optimization. The idea is the same as in the s
 
 Here is a two-variable example:
 Find the minimum of the function
-$$f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right)$$
+$$f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right)$$
 ```{python}
 #| label: fig-opt-3
-#| fig-cap: Graph of the function $\sin(x)\exp\left(\sqrt{x^2+y^2}\right)$.
+#| fig-cap: Graph of the function $\sin(x)\exp\left(-\sqrt{x^2+y^2}\right)$.
 #| fig-alt: Graph of example function
 #| code-fold: true
 #| column: page-right
@@ -362,7 +362,7 @@ You can build on your code for the single-variable gradient descent from @exr-3.
 The function should now take as input the two partial derivatives of the function and the starting point `(x0, y0)`, as well as the tolerance and the maximum number of iterations.
 
 Use your function to find the minimum of the function
-$$f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right).$$
+$$f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right).$$
 :::
 
 ------------------------------------------------------------------------

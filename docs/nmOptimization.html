@@ -413,7 +413,7 @@ Figure&nbsp;5.2: Graph of the function <span class="math inline">\(f(x) = e^{-x^
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-1D-optimization"><span class="header-section-number">5.1</span> Single Variable Optimization</h2>
 <p>The preceding thought exercises have given you intuition about finding extrema in a two-dimensional landscape. But first we will reduce back to one-dimensional optimization problems before generalising to multiple dimensions in the next section.</p>
 <div id="exr-3.51" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.5</strong></span> Try to turn your intuitions into algorithms. If <span class="math inline">\(f(x)\)</span> is the function that you are trying to maximize then turn your ideas from the previous exercises into step-by-step algorithms which could be coded. Then try out your codes on the function <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 5.5</strong></span> Try to turn your intuitions into algorithms. If <span class="math inline">\(f(x)\)</span> is the function that you are trying to minimize then turn your ideas from the previous exercises into step-by-step algorithms which could be coded. Then try out your codes on the function <span class="math display">\[\begin{equation}
 f(x) = -e^{-x^2} - \sin(x^2)
 \end{equation}\]</span> to see if your algorithms can find the local minimum near <span class="math inline">\(x \approx 1.14\)</span>. Try to generate several different algorithms.</p>
 </div>
@@ -555,8 +555,8 @@ f(x) = -e^{-x^2} - \sin(x^2)
 <p><span class="theorem-title"><strong>Exercise 5.10</strong></span> Make a plot of the log of the absolute error at iteration <span class="math inline">\(k+1\)</span> agains the log of the absolute error at iteration <span class="math inline">\(k\)</span>, similar to <a href="nmAlgebra.html#fig-2.4" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> for several methods and several choices of function. What do you observe?</p>
 </div>
 <div id="exr-3.56b" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.11</strong></span> Try out your algorithms to find the maximum of the function <span class="math display">\[f(x) = (\sin(4x)+1)((x-5)^2-25)\]</span> on the domain <span class="math inline">\(0 \le x \le 8\)</span>.</p>
-<div id="cell-fig-opt-2" class="cell" data-execution_count="3">
+<p><span class="theorem-title"><strong>Exercise 5.11</strong></span> Try out your algorithms to find the minimum of the function <span class="math display">\[f(x) = (\sin(4x)+1)((x-5)^2-25)\]</span> on the domain <span class="math inline">\(0 \le x \le 8\)</span>.</p>
+<div id="cell-fig-opt-2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -586,8 +586,8 @@ Figure&nbsp;5.3: Graph of the function <span class="math inline">\(f(x) = (\sin(
 <section id="multivariable-optimization" class="level2 page-columns page-full" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="multivariable-optimization"><span class="header-section-number">5.2</span> Multivariable Optimization</h2>
 <p>Now let us look at multi-variable optimization. The idea is the same as in the single-variable case. We want to find the minimum of a function <span class="math inline">\(f(x_1, x_2, \ldots, x_n)\)</span>. Such higher-dimensional problems are very common and the dimension <span class="math inline">\(n\)</span> can be very large in practical problems. A good example is the loss function of a neural network which is a function of the weights and biases of the network. In a large language model the loss function is a function of many billions of variables and the training of the model is a large optimization problem.</p>
-<p>Here is a two-variable example: Find the minimum of the function <span class="math display">\[f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right)\]</span></p>
-<div id="cell-fig-opt-3" class="cell column-page-right" data-execution_count="4">
+<p>Here is a two-variable example: Find the minimum of the function <span class="math display">\[f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right)\]</span></p>
+<div id="cell-fig-opt-3" class="cell column-page-right" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -636,7 +636,7 @@ if (outputEl) {{
                         })                };                });            </script>        </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-opt-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\left(\sqrt{x^2+y^2}\right)\)</span>.
+Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\left(-\sqrt{x^2+y^2}\right)\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -666,7 +666,7 @@ Figure&nbsp;5.4: Graph of the function <span class="math inline">\(\sin(x)\exp\l
 </ol>
 <div id="exr-3.58" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.13</strong></span> Write code to implement the gradient descent algorithm for a function <span class="math inline">\(f(x,y)\)</span>. You can build on your code for the single-variable gradient descent from <a href="#exr-3.53" class="quarto-xref">Exercise&nbsp;<span>5.8</span></a>. The function should now take as input the two partial derivatives of the function and the starting point <code>(x0, y0)</code>, as well as the tolerance and the maximum number of iterations.</p>
-<p>Use your function to find the minimum of the function <span class="math display">\[f(x,y) = \sin(x)\exp\left(\sqrt{x^2+y^2}\right).\]</span></p>
+<p>Use your function to find the minimum of the function <span class="math display">\[f(x,y) = \sin(x)\exp\left(-\sqrt{x^2+y^2}\right).\]</span></p>
 </div>
 <hr>
 <p>Of course there are many other methods for finding the minimum of a multi-variable function. An important method that does not need the gradient of the function is the Nelder-Mead method. This method is a direct search method that only needs the function values at the points it is evaluating. The method is very robust and is often used when the gradient of the function is not known or is difficult to calculate. There are also clever variants of the gradient descent method that are more efficient than the basic method. The Adam and RMSprop algorithms are two such methods that are used in machine learning. This subject is a large and active area of research and we will not go into more detail here.</p>

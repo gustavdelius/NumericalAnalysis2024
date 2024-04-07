@@ -51,16 +51,16 @@ x(1) \approx \underline{\hspace{1in}}
 \end{equation}
 
 
-b.  Use your answer from part (a) for time $t=1$ to approximate the $x$ value at time $t=2$. Then use that value to approximate the value at time $t=3$. Repeat the process to approximate the value of $x$ at times $t=2, 3, 4, 5, \ldots, 10$. Record your answers in the table below. Then find the analytic solution to this differential equation and record the $x$ values at the appropriate times.
+b.  Use your answer from part (a) for time $t=1$ to approximate the $x$ value at time $t=2$. Then use that value to approximate the value at time $t=3$. Repeat the process to approximate the value of $x$ at times $t=2, 3, 4$. Record your answers in the table below. Then find the analytic solution to this differential equation and record the $x$ values at the appropriate times.
 
-| $t$                     | **0** | **1** | **2** | **3** | **4** | **5** | **6** |
-|-------------------------|-------|-------|-------|-------|-------|-------|-------|
-| Approximation of $x(t)$ | 6     |       |       |       |       |       |       |
-| Exact value of $x(t)$   | 6     |       |       |       |       |       |       | 
+| $t$                     | **0** | **1** | **2** | **3** | **4** |
+|-------------------------|-------|-------|-------|-------|-------|
+| Approximation of $x(t)$ | 6     |       |       |       |       |
+| Exact value of $x(t)$   | 6     |       |       |       |       |
 
 c.  The "approximations of $x$" that you found in part (b) are a **numerical approximation** of the solution to the differential equation. You should notice that your numerical solution is pretty far off from the actual solution for most values of $t$. Why? What could be the sources of this error and how could we fix it? Once you have an idea of how to fix it, put your idea into action and devise some measurement of error to analyse your results.
 
-d.  In @fig-5.1 you will see a slope field and the exact solution to the differential equation $x' = -0.5x$ with $x(0) = 6$. Mark your approximate solutions at times $t=1$, $t=2$, $\ldots$, $t=6$ on the plot and connect them with straight lines.
+d.  In @fig-5.1 you will see a slope field and the exact solution to the differential equation $x' = -0.5x$ with $x(0) = 6$. Mark your approximate solutions at times $t=1$, $t=2$, $\ldots$, $t=4$ on the plot and connect them with straight lines.
 
     1.  Why are we using straight lines to connect the points?
 
@@ -75,7 +75,7 @@ d.  In @fig-5.1 you will see a slope field and the exact solution to the differe
 ------------------------------------------------------------------------
 
 ::: {#exr-5.10}
-In @fig-5.2 you see the analytic solution at $x(0)=5$ and a slope field for an unknown differential equation.
+In @fig-5.2 you see the analytic solution with initial condition $x(0)=5$ and a slope field for an unknown differential equation.
 
 a.  Use the slope field and a step size of $\Delta t=1$ to plot approximate solution values at $t=1$, $t=2$, $\ldots$, $t=10$. Connect your points with straight lines. The collection of line segments that you just drew is an approximation to the solution of the unknown differential equation.
 
@@ -139,7 +139,7 @@ Write code to implement Euler's method for initial value problems. Your function
 def euler1d(f,x0,t0,tmax,dt):
     t = # set up the domain based on t0, tmax, and dt
     # next set up an array for x that is the same size as t
-    x = np.zeros_like(t)
+    x = np.zeros(len(t))
     x[0] = # fill in the initial condition
     for n in range( ??? ): # think about how far we should loop
         x[n+1] = # advance the solution forward in time with Euler
@@ -192,7 +192,7 @@ x(t) = \frac{1}{10} \left( 19 e^{-t/3} + 3\sin(t) - 9\cos(t) \right).
 # Create vector with different step sizes
 H = 10**(-np.linspace(0,4,50))
 # Create vector for holding the errors
-errors = np.zeros_like(H)
+errors = np.zeros(len(H))
 # Loop over the different step sizes
 for i in range(H.size):
     # Approximate the solution with Euler's method
@@ -331,17 +331,17 @@ Let $x_0(t)$ denote the number of rabbits (prey) and $x_1(t)$ denote the number 
 \begin{equation}
 \left\{ \begin{array}{ll} x_0' &= \alpha x_0 - \beta x_0 x_1 \\ x_1' &= \delta x_0 x_1 - \gamma x_1 \end{array} \right.
 \end{equation}
- where $\alpha, \beta, \gamma,$ and $\delta$ are positive constants. For this problems take $\alpha \approx 1.1$, $\beta \approx 0.4$, $\gamma \approx 0.1$, and $\delta \approx 0.4$.
+ where $\alpha, \beta, \gamma,$ and $\delta$ are positive constants. For this problems take $\alpha =1$, $\beta \approx 0.1$, $\gamma =1$, and $\delta =0.1$.
 
 1.  First rewrite the system of ODEs in the form $\boldsymbol{x}' = F(t,\boldsymbol{x})$ so you can use your `euler()` code.
 
-2.  Modify your code from the previous problem so that it works for this problem. Use `tmax = 200` and an appropriately small time step. Start with initial conditions $x_0(0)=20$ rabbits and $x_1(0)=1$ fox.
+2.  Modify your code from the previous problem so that it works for this problem. Use `tmax = 20` and an appropriately small time step. Start with initial conditions $x_0(0)=10$ rabbits and $x_1(0)=5$ foxes.
 
 3.  Create the time evolution plot. What does this plot tell you in context?
 
 4.  Create a phase plot. What does this plot tell you in context?
 
-5.  If you cut your time step in half, what do you see in the two plots? Why? What is Euler's method doing here?
+5.  If you cut your time step in half, what do you see in the two plots? Why? 
 
 :::
 
@@ -354,25 +354,21 @@ A classic model for predicting the spread of a virus or a disease is the SIR Mod
 -   Susceptible people become infected by having interaction with the infected people. Hence, the rate of change of the susceptible people is proportional to the number of interactions that can occur between the $S$ and the $I$ populations.\
     
 \begin{equation}
- S' = -\beta SI 
+ S' = -\beta SI.
 \end{equation}
 
 -   The infected population gains people from the interactions with the susceptible people, but at the same time, infected people recover at a predictable rate. 
 \begin{equation}
- I' = \beta SI - \gamma I 
+ I' = \beta SI - \gamma I.
 \end{equation}
 
 -   The people in the recovered class are then immune to the virus, so the recovered class $R$ only gains people from the recoveries from the $I$ class. 
 \begin{equation}
- R' = \gamma I 
+ R' = \gamma I.
 \end{equation}
 
 
-1.  Explain the minus sign in the $S'$ equation in the context of the spread of a virus.
-
-2.  Explain the product $SI$ in the $S'$ equation in the context of the spread of a virus.
-
-3.  Find a numerical solution to the system of equations using your `euler()` function. Use the parameters $\beta = 0.4$ and $\beta = 0.04$ with initial conditions $S(0) = 0.99$, $I(0) = 0.01$, and $R(0) = 0$. Explain all three curves in context.
+Find a numerical solution to the system of equations using your `euler()` function. Use the parameters $\beta = 0.0003$ and $\gamma = 0.1$ with initial conditions $S(0) = 999$, $I(0) = 1$, and $R(0) = 0$. Plot the solution against time. Explain all three curves in context.
 
 :::
 
@@ -380,7 +376,7 @@ A classic model for predicting the spread of a virus or a disease is the SIR Mod
 
 ## The Midpoint Method
 
-Now we get to improve upon Euler's method. There is a long history of wonderful improvements to the classic Euler's method -- some that work in special cases, some that resolve areas where the error is going to be high, and some that are great for general purpose numerical solutions to ODEs with relatively high accuracy. In this section we will make a simple modification to Euler's method that has a surprisingly great payoff in the error rate.
+Now we get to improve upon Euler's method. There is a long history of wonderful improvements to the classic Euler's method -- some that work in special cases, some that resolve areas where the error is going to be high, and some that are great for general purpose numerical solutions to ODEs with relatively high accuracy. In this section we will make a simple modification to Euler's method that has a surprisingly great pay-off in the error rate.
 
 ------------------------------------------------------------------------
 
@@ -414,13 +410,13 @@ Perhaps a bit confusing ...let us build this idea together:
 
 -   Your answers to the previous bullets should be: $x'(0) = -3$, $x(0.5) \approx 4.5$, $x'(0.5) = -2.25$, so if we take a full step forward with slope $m=-2.25$ starting from $t=0$ we get $x(1) \approx 3.75$.
 
-b.  Repeat the process outlined in part (a) to approximate the solution to the differential equation at times $t=2, 3, \ldots, 10$. Also record the exact answer at each of these times by noting that the exact solution is $x(t) = 6e^{-0.5t}$.
+b.  Repeat the process outlined in part (a) to approximate the solution to the differential equation at times $t=2, 3, 4$. Also record the exact answer at each of these times by noting that the exact solution is $x(t) = 6e^{-0.5t}$.
 
-| $t$                    | **0** | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** | **9** | **10** |
-|--------------------------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|--------|
-| Euler approx of $x(t)$ | 6     |       |       |       |       |       |       |       |       |       |        |
-| New approx of $x(t)$   | 6     |       |       |       |       |       |       |       |       |       |        |
-| Exact value of $x(t)$  | 6     |       |       |       |       |       |       |       |       |       |        |
+| $t$                    | **0** | **1** | **2** | **3** | **4** |
+|------------------------|-------|-------|-------|-------|-------|
+| Euler approx of $x(t)$ | 6     |       |       |       |       |
+| New approx of $x(t)$   | 6     |       |       |       |       |
+| Exact value of $x(t)$  | 6     |       |       |       |       |
 
 c.  Draw a clear picture of what this method is doing in order to approximate the slope at each individual step.
 
@@ -453,7 +449,7 @@ Complete the code below to implement the midpoint method in one dimension.
 def midpoint1d(f,x0,t0,tmax,dt):
     t = # build the times
     x = # build an array for the x values
-    x[0] = # build the initial condition
+    x[0] = # save the initial condition
     # On the next line: be careful about how far you're looping
     for n in range( ??? ): 
         # The interesting part of the code goes here.
@@ -588,7 +584,7 @@ One of the troubles with the midpoint method is that it does not actually use th
 
     -   We could use a weighted average of the three slopes where some preference is given to some slopes over the others.
 
-In the code below you will find a function called `ode_test()` that you can use as a starting point to test our the last three ideas. After the function you will see several lines of code that test your method against the differential equation $x'(t) = -\frac{1}{3}x + \sin(t)$ with $x(0) = 1$. The plots that come out are our typical error plots with the step size on the horizontal axis and our maximum absolute error between the numerical solution and the exact solution on the vertical axis. Recall that the exact solution to this differential equation is 
+In the code below you will find a function called `ode_test()` that you can use as a starting point to test out the last three ideas. After the function you will see several lines of code that test your method against the differential equation $x'(t) = -\frac{1}{3}x + \sin(t)$ with $x(0) = 1$. The plots that come out are our typical error plots with the step size on the horizontal axis and our maximum absolute error between the numerical solution and the exact solution on the vertical axis. Recall that the exact solution to this differential equation is 
 \begin{equation}
  x(t) = \frac{1}{10} \left( 19 e^{-t/3} + 3\sin(t) - 9\cos(t) \right) 
 \end{equation}
@@ -599,7 +595,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # *********
-# You should copy your euler and midpoint functions here. 
+# You should copy your 1d euler and midpoint functions here. 
 # We will be comparing to these two existing methods.
 # *********
 
@@ -765,6 +761,7 @@ In @thm-5.3 we state the Runge-Kutta 4 method in terms of the estimates of the s
 
 ------------------------------------------------------------------------
 
+<!---
 ::: {#exr-5.38}
 Jackson wants to solve the differential equation $x' = f(t,x)$ on the domain $t \in [0,1]$ so that the maximum absolute error is less than $10^{-8}$.
 
@@ -781,21 +778,22 @@ d.  Discuss the implications of what you found in parts (a) - (c) of this proble
 ------------------------------------------------------------------------
 
 ::: {#exr-5.39}
-It would nice, but it would be completely impractical, to have a numerical method compute the approximate solution so that the maximum absolute error is less than machine precision $10^{-16}$. That is an impracticality since we cannot actually detect errors that small on a computer using double precision arithmetic. However, what if we wanted accuracy of $10^{-15}$ instead? Repeat the previous exercise with $10^{-15}$ as the goal for the maximum absolute error.
+It would be nice, but completely impractical, to have a numerical method compute the approximate solution so that the maximum absolute error is less than machine precision $10^{-16}$. That is an impracticality since we cannot actually detect errors that small on a computer using double precision arithmetic. However, what if we wanted accuracy of $10^{-15}$ instead? Repeat the previous exercise with $10^{-15}$ as the goal for the maximum absolute error.
 
 :::
 
 ------------------------------------------------------------------------
+--->
 
 ::: {#exr-5.40}
-Let us step back for a second and just see what the RK4 method does from a nuts-and-bolts point of view. Consider the differential equation $x' = x$ with initial condition $x(0) = 1$. The solution to this differential equation is clearly $x(t) = e^t$. For the same of simplicity, take $\Delta t = 1$ and perform 1 step of the RK4 method BY HAND to approximate the value $x(1)$.
+Let us step back for a second and just see what the RK4 method does from a nuts-and-bolts point of view. Consider the differential equation $x' = x$ with initial condition $x(0) = 1$. The solution to this differential equation is clearly $x(t) = e^t$. For the sake of simplicity, take $\Delta t = 1$ and perform 1 step of the RK4 method BY HAND to approximate the value $x(1)$.
 
 :::
 
 ------------------------------------------------------------------------
 
 ::: {#exr-5.41}
-Write a Python function that implements the Runge-Kutta 4 method in one dimension. Test the problem on several differential equations where you know the solution.
+Write a Python function that implements the Runge-Kutta 4 method in one dimension. 
 
 ``` python         
 import numpy as np
@@ -803,12 +801,14 @@ import matplotlib.pyplot as plt
 
 def rk41d(f,x0,t0,tmax,dt):
     t = np.arange(t0,tmax+dt,dt)
-    x = np.zeros_like(t)
+    x = np.zeros(len(t))
     x[0] = x0
     for n in range(len(t)-1):
         # the interesting bits of the code go here
     return t, x
-
+```
+Test the problem on several differential equations where you know the solution.
+``` python
 f = lambda t, x: -(1/3.0)*x + np.sin(t)
 x0 = # initial condition
 t0 = 0
@@ -819,7 +819,6 @@ plt.plot(t,x,'b.-')
 plt.grid()
 plt.show()
 ```
-
 :::
 
 ------------------------------------------------------------------------
@@ -831,229 +830,10 @@ Modify your Runge-Kutta 4 code to work for any number of dimensions.  You may wa
 
 ------------------------------------------------------------------------
 
-## Animating ODE Solutions
-
-Differential equations that depend on time are often best visualized when they are animated. This can also be said about any parametrised function, but in this present case we will focus on visualizing differential equations. There are several animation tools with python and we will demonstrate only two primary technique here:
-
--   `ipywidgets.interactive` is a tool that will produce an image with sliders that can be used to manually control an animation. The big advantage to `ipywidgets.iteractive` is that you can animate over several parameters, and hence use this tool as a playground for learning how parameters interact with each other.
-
--   `matplotlib.animation` is a tool built directly into `matplotlib` that gives a playable animation (like a small movie). In this sort of animation we can only animate over one parameter or variable (like time), but this is most like what we would expect when animating a function that changes over time.
-
-The reader should take careful note that the tools described here are meant to be used in Google Colab. These tools may not work as expected in other instances of Python and you may have to do some playing around (and Googling) to get it to work properly on your Python installation. Moreover, the animations are not built directly into the book since this book is delivered in several formats (HTML, PDF, and print). Instead you will find links to Google Colab documents that have the contain the code and animations.
-
-### `ipywidgets.interactive`
-
-Consider the differential equation $x' = f(t,x)$ with $x(0) = x_0$. We would like to build an animation of the numerical solution to this differential equation over the parameters $t$ but also over $x_0$ and $\Delta t$. The following blocks of python code walk through this animation.
-
-------------------------------------------------------------------------
-
-::: {#exm-5.2}
-#### ipywidgets.interactive
-Let us say that we want to control the numerical solution to the differential equation $x' = -\frac{1}{3}x + \sin(t)$ by manually altering the values of $x(0) = x_0$, $t_{max}$, and $\Delta t$. In this case we will solve the differential equation using Euler's method but note that our code could be easily modified to use other solvers.
-
-First we import all of the appropriate libraries. Of particular interest is the `ipywidgets.interactive` library. This allows for images to be interactive with the use of sliders. Moving the sliders will provide a nice way to animate a plot manually.
-
-``` python         
-from ipywidgets import interactive
-import matplotlib.pyplot as plt
-import numpy as np
-```
-
-In the next block of code we define our `euler()` solver. This particular step is only included because we are using Euler's method to solve this specific problem. In general, include any functions or code that are going to be used to produce the data that you will be plotting. We will also introduce the function `f` and the parameter `t0` since we will not be animating over these parameters.
-
-``` python         
-def euler(f,x0,t0,tmax,dt):
-  N = int(np.floor((tmax-t0)/dt)+1)
-  t = np.linspace(t0,tmax,N+1)
-  x = np.zeros_like(t)
-  x[0] = x0
-  for n in range(len(t)-1):
-    x[n+1] = x[n] + dt*f(t[n],x[n])
-  return t, x
-
-f = lambda t, x: -(1/3.0)*x + np.sin(t)
-t0 = 0
-```
-
-Next we build a function that accepts only the parameters that we want to animate over and produces only a plot. This function will be called later by the `ipywidgets.interactive` function every time we change one of the parameters so be sure that this is a clean and fast function to evaluate (keep the code simple).
-
-``` python         
-def eulerAnimator(x0,tmax,dt):
-    # call on the euler function to build the solution
-    t, x = euler(f,x0,t0,tmax,dt) 
-    plt.plot(t, x, 'b-') # plot the solution
-    plt.xlim(0,30)
-    plt.ylim( np.min(x)-1, np.max(x)+1)
-    plt.grid()
-    plt.show() 
-```
-
-Now that we have everything set up we need to call on the `ipywidgets.interactive` command to turn the graphic into a visualization which can be controlled by sliders. In the code below we are allowing the initial condition to range between $x_0 = -2$ and $x_0 = 5$ in steps of $0.5$, the time to range from $t_{max}=1$ to $t_{max}=30$ in steps of $0.1$, and the time step to range from $\Delta t = 0.01$ to $\Delta t = 0.75$ in steps of $0.005$.
-
-``` python         
-interactive_plot = interactive(eulerAnimator, 
-                               x0=(-2, 5, 0.5), 
-                               tmax=(1, 30, 0.1), 
-                               dt=(0.01, 0.75, 0.005))
-interactive_plot
-```
-
-A static snapshot of the animation applet is shown in @fig-5.5. When you build this animation you will have control over all three parameters. Like we mentioned before, this sort of animation can be a great playground for building insight into the interplay between parameters.
-
-![Snapshot of the ODE animation applet with ipywidgets.](figures/ODE/widgetsnapshot.png){#fig-5.5 alt="Snapshot of the ODE animation applet with ipywidgets."}
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.42}
-Modify the previous exercise to use a different numerical solver (e.g. the midpoint method) instead of Euler's method.
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.43}
-Modify the animation routine above to simultaneously show the Euler, Midpoint, and RK4 solutions to a differential equation on top of each other. Animate over different values of $\Delta t$ for fixed values of $x_0$ and $t_{max}$.
-
-:::
-
-------------------------------------------------------------------------
-
-### `matplotlib.animation`
-
-The next animation package that we discuss is the `matplotlib.animation` package. This particular package is very similar to `ipywidgets.interactive`, but results only in a playable movie that is embedded within the Google Colab environment.
-
-------------------------------------------------------------------------
-
-::: {#exr-5.44}
-Again we will consider the differential equation $x' = -\frac{1}{3}x + \sin(t)$ but this time we will only be interested in an animation over time.
-
-We start the code by importing all of the necessary libraries. Take note that we import the `matplotlib.animation` and `matplotlib.rc` libraries in order to build the animation. We then import the `IPython.display.HTML` library to take care of embedding the player into the Google Colab environment.
-
-``` python         
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation, rc
-from IPython.display import HTML
-```
-
-Next we write all of the code necessary to build an Euler solution for the differential equation. Take note, of course, that much of this code is specific only to this problem and what we really need here is code that produces data for the animation.
-
-``` python         
-def euler(f,x0,t0,tmax,dt): # this is the Euler function
-  N = int(np.floor((tmax-t0)/dt)+1)
-  t = np.linspace(t0,tmax,N+1)
-  x = np.zeros_like(t)
-  x[0] = x0
-  for n in range(len(t)-1):
-    x[n+1] = x[n] + dt*f(t[n],x[n])
-  return t, x
-
-# Now we define the parameters for the Euler function
-dt = 1e-2
-x0 = 3 # initial condition
-t0 = 0
-tmax = 10
-f = lambda t, x: -(1/3.0)*x + np.sin(t)
-
-# Next we get the full Euler solution associate with these 
-# parameters.  Be careful that you put this outside your 
-# animation loop so that you do not build this over and over.
-t, x = euler(f,x0,t0,tmax,dt) 
-```
-
-Next we have to set up the figure that we are going to animate. This involves:
-
--   setting up the axes,
-
--   building any features onto the axes that we want (e.g. a grid, axis labels, axis limits, etc)
-
--   and then we build a variable that we call `frame`.
-
-    -   The variable `frame` contains a blank plot with no data.
-
-    -   Notice that we define the line and marker styles here.
-
-    -   Also notice the comma in the definition of the `frame` variable. This is here since there are several Python objects inside `ax.plot()` and we only want to unpack the first one into `frame`.
-
-``` python         
-fig, ax = plt.subplots()
-plt.close()
-# Below we set up many of the global parameters for the plot.
-# Much of what we do here depends on what we are trying to animate.
-ax.grid()
-ax.set_xlabel('Time')
-ax.set_ylabel('Approximate Solution')
-ax.set_xlim(( t0, tmax)) 
-ax.set_ylim((np.min(x)-0.5, np.max(x)+0.5)) 
-frame, = ax.plot([], [], linewidth=2, linestyle='--') 
-# notice we also set line and marker parameters here
-```
-
-Now we build a function that accepts only the animation frame number, `N`, and adds appropriate elements to the plot defined by `frame`.
-
-``` python         
-def animator(N): # N is the animation frame number
-  T = t[:N] # get t data up to the frame number
-  X = x[:N] # get x data up to the frame number
-  # display the current simulation time in the title
-  ax.set_title('Time='+str(t[N])) 
-  # put the data for the current frame into the varable "frame"
-  frame.set_data(T,X) 
-  return (frame,)
-```
-
-In the next block of code we define which frames we want to use in the animation and then we call upon the `matplotlib.animation` function to build the animation.
-
-``` python         
-# The Euler solution takes many very small time steps.  
-# To speed up the animation we view every 10th iteration.
-PlotFrames = range(0,len(t),10) 
-anim = animation.FuncAnimation(fig, # call on the figure
-# next call the function that builds the animation frame
-                               animator, 
-# next tell which frames to pass to animator
-                               frames=PlotFrames, 
-# lastly give the delay between frames                         
-                               interval=100 
-                               ) 
-```
-
-Finally, we embed the animation into the Google Colab environment. Take note that if you are using a different Python IDE then you may need to experiment with how to show the resulting animation.
-
-``` python         
-rc('animation', html='jshtml') # embed in the HTML for Google Colab
-anim # show the animation
-```
-
-A static snapshot of the resulting animation can be seen in @fig-5.6. The controls for the animation should be familiar from other media players.
-
-![Snapshot of the ODE animation applet with matplotlib animation.](figures/ODE/mplanimationsnapshot.png){#fig-5.6 alt="Snapshot of the ODE animation applet with matplotlib animation."}
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.45}
-Modify the code from the previous exercise to show faster and slower animations.
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.46}
-Modify the `matplotlib.animation` code from @exr-5.44 to use a different differential equation solver.
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.47}
-Modify the `matplotlib.animation` code from @exr-5.44 to show the Euler, Midpoint, and RK4 solutions to a differential equation on top of each other for a fixed value of $\Delta t$.
-:::
 
 ## The Backwards Euler Method
 
-We have now built up a fairly large variety of numerical ODE solvers. All of the solvers that we have built thus far are called **explicit** numerical differential equation solvers since they try to advance the solution explicitly forward in time. Wouldn't it be nice if we could literally just say, *what slope is going to work best in the future time steps ... let us use that*? Seems like an unrealistic hope, but that is exactly what the last method covered in this section does.
+We have now built up a variety of numerical ODE solvers. All of the solvers that we have built thus far are called **explicit** numerical differential equation solvers since they try to advance the solution explicitly forward in time. Wouldn't it be nice if we could literally just say, *what slope is going to work best in the future time steps ... let us use that*? Seems like an unrealistic hope, but that is exactly what the last method covered in this section does.
 
 ------------------------------------------------------------------------
 
@@ -1075,7 +855,7 @@ x_{n+1} = x_n + h f(t_{n+1},x_{n+1}).
 
 -   We will always know the value of $t_{n+1}$ and we will always know the value of $x_n$, but we do not know the value of $x_{n+1}$. In fact, that is exactly what we want. The major trouble is that $x_{n+1}$ shows up on both sides of the equation. Can you think of a way to solve for it? ...you have code that does this step!!!
 
--   This method is called the **Backward Euler** method and is known as an **implicit method** since you do not explicitly calculate $x_{n+1}$ but instead there is some intermediate calculation that needs to happen to solve for $x_{n+1}$. The (usual) advantage to an implicit method such as Backward Euler is that you can take far fewer steps with reasonably little loss of accuracy. we will see that in the coming problems.
+-   This method is called the **Backward Euler** method and is known as an **implicit method** since you do not explicitly calculate $x_{n+1}$ but instead there is some intermediate calculation that needs to happen to solve for $x_{n+1}$. The (usual) advantage to an implicit method such as Backward Euler is that you can take far fewer steps with reasonably little loss of accuracy. We will see that in the coming exercises.
 
 :::
 
@@ -1125,7 +905,7 @@ x_{n+1} = x_n + h f(t_{n+1},x_{n+1}).
 
 3.  Go two steps further with the backward Euler method on this problem. Then take the same number of steps with regular (forward) Euler's method.
 
-4.  Work our the analytic solution for this differential equation (using separation of variables perhaps). Then compare the values that you found in parts (b) and (c) of this problem to values of the analytic solution and values that you would find form the regular (forward) Euler approximation. What do you notice?
+4.  Work out the analytic solution for this differential equation (using separation of variables perhaps). Then compare the values that you found in parts (b) and (c) of this problem to values of the analytic solution and values that you would find from the regular (forward) Euler approximation. What do you notice?
 
 :::
 
@@ -1151,7 +931,7 @@ import numpy as np
 from scipy import optimize
 def backwardEuler1d(f,x0,t0,tmax,dt):
     t = np.arange(t0,tmax+dt,dt)
-    x = np.zeros_like(t)
+    x = np.zeros(len(t))
     x[0] = x0
     for n in range(len(t)-1):
         G = lambda X: ??? # define this function
@@ -1160,12 +940,7 @@ def backwardEuler1d(f,x0,t0,tmax,dt):
     return t, x
 ```
 
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.51}
-Test the Backward Euler method from the previous problem on several differential equations where you know the solution.
+Test your `backwardEuler1d()` function on several differential equations where you know the solution.
 
 :::
 
@@ -1174,7 +949,7 @@ Test the Backward Euler method from the previous problem on several differential
 ::: {#exr-5.52}
 Write a script that outputs a log-log plot with the step size on the horizontal axis and the error in the numerical method on the vertical axis. Plot the errors for Euler, Midpoint, Runge Kutta, and Backward Euler measured against a differential equation with a known analytic solution. Use this plot to conjecture the convergence rates of the four methods. You can use the differential equation $x' = -\frac{1}{3} x + \sin(t)$ with $x(0) = 1$ like we have for many of our past algorithm since we know that the solution is 
 \begin{equation}
- x(t) = \frac{1}{10}\left( 19e^{-t/3} + 3\sin(t) - 9\cos(t) \right) 
+ x(t) = \frac{1}{10}\left( 19e^{-t/3} + 3\sin(t) - 9\cos(t) \right).
 \end{equation}
 
 
@@ -1190,238 +965,7 @@ What is the order of the error on the Backward Euler method? Given this answer, 
 ------------------------------------------------------------------------
 
 ::: {#exr-5.54}
-It may not be obvious at the outset, but the Backward Euler method will actually behave better than our regular Euler's method in some sense. Let us take a look. Consider, for example, the really simply differential equation $x' = -x$ with $x(0) = 1$ on the interval $t \in [0,2]$. The analytic solution is $x(t) = e^{-t}$. Write Python code that plots the analytic solution, the Euler approximation, and the Backward Euler approximation on top of each other. Use a time step that is larger than you normally would (such as $\Delta t = 0.25$ or $\Delta t = 0.5$ or larger). Try the same experiment on another differential equation where we know the exact solution and the solution has some regions of high curvature. What do you notice? What does Backward Euler do that is an improvement on regular Euler?
-:::
-
-## Fitting ODE Models to Data
-
-To end this chapter we will examine a very common scientific situation:  We have data from an experiment and a (challenging to solve) differential equation modelling the data that has some parameter that controls the behaviour. We want to find the value of the parameter that gives us the best fit between our numerical solution and the data. For example, say we have temperature data for a cooling liquid and we have a differential equation for temperature that depends on a parameter related to the thermal properties of the container. We would like to use the data and the differential equation to determine the parameter for the container. As another example, say we have the number of patients that become ill with a virus each day and we actually want to know the long-term impacts on the population. An SIR differential equation model might describe the dynamics of the situation well, and the data can be used to determine the transmission rate parameters in the model.
-
-We examined data fitting in [Chapter -@sec-calculus]. The present situation is really not that much different than regular least squares curve fitting.
-
--   Propose a model function: In this case our model function will be a numerical solution to a differential equation given some value for an unknown parameter.
-
--   Calculate the sum of the squared residuals: In this case, we need to match the times between the numerical solution and the data. There will likely be far more points in the numerical solution than there will be in the data so we will have to carefully select the points that closely match between the two. Then calculating the sum of the squared error is simple.
-
--   Use an optimization routine to find the value of the best parameter: In this case this is no different than regular least squares. We are trying to find the value of the parameter that minimizes the sum of the squared residuals.
-
-------------------------------------------------------------------------
-
-::: {#exr-5.55}
-#### Newton's Law of Cooling
-From Calculus you may recall Newton's Law of Cooling: 
-\begin{equation}
- \frac{dT}{dt} = -k(T - T_{ambient}) 
-\end{equation}
- where $T$ is the temperature of some object (like a cup of coffee), $T_{ambient}$ is the temperature of the ambient environment, and $k$ is the proportionality constant that governs the rate of cooling. This is a classic differential equation with a well known solution.^[If you do not know the solution to Newton's Law of Cooling then take a moment and do the separation of variables to solve for $T(t)$.] In the present situation we do not want the analytic solution, but instead we will work with a numerical solution since we are thinking ahead to where the differential equation may be very hard to solve in future problems. We also do not want to just look at the data and guess an algebraic form for the function that best fits the data. That would be a trap! (why?) Instead, we rely on our knowledge of the physics of the situation to give us the differential equation.
-
-The following data table gives the temperature (degrees $F$) at several times while a cup of tea cools on a table [@Bauer]. The ambient temperature of the room is $65^\circ F$.
-
-| **Time (sec)** | **Temperature** |
-|----------------|-----------------|
-| 0              | 160             |
-| 60             | 155             |
-| 180            | 145             |
-| 210            | 142             |
-| 600            | 120             |
-
-Plot the data as a scatter plot.
-
-``` python         
-import numpy as np
-import matplotlib.pyplot as plt
-data = np.array([[0,160],[60,155],[180,145],[210,142],[600,120]])
-plt.plot(data[??? , ???] , data[??? , ???], 'b*')
-plt.grid()
-plt.show()
-```
-
-Now we will build several Python functions as well as several additional lines of code that are created specifically for this problem. Note that every parameter estimate problem of this type will take similar form, but there may be subtle differences depending on the data that you need to account for in each problem. You will need to Taylor make parts of each parameter estimation script for each new problem.
-
--   First we set the stage by defining $\Delta t$, a collection of times that contains the data, the function $f(t,x; k)$ which depends on the parameter $k$, and any other necessary parameters of our specific problem.
-
-``` python         
-import numpy as np
-Tambient = ???
-# Next choose an appropriate value of dt.  
-# Choosing dt so that values of time in the data fall within
-# the times for the numerical solution is typically a good 
-# practice (but is not always possible).
-dt = ??? 
-t0 = 0 # time where the data starts
-tmax = ??? # just beyond where the data ends
-t = np.arange(t0,tmax+dt,dt) # set up the times 
-# nest we define our specific differential equation
-f = lambda t, x, k: -k*(x - Tambient) 
-x0 = ??? # initial condition pulled from the data
-```
-
--   Now we build a Python function that will accept a value of the parameter $k$ as the only input and will return a high quality numerical solution to the proposed differential equation.
-
-``` python         
-def numericalSolution(k):
-    x = np.zeros_like(t)
-    x[0] = x0
-    for n in range(len(t)-1):
-        # put the code necessary to build a good 
-        # numerical solver here be sure to account 
-        # for the parameter k in each of your function calls.
-    return t, x
-```
-
--   Spend a little time now playing with different parameters and plotting numerical solutions along with the data to determine the proper ballpark value of the parameter.
-
--   Now we need to write a short Python script that will find all of the indices where the value of time in the data closely match values of time in the numerical solution. There are many ways to do this, but the most readable is a pair of nested `for` loops. Outline what the following code does. Why are we using `dt/2` in the code below? You should work to find more efficient ways to code this for bigger problems since the nested `for` loops is potentially quite time consuming.
-
-``` python         
-indices = []
-for j in range(len(t)):
-    for k in range(len(data)):
-        if # write a check to find where t is closest to data[:,1]
-            indices.append(j)
-```
-
--   Now we build a Python function `dataMatcher(k)` which accepts the parameter $k$ and outputs the sum of the squared residuals between the numerical solution associated with $k$ and our data. Carefully dissect the following code.
-
-``` python         
-def dataMatcher(k):
-    t, x = numericalSolution(k)
-    err = []
-    counter = 0
-    for n in indices:
-        err.append( (data[counter,1] - x[int(n)])**2 )
-        counter += 1
-    print("For k=",k[0],",  SSRes=",np.sum(err)) # optional
-    return np.sum(err)
-```
-
--   Test your `dataMatcher()` function to be sure that it is working properly on a value of $k$ which visually matches the data well.
-
--   Finally, we call upon the `scipy.optimize.minimize()` function to iteratively try different values of the parameter $k$ and to find the one that minimizes the sum of the squared residuals. Be sure to start $k$ at a value that gives a reasonably good visual match between the numerical solution and the data. Once the optimization routine is done you should plot your best solution on top of the data to verify that it indeed found a good solution. You will notice that there are several options that you can send to the `scipy.optimize.minimize()` command. Play with these options to see what they do and how they impact the quality of your solution.
-
-``` python         
-import scipy.optimize as sp
-# Choose an initial value of k and put it into the following code 
-# in place of the "???".  Note that we are sending a few parameters 
-# to the optimization tool.  Be sure to understand these options 
-# and take care that these options problem dependent and you will 
-# need to choose these again for the next new problem.
-K = sp.minimize(dataMatcher,???, options = {'maxiter': 5}, tol=1e-2)
-print(K)
-t, x = numericalSolution(K.x[0])
-plt.plot(t,x,'r--',data[:,0],data[:,1],'b*')
-plt.grid()
-plt.show()
-```
-
--   Note: If your optimization does not terminate successfully then you will need to go back to the point where you guess a few values for the parameter so that your initial guess for `scipy.optimize.minimize()` is *close* to what it should be. It is always helpful to think about the physical context of the problem to help guide your understanding of which value(s) to choose for your parameter.
-
-To recap:
-
--   We have data and a proposed differential equation with an unknown parameter.
-
--   We matched numerical solutions to the differential equation to the data for various values of the parameter.
-
--   We used an optimization routine to find the value of the parameter that minimized the sum of the squared residuals between the data and the numerical solution.
-
-At this point you can now use the *best* numerical solution to answer questions about the scientific setup (e.g. extrapolation).
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.56}
-In the paper [*Steeping Tea: A differential equations approach to a great cup of fruit tea*](https://www.simiode.org/resources/4192/download/1-094-S-SteepingTea-StudentVersion.pdf) [@Bauer], the authors give colour data from photographs of tea that is steeping in a clear mason jar. The temperature data from the previous exercise in this section were taken from this paper.
-
-1.  Read the introduction, methods, and experimental setup in the paper.
-
-2.  Think carefully about the physics of the problem to propose a differential equation (NOT an algebraic function) which would best models the grayscale data found on page 3 of the paper. Your model will likely involve at least one unknown parameter.
-
-3.  Use the least squares data fitting routine outlined in the previous exercise to find the value(s) of your parameter(s) which will create a high quality match between the numerical solution to your ODE and the data.
-
-4.  Plot your solution curve along with the data.
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.57}
-#### Village Epidemic
-(This exercise is modified from [@Winkel])
-
-In the mid seventeenth century in a small village in England a form of the Plague spread from July 3 through October 20 in one year. We note three classes of individuals: Susceptible, Infective, and Removed. The latter group consists of those who have died from the disease or who developed an immunity from the disease, having already had the disease. We keep track of the following:
-
--   $S(t)=$ the number of Susceptibles on day $t$ of the epidemic. $S(0) = 235$.
-
--   $I(t)=$ the number of Infectives on day $t$ of the epidemic. $I(0)=14$
-
--   $R(t)=$ the number of Removeds on day $t$ of the epidemic. $R(0)=0$.
-
-A standard $SIR$ model takes the form 
-\begin{equation}
-\begin{aligned} S' &= -\beta SI \\ I' &= \beta SI - \beta I \\ R' &= \beta I. \end{aligned}
-\end{equation}
-
-
-Data was gathered on the outbreak and is shown in the table below.
-
-| **Time (days)** | **Susceptibles** | **Infectives** |
-|-----------------|------------------|----------------|
-| 0               | 235              | 14             |
-| 16              | 201              | 22             |
-| 31              | 153.5            | 29             |
-| 47              | 121              | 21             |
-| 62              | 108              | 8              |
-| 78              | 97               | 8              |
-| 109             | 83               | 0              |
-
-Use the least squares fitting technique discussed in this section to find the parameters $\beta$ and $\beta$ that minimize the sum of the squared residuals between a numerical solution of the $SIR$ model and the data. You can load the data directly with the code below.
-
-Note: The total population is fixed.
-
-You can load in the data as follows:
-``` python         
-import numpy as np
-import pandas as pd
-URL = 'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Optimization/'
-data = np.array( pd.read_csv(URL+'village.csv') )
-```
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.58}
-#### Bedridden Boys Problem
-(This problem is modified from [@Miller])
-
-A boarding school is a relatively closed community in which all students live on campus, teachers tend to live on or near campus, and students do not regularly interact with people not in the boarding school community. The table below gives data for an influenza outbreak at a boarding school in England during which there were no fatalities. There were 763 boys at the English boarding school from which the data was obtained.
-
-| **Time (days)** | **Number of Bedridden Boys** |
-|-----------------|------------------------------|
-| 0               | 1                            |
-| 1               | 3                            |
-| 2               | 25                           |
-| 3               | 72                           |
-| 4               | 222                          |
-| 5               | 282                          |
-| 6               | 256                          |
-| 7               | 233                          |
-| 8               | 189                          |
-| 9               | 123                          |
-| 10              | 70                           |
-| 11              | 25                           |
-| 12              | 11                           |
-| 13              | 4                            |
-
-Propose a differential equation model that includes the number of bedridden (sick) boys. Your model will likely have one or more unknown parameters. Use the technique from this section to find the parameters. Complete the problem by showing a plot of the number of bedridden boys along with the data. You can load the data directly with the code below.
-
-``` python         
-import numpy as np
-import pandas as pd
-URL = 'https://github.com/gustavdelius/NumericalAnalysis2024/raw/main/data/Optimization/'
-data = np.array( pd.read_csv(URL+'boys.csv') )
-```
+It may not be obvious at the outset, but the Backward Euler method will actually behave better than our regular Euler's method in some sense. Let us take a look. Consider, for example, the really simply differential equation $x' = -10x$ with $x(0) = 1$ on the interval $t \in [0,2]$. The analytic solution is $x(t) = e^{-10t}$. Write Python code that plots the analytic solution, the Euler approximation, and the Backward Euler approximation on top of each other. Use a time step that is larger than you normally would (such as $\Delta t = 0.25$ or $\Delta t = 0.5$ or larger).  What do you notice? Why do you think this is happening?
 :::
 
 ## Algorithm Summaries
@@ -1441,7 +985,7 @@ Explain in clear language what Euler's method does geometrically.
 ------------------------------------------------------------------------
 
 ::: {#exr-5.61}
-Consider the first-order differential equation $x' = f(t,x)$. What is the Midpoint method for approximating the solution to this differential equation? What is the order of accuracy of the Midpoint method? Explain the meaning of the order of the method in the context of solving a differential equation.
+Consider the first-order differential equation $x' = f(t,x)$. What is the Midpoint method for approximating the solution to this differential equation? What is the order of accuracy of the Midpoint method? 
 
 :::
 
@@ -1455,7 +999,7 @@ Explain in clear language what the Midpoint method does geometrically.
 ------------------------------------------------------------------------
 
 ::: {#exr-5.63}
-Consider the first-order differential equation $x' = f(t,x)$. What is the Runge Kutta 4 method for approximating the solution to this differential equation? What is the order of accuracy of the Runge Kutta 4 method? Explain the meaning of the order of the method in the context of solving a differential equation.
+Consider the first-order differential equation $x' = f(t,x)$. What is the Runge Kutta 4 method for approximating the solution to this differential equation? What is the order of accuracy of the Runge Kutta 4 method?
 
 :::
 
@@ -1469,7 +1013,7 @@ Explain in clear language what the Runge Kutta 4 method does geometrically.
 ------------------------------------------------------------------------
 
 ::: {#exr-5.65}
-Consider the first-order differential equation $x' = f(t,x)$. What is the Backward Euler method for approximating the solution to this differential equation? What is the order of accuracy of the Backward Euler method? Explain the meaning of the order of the method in the context of solving a differential equation.
+Consider the first-order differential equation $x' = f(t,x)$. What is the Backward Euler method for approximating the solution to this differential equation? What is the order of accuracy of the Backward Euler method?
 
 :::
 
@@ -1477,13 +1021,6 @@ Consider the first-order differential equation $x' = f(t,x)$. What is the Backwa
 
 ::: {#exr-5.66}
 Explain in clear language what the Backward Euler method does geometrically.
-
-:::
-
-------------------------------------------------------------------------
-
-::: {#exr-5.67}
-Explain in clear language how to fit a numerical solution of and ODE model to a dataset.
 
 :::
 
@@ -1530,7 +1067,7 @@ def euler(f,x0,t0,tmax,dt):
 ``` python         
 def euler(f,x0,t0,tmax,dt):
     t = np.arange(t0,tmax+dt,dt)
-    x = np.zeros_like(t)
+    x = np.zeros(len(t))
     x[0] = x0
     for n in range(len(t)-1):
         x[n+1] = x[n] + dt*f(t[n],x[n])

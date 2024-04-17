@@ -736,7 +736,7 @@ In the previous exercise you should have found at least one of the many methods 
 #### The Runge-Kutta 4 Method
 The Runge-Kutta 4 (RK4) method for approximating the solution to the differential equation $x' = f(t,x)$ approximates the slope at the point $t_n$ by using the following weighted sum: 
 \begin{equation}
- \text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_n}{6}. 
+ \text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_{n+1}}{6}. 
 \end{equation}
  The order of the error in the RK4 method is $\mathcal{O}(\Delta t^4)$.
 

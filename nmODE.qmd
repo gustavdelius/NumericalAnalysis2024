@@ -434,7 +434,7 @@ The midpoint method is defined by first taking a half step with Euler's method t
 \end{equation}
  Note: Indexing by $1/2$ in a computer is nonsense. Instead, we implement the midpoint method with: 
 \begin{equation}
-\begin{aligned} m_n &= f(t_n,x_n) \\ x_{temp} &= x_n + \frac{h}{2} m_n \\ x_{n+1} &= x_n + h f\left( t_n + \frac{\Delta t}{2}, x_{temp}\right) \end{aligned}
+\begin{aligned} m_n &= f(t_n,x_n) \\ x_{temp} &= x_n + \frac{h}{2} m_n \\ x_{n+1} &= x_n + h f\left( t_n + \frac{h}{2}, x_{temp}\right) \end{aligned}
 \end{equation}
 
 
@@ -669,7 +669,7 @@ In the previous exercise you should have found that an average of the three slop
 ------------------------------------------------------------------------
 
 ::: {#exr-5.34}
-OK. Let us make one more modification. What if we built a fourth slope that resulted from stepping a half step forward using $m_{n+1/2}$? we will call this $m_{n+1/2}^*$ since it is a new estimate of $m_{n+1/2}$. 
+OK. Let us make one more modification. What if we built a fourth slope that resulted from stepping a half step forward using $m_{n+1/2}$? We will call this $m_{n+1/2}^*$ since it is a new estimate of $m_{n+1/2}$. 
 \begin{equation}
  x_{n+1/2}^* = x_n + \frac{\Delta t}{2} m_{n+1/2} 
 \end{equation}
@@ -677,13 +677,19 @@ OK. Let us make one more modification. What if we built a fourth slope that resu
 \begin{equation}
  m_{n+1/2}^* = f(t_n + \Delta t/2, x_{n+1/2}^*) 
 \end{equation}
- Then calculate $m_{n+1}$ using this new slope instead of what we did in the previous problem.
+Then calculate a new estimat $m_{n+1}^*$ of the slope at the end of the step using this new slope:
+\begin{equation}
+ x_{n+1}^* = x_n + \Delta t\, m_{n+1/2}^*
+\end{equation}
+\begin{equation}
+ m_{n+1}^* = f(t_n + \Delta t, x_{n+1}^*) 
+\end{equation}
 
 1.  Draw a picture showing where this slope was calculated.
 
 2.  Modify the code from above to include this fourth slope.
 
-3.  Experiment with several ideas about how to best combine the four slopes: $m_n$, $m_{n+1/2}$, $m_{n+1/2}^*$, and $m_{n+1}$.
+3.  Experiment with several ideas about how to best combine the four slopes: $m_n$, $m_{n+1/2}$, $m_{n+1/2}^*$, and $m_{n+1}^*$.
 
     -   Should we just take an average of the four slopes?
 
@@ -698,9 +704,9 @@ Remember that we are looking to improve the slope in the log-log plot since that
 ------------------------------------------------------------------------
 
 ::: {#exr-5.35}
-In the previous exercise you no doubt experimented with many different linear combinations of $m_n$, $m_{n+1/2}$, $m_{n+1/2}^*$, and $m_n$. Many of the resulting numerical ODE methods likely had the same order of accuracy (again, the order of the method is the slope in the error plot), but some may have been much better or much worse. Work with your team to fill in the following summary table of all of the methods that you devised. If you generated linear combinations that are not listed below then just add them to the list (we have only listed the most common ones here).
+In the previous exercise you no doubt experimented with many different linear combinations of $m_n$, $m_{n+1/2}$, $m_{n+1/2}^*$, and $m_{n+1}^*$. Many of the resulting numerical ODE methods likely had the same order of accuracy (again, the order of the method is the slope in the error plot), but some may have been much better or much worse. Work with your team to fill in the following summary table of all of the methods that you devised. If you generated linear combinations that are not listed below then just add them to the list (we have only listed the most common ones here).
 
-|     | $m_n$ | $m_{n+1/2}$ | $m_{n+1/2}^*$ | $m_n$ | **Order of Error**          | **Name**        |
+|     | $m_n$ | $m_{n+1/2}$ | $m_{n+1/2}^*$ | $m_{n+1}^*$ | **Order of Error**          | **Name**        |
 |-----|---------|---------------|-----------------|---------|-----------------------------|-----------------|
 | 1   | 1       | 0             | 0               | 0       | $\mathcal{O}(\Delta t)$   | Euler's Method |
 | 2   | 0       | 1             | 0               | 0       | $\mathcal{O}(\Delta t^2)$ | Midpoint Method |
@@ -736,7 +742,7 @@ In the previous exercise you should have found at least one of the many methods 
 #### The Runge-Kutta 4 Method
 The Runge-Kutta 4 (RK4) method for approximating the solution to the differential equation $x' = f(t,x)$ approximates the slope at the point $t_n$ by using the following weighted sum: 
 \begin{equation}
- \text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_{n+1}}{6}. 
+ \text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_{n+1}^*}{6}. 
 \end{equation}
  The order of the error in the RK4 method is $\mathcal{O}(\Delta t^4)$.
 

@@ -687,7 +687,7 @@ R' = \gamma I.
 <p><span class="theorem-title"><strong>Definition 6.2 (The Midpoint Method)</strong></span> The midpoint method is defined by first taking a half step with Euler’s method to approximate a solution at time <span class="math inline">\(t_{n+1/2}\)</span> There is not grid point at <span class="math inline">\(t_{n+1/2}\)</span> so we define this as <span class="math inline">\(t_{n+1/2} = (t_n + t_{n+1})/2\)</span>. We then take a full step using the value of <span class="math inline">\(f\)</span> at <span class="math inline">\(t_{n+1/2}\)</span> and the approximate <span class="math inline">\(x_{n+1/2}\)</span>. <span class="math display">\[\begin{equation}
 \begin{aligned} x_{n+1/2} &amp;= x_n + \frac{h}{2} f(t_n,x_n) \\ x_{n+1} &amp;= x_n + h f(t_{n+1/2},x_{n+1/2}) \end{aligned}
 \end{equation}\]</span> Note: Indexing by <span class="math inline">\(1/2\)</span> in a computer is nonsense. Instead, we implement the midpoint method with: <span class="math display">\[\begin{equation}
-\begin{aligned} m_n &amp;= f(t_n,x_n) \\ x_{temp} &amp;= x_n + \frac{h}{2} m_n \\ x_{n+1} &amp;= x_n + h f\left( t_n + \frac{\Delta t}{2}, x_{temp}\right) \end{aligned}
+\begin{aligned} m_n &amp;= f(t_n,x_n) \\ x_{temp} &amp;= x_n + \frac{h}{2} m_n \\ x_{n+1} &amp;= x_n + h f\left( t_n + \frac{h}{2}, x_{temp}\right) \end{aligned}
 \end{equation}\]</span></p>
 </div>
 <hr>
@@ -887,16 +887,20 @@ x(t) = \frac{1}{10} \left( 19 e^{-t/3} + 3\sin(t) - 9\cos(t) \right)
 </div>
 <hr>
 <div id="exr-5.34" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.22</strong></span> OK. Let us make one more modification. What if we built a fourth slope that resulted from stepping a half step forward using <span class="math inline">\(m_{n+1/2}\)</span>? we will call this <span class="math inline">\(m_{n+1/2}^*\)</span> since it is a new estimate of <span class="math inline">\(m_{n+1/2}\)</span>. <span class="math display">\[\begin{equation}
+<p><span class="theorem-title"><strong>Exercise 6.22</strong></span> OK. Let us make one more modification. What if we built a fourth slope that resulted from stepping a half step forward using <span class="math inline">\(m_{n+1/2}\)</span>? We will call this <span class="math inline">\(m_{n+1/2}^*\)</span> since it is a new estimate of <span class="math inline">\(m_{n+1/2}\)</span>. <span class="math display">\[\begin{equation}
 x_{n+1/2}^* = x_n + \frac{\Delta t}{2} m_{n+1/2}
 \end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
 m_{n+1/2}^* = f(t_n + \Delta t/2, x_{n+1/2}^*)
-\end{equation}\]</span> Then calculate <span class="math inline">\(m_{n+1}\)</span> using this new slope instead of what we did in the previous problem.</p>
+\end{equation}\]</span> Then calculate a new estimat <span class="math inline">\(m_{n+1}^*\)</span> of the slope at the end of the step using this new slope: <span class="math display">\[\begin{equation}
+x_{n+1}^* = x_n + \Delta t\, m_{n+1/2}^*
+\end{equation}\]</span> <span class="math display">\[\begin{equation}
+m_{n+1}^* = f(t_n + \Delta t, x_{n+1}^*)
+\end{equation}\]</span></p>
 <ol type="1">
 <li><p>Draw a picture showing where this slope was calculated.</p></li>
 <li><p>Modify the code from above to include this fourth slope.</p></li>
-<li><p>Experiment with several ideas about how to best combine the four slopes: <span class="math inline">\(m_n\)</span>, <span class="math inline">\(m_{n+1/2}\)</span>, <span class="math inline">\(m_{n+1/2}^*\)</span>, and <span class="math inline">\(m_{n+1}\)</span>.</p>
+<li><p>Experiment with several ideas about how to best combine the four slopes: <span class="math inline">\(m_n\)</span>, <span class="math inline">\(m_{n+1/2}\)</span>, <span class="math inline">\(m_{n+1/2}^*\)</span>, and <span class="math inline">\(m_{n+1}^*\)</span>.</p>
 <ul>
 <li><p>Should we just take an average of the four slopes?</p></li>
 <li><p>Should we give one or more of the slopes preferential treatment and do some sort of weighted average?</p></li>
@@ -907,7 +911,7 @@ m_{n+1/2}^* = f(t_n + \Delta t/2, x_{n+1/2}^*)
 </div>
 <hr>
 <div id="exr-5.35" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.23</strong></span> In the previous exercise you no doubt experimented with many different linear combinations of <span class="math inline">\(m_n\)</span>, <span class="math inline">\(m_{n+1/2}\)</span>, <span class="math inline">\(m_{n+1/2}^*\)</span>, and <span class="math inline">\(m_n\)</span>. Many of the resulting numerical ODE methods likely had the same order of accuracy (again, the order of the method is the slope in the error plot), but some may have been much better or much worse. Work with your team to fill in the following summary table of all of the methods that you devised. If you generated linear combinations that are not listed below then just add them to the list (we have only listed the most common ones here).</p>
+<p><span class="theorem-title"><strong>Exercise 6.23</strong></span> In the previous exercise you no doubt experimented with many different linear combinations of <span class="math inline">\(m_n\)</span>, <span class="math inline">\(m_{n+1/2}\)</span>, <span class="math inline">\(m_{n+1/2}^*\)</span>, and <span class="math inline">\(m_{n+1}^*\)</span>. Many of the resulting numerical ODE methods likely had the same order of accuracy (again, the order of the method is the slope in the error plot), but some may have been much better or much worse. Work with your team to fill in the following summary table of all of the methods that you devised. If you generated linear combinations that are not listed below then just add them to the list (we have only listed the most common ones here).</p>
 <table class="table">
 <colgroup>
 <col style="width: 4%">
@@ -924,7 +928,7 @@ m_{n+1/2}^* = f(t_n + \Delta t/2, x_{n+1/2}^*)
 <th><span class="math inline">\(m_n\)</span></th>
 <th><span class="math inline">\(m_{n+1/2}\)</span></th>
 <th><span class="math inline">\(m_{n+1/2}^*\)</span></th>
-<th><span class="math inline">\(m_n\)</span></th>
+<th><span class="math inline">\(m_{n+1}^*\)</span></th>
 <th><strong>Order of Error</strong></th>
 <th><strong>Name</strong></th>
 </tr>
@@ -1102,7 +1106,7 @@ m_{n+1/2}^* = f(t_n + \Delta t/2, x_{n+1/2}^*)
 <hr>
 <div id="thm-5.3" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 6.2 (The Runge-Kutta 4 Method)</strong></span> The Runge-Kutta 4 (RK4) method for approximating the solution to the differential equation <span class="math inline">\(x' = f(t,x)\)</span> approximates the slope at the point <span class="math inline">\(t_n\)</span> by using the following weighted sum: <span class="math display">\[\begin{equation}
-\text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_{n+1}}{6}.
+\text{estimated slope } = \frac{m_n + 2 m_{n+1/2} + 2 m_{n+1/2}^* + m_{n+1}^*}{6}.
 \end{equation}\]</span> The order of the error in the RK4 method is <span class="math inline">\(\mathcal{O}(\Delta t^4)\)</span>.</p>
 </div>
 <hr>

@@ -901,7 +901,7 @@ x_{n+1} = x_n + h f(t_{n+1},x_{n+1}).
  Let us take $h=1$ for simplicity (we will make it smaller later). What is the backward Euler formula for this particular differential equation?
 
 2.  You should notice that your backward Euler formula is now a quadratic function in $x_{n+1}$. That is to say, if you are given a value of $x_n$ then you need to solve a quadratic polynomial equation to get $x_{n+1}$. Let us be more explicit:\
-    We know that $x(0) = 6$ so in our numerical solutions, $x_1 = 6$. In order to get $x_2$ we consider the equation $x_2 = x_1 - \frac{1}{2} x_2^2$. Rearranging we see that we need to solve $\frac{1}{2}x_2^2 + x_2 - 6 = 0$ in order to get $x_2$. Doing so gives us $x_2 = \sqrt{13} - 1 \approx 2.606$.
+    We know that $x(0) = 6$ so in our numerical solutions, $x_0 = 6$. In order to get $x_1$ we consider the equation $x_1 = x_0 - \frac{1}{2} x_1^2$. Rearranging we see that we need to solve $\frac{1}{2}x_1^2 + x_1 - 6 = 0$ in order to get $x_1$. Doing so gives us $x_1 = \sqrt{13} - 1 \approx 2.606$.
 
 3.  Go two steps further with the backward Euler method on this problem. Then take the same number of steps with regular (forward) Euler's method.
 

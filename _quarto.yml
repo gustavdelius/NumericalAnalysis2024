@@ -43,7 +43,6 @@ book:
     - nmOptimization.qmd
     - nmODE.qmd
     - nmPDE.qmd
-    - nmLinAlg.qmd
     - references.qmd
 
 bibliography: references.bib

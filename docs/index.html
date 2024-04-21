@@ -8,7 +8,7 @@
 
 <meta name="author" content="Gustav Delius">
 <meta name="author" content="Eric Sullivan">
-<meta name="dcterms.date" content="2024-03-12">
+<meta name="dcterms.date" content="2024-04-21">
 
 <title>Numerical Analysis</title>
 <style>
@@ -88,6 +88,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./nmPython.html" rel="next">
+<link href="./faviconNA.webp" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -253,12 +254,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nmLinAlg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -330,7 +325,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 12, 2024</p>
+      <p class="date">April 21, 2024</p>
     </div>
   </div>
   
@@ -441,7 +436,7 @@ Figure&nbsp;2: Visual representation of the integral of <span class="math inline
 </div>
 </div>
 <p>Again, trying to use any of the possible techniques for using the Fundamental Theorem of Calculus, and hence finding an antiderivative, on the function <span class="math inline">\(\sin(x^2)\)</span> is completely hopeless. Substitution, integration by parts, and all of the other techniques that you know will all fail. Again, a numerical approximation is not so difficult and is very fast and gives the value</p>
-<div id="61cb7ffe" class="cell" data-execution_count="4">
+<div id="bb89e3f8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Simpson's rule to approximate the integral of sin(x^2) from 0 to pi</span></span>
@@ -449,7 +444,7 @@ Figure&nbsp;2: Visual representation of the integral of <span class="math inline
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>simpson(y, x <span class="op">=</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>0.7726517345959694</code></pre>
+<pre><code>0.7726517138019184</code></pre>
 </div>
 </div>
 <p>By the way, this integral (called the <a href="https://en.wikipedia.org/wiki/Fresnel_integral">Fresnel Sine Integral</a>) actually shows up naturally in the field of optics and electromagnetism, so it is not just some arbitrary integral that I cooked up just for fun.</p>

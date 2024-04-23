@@ -377,10 +377,10 @@ window.Quarto = {
 <p>Next we need to approximate both derivatives <span class="math inline">\(u_t\)</span> and <span class="math inline">\(u_{xx}\)</span> in the PDE using methods that we have used before. Now would be a good time to go back to <a href="nmCalculus.html" class="quarto-xref">Chapter&nbsp;<span>4</span></a> and refresh your memory for how we build approximations of derivatives.</p>
 <ol type="a">
 <li><p>Use the forward-difference formula to approximate the time derivative <span class="math inline">\(u_t\)</span> at the point <span class="math inline">\(t=t_n\)</span> and <span class="math inline">\(x=x_i\)</span>. <span class="math display">\[\begin{equation}
-u_t(t_n,x_n) \approx \frac{??? - ???}{???}.
+u_t(t_n,x_i) \approx \frac{??? - ???}{???}.
 \end{equation}\]</span></p></li>
 <li><p>Use the centred-difference formula to approximate the second spatial derivative <span class="math inline">\(u_{xx}\)</span> at the point <span class="math inline">\(t=t_n\)</span> and <span class="math inline">\(x=x_i\)</span>. <span class="math display">\[\begin{equation}
-u_{xx}(t_n,x_n) \approx \frac{??? - ??? + ???}{???}.
+u_{xx}(t_n,x_i) \approx \frac{??? - ??? + ???}{???}.
 \end{equation}\]</span></p></li>
 <li><p>Put your answers from parts (a) and (b) together using the 1D heat equation <span class="math display">\[\begin{equation}
 \frac{??? - ???}{\Delta t} = D \left( \frac{??? - ??? + ???}{\Delta x^2} \right).

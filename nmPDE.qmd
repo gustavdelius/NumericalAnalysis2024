@@ -85,13 +85,13 @@ Next we need to approximate both derivatives $u_t$ and $u_{xx}$ in the PDE using
 
 (a)  Use the forward-difference formula to approximate the time derivative $u_t$ at the point $t=t_n$ and $x=x_i$.
 \begin{equation}
- u_t(t_n,x_n) \approx \frac{??? - ???}{???}. 
+ u_t(t_n,x_i) \approx \frac{??? - ???}{???}. 
 \end{equation}
 
 
 (b)  Use the centred-difference formula to approximate the second spatial derivative $u_{xx}$ at the point $t=t_n$ and $x=x_i$.
 \begin{equation}
- u_{xx}(t_n,x_n) \approx \frac{??? - ??? + ???}{???}.
+ u_{xx}(t_n,x_i) \approx \frac{??? - ??? + ???}{???}.
 \end{equation}
 
 

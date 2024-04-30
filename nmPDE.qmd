@@ -282,7 +282,7 @@ Modify your 1D heat equation code to plot an approximate solution of the diffusi
 ------------------------------------------------------------------------
 
 ::: {#exr-6.34}
-Modify your 1D heat equation code to plot an approximate solution of the Fisher-KPP equation $u_t = u_{xx} +u(1-u)$ with $x \in (0,1)$, $u(0,x) = (1+\tanh((x-40)/2))/2$, $u(t,0) = 0$ and $u(t,1) = 1$.
+Modify your 1D heat equation code to plot an approximate solution of the Fisher-KPP equation $u_t = u_{xx} +u(1-u)$ with $t\in[0,10]$, $x \in (0,50)$, $u(0,x) = (1+\tanh((x-40)/2))/2$, $u(t,0) = 0$ and $u(t,50) = 1$.
 
 :::
 

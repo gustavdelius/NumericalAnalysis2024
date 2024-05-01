@@ -275,9 +275,9 @@ window.Quarto = {
   <li><a href="#intro-to-pdes" id="toc-intro-to-pdes" class="nav-link active" data-scroll-target="#intro-to-pdes"><span class="header-section-number">7.1</span> Intro to PDEs</a></li>
   <li><a href="#the-heat-equation" id="toc-the-heat-equation" class="nav-link" data-scroll-target="#the-heat-equation"><span class="header-section-number">7.2</span> The Heat Equation</a>
   <ul>
-  <li><a href="#in-one-spatial-dimensions" id="toc-in-one-spatial-dimensions" class="nav-link" data-scroll-target="#in-one-spatial-dimensions"><span class="header-section-number">7.2.1</span> In One Spatial Dimensions</a></li>
-  <li><a href="#in-two-spatial-dimensions" id="toc-in-two-spatial-dimensions" class="nav-link" data-scroll-target="#in-two-spatial-dimensions"><span class="header-section-number">7.2.2</span> In Two Spatial Dimensions</a></li>
-  <li><a href="#stability-and-implicit-methods" id="toc-stability-and-implicit-methods" class="nav-link" data-scroll-target="#stability-and-implicit-methods"><span class="header-section-number">7.2.3</span> Stability and Implicit Methods</a></li>
+  <li><a href="#sec-heat1d" id="toc-sec-heat1d" class="nav-link" data-scroll-target="#sec-heat1d"><span class="header-section-number">7.2.1</span> In One Spatial Dimensions</a></li>
+  <li><a href="#sec-heat2d" id="toc-sec-heat2d" class="nav-link" data-scroll-target="#sec-heat2d"><span class="header-section-number">7.2.2</span> In Two Spatial Dimensions</a></li>
+  <li><a href="#sec-heat_stability" id="toc-sec-heat_stability" class="nav-link" data-scroll-target="#sec-heat_stability"><span class="header-section-number">7.2.3</span> Stability and Implicit Methods</a></li>
   </ul></li>
   <li><a href="#the-wave-equation" id="toc-the-wave-equation" class="nav-link" data-scroll-target="#the-wave-equation"><span class="header-section-number">7.3</span> The Wave Equation</a></li>
   <li><a href="#the-travelling-wave-equation" id="toc-the-travelling-wave-equation" class="nav-link" data-scroll-target="#the-travelling-wave-equation"><span class="header-section-number">7.4</span> The Travelling Wave Equation</a></li>
@@ -372,8 +372,8 @@ window.Quarto = {
 \frac{\partial u}{\partial t} = D \nabla^2 u
 \]</span> where <span class="math inline">\(u(t,x)\)</span> is the temperature of the material at time <span class="math inline">\(t\)</span> and position <span class="math inline">\(x\)</span> and <span class="math inline">\(D\)</span> is the diffusion coefficient. The heat equation is a simple model for heat diffusion but also describes diffusion in general, like the diffusion of a solute in a solvent or of plants in a field or, …. well, you get the idea.</p>
 <p>In the remainder of this section we will use a technique called <strong>the finite difference method</strong> to build numerical approximations to solutions of the heat equation in 1D, 2D, and 3D. You of course that the heat equation is easy to solve analytically, given that it is a linear homogeneous PDE with constant coefficients. However, the finite difference method is a powerful tool for solving similar PDEs that do not have simple analytic solutions. The advantage of using the heat equation as a test case for the finite difference method is that we can easily verify the accuracy of our numerical solutions by comparing them to the known analytic solutions.</p>
-<section id="in-one-spatial-dimensions" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="in-one-spatial-dimensions"><span class="header-section-number">7.2.1</span> In One Spatial Dimensions</h3>
+<section id="sec-heat1d" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="sec-heat1d"><span class="header-section-number">7.2.1</span> In One Spatial Dimensions</h3>
 <p>For the sake of simplicity we will start by considering the heat equation in 1 spatial dimension: <span class="math display">\[\begin{equation}
 \frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2}.
 \end{equation}\]</span></p>
@@ -532,8 +532,8 @@ u_x(t_n,0) \approx \frac{U_1^n - U_0^n}{\Delta x}.
 <p><span class="theorem-title"><strong>Exercise 7.8</strong></span> Modify your 1D heat equation code to plot an approximate solution of the Fisher-KPP equation <span class="math inline">\(u_t = u_{xx} +u(1-u)\)</span> with <span class="math inline">\(t\in[0,10]\)</span>, <span class="math inline">\(x \in (0,50)\)</span>, <span class="math inline">\(u(0,x) = (1+\tanh((x-40)/2))/2\)</span>, <span class="math inline">\(u(t,0) = 0\)</span> and <span class="math inline">\(u(t,50) = 1\)</span>.</p>
 </div>
 </section>
-<section id="in-two-spatial-dimensions" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="in-two-spatial-dimensions"><span class="header-section-number">7.2.2</span> In Two Spatial Dimensions</h3>
+<section id="sec-heat2d" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="sec-heat2d"><span class="header-section-number">7.2.2</span> In Two Spatial Dimensions</h3>
 <p>Now we transition to the two dimensional heat equation. Instead of thinking of this as heating a long metal rod we can think of heating a thin plate of metal (like a flat cookie sheet). The heat equation models the propagation of the heat energy throughout the 2D surface. In two spatial dimensions the heat equation is <span class="math display">\[\begin{equation}
 \frac{\partial u}{\partial t} = D \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right),
 \end{equation}\]</span> or, using subscript notation for the partial derivatives, <span class="math display">\[\begin{equation}
@@ -657,8 +657,8 @@ Figure&nbsp;7.2: The finite difference stencil for the 2D heat equation.
 <p><span class="theorem-title"><strong>Exercise 7.13</strong></span> Now solve the 2D heat equation on a rectangular domain. You will need to make some modifications to your code since it is unlikely that assuming that <span class="math inline">\(\Delta x = \Delta y\)</span> is a good assumption any longer. Again, be prepared to present your solutions.</p>
 </div>
 </section>
-<section id="stability-and-implicit-methods" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="stability-and-implicit-methods"><span class="header-section-number">7.2.3</span> Stability and Implicit Methods</h3>
+<section id="sec-heat_stability" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="sec-heat_stability"><span class="header-section-number">7.2.3</span> Stability and Implicit Methods</h3>
 <div id="exr-6.39" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.14 (Sawtooth Errors)</strong></span> We have already seen that the 1D heat equation is stable if <span class="math inline">\(D \Delta t / \Delta x^2 &lt; 0.5\)</span>. The goal of this problem is to show what, exactly, occurs when we choose parameters in the unstable region. We will solve the PDE <span class="math inline">\(u_t = u_{xx}\)</span> on the domain <span class="math inline">\(x \in [0,1]\)</span> with initial conditions <span class="math inline">\(u(0,x) = \sin(\pi x)\)</span> and boundary conditions <span class="math inline">\(u(t,0)=u(t,1)=0\)</span> for all <span class="math inline">\(t\in[0,0.25]\)</span>. The analytic solution is <span class="math inline">\(u(t,x) = e^{-\pi^2 t}\sin(\pi x)\)</span>. To build the spatial and temporal grid we will use <code>x = np.linspace(0,1,21)</code> and <code>t = np.linspace(0,0.25,101)</code>. This means that <span class="math inline">\(\Delta x = 0.05\)</span> and <span class="math inline">\(\Delta t = 0.0025\)</span> so the ratio <span class="math inline">\(D \Delta t / \Delta x^2 = 1 &gt; 0.5\)</span> (certainly in the unstable region). Solve the heat equation with finite differences using these parameters. Make plots of the approximate solution on top of the exact solution at time steps 0, 10, 20, 30, 31, 32, 33, 34, etc. Describe what you observe.</p>
 </div>

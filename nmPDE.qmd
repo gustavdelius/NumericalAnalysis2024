@@ -66,7 +66,7 @@ where $u(t,x)$ is the temperature of the material at time $t$ and position $x$ a
 
 In the remainder of this section we will use a technique called **the finite difference method** to build numerical approximations to solutions of the heat equation in 1D, 2D, and 3D. You of course that the heat equation is easy to solve analytically, given that it is a linear homogeneous PDE with constant coefficients. However, the finite difference method is a powerful tool for solving similar PDEs that do not have simple analytic solutions. The advantage of using the heat equation as a test case for the finite difference method is that we can easily verify the accuracy of our numerical solutions by comparing them to the known analytic solutions.
 
-### In One Spatial Dimensions
+### In One Spatial Dimensions {#sec-heat1d}
 
 For the sake of simplicity we will start by considering the heat equation in 1 spatial dimension:
 \begin{equation}
@@ -286,7 +286,7 @@ Modify your 1D heat equation code to plot an approximate solution of the Fisher-
 
 :::
 
-### In Two Spatial Dimensions
+### In Two Spatial Dimensions {#sec-heat2d}
 
 Now we transition to the two dimensional heat equation. Instead of thinking of this as heating a long metal rod we can think of heating a thin plate of metal (like a flat cookie sheet). The heat equation models the propagation of the heat energy throughout the 2D surface. In two spatial dimensions the heat equation is 
 \begin{equation}
@@ -442,7 +442,7 @@ Time to do some experimentation with your new 2D heat equation code! Numerically
 Now solve the 2D heat equation on a rectangular domain. You will need to make some modifications to your code since it is unlikely that assuming that $\Delta x = \Delta y$ is a good assumption any longer. Again, be prepared to present your solutions.
 :::
 
-### Stability and Implicit Methods
+### Stability and Implicit Methods {#sec-heat_stability}
 
 ::: {#exr-6.39}
 #### Sawtooth Errors

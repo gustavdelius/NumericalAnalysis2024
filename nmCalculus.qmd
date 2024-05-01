@@ -54,7 +54,7 @@ What you have seen here are just a few examples of why you might need to use num
 
 Throughout this chapter we will make heavy use of Taylor's Theorem to build approximations of derivatives and integrals. If you find yourself still a bit shaky on Taylor's Theorem it would probably be wise to go back to @sec-Taylor and do a quick review.
 
-## Differentiation
+## Differentiation {#sec-differentiation}
 
 ### The First Derivative
 
@@ -717,7 +717,7 @@ The table below summarizes the formulas that we have for derivatives thus far. T
 
 ------------------------------------------------------------------------
 
-## Integration
+## Integration {#sec-integration}
 
 Now we begin our work on the second principal computation of Calculus: evaluating a definite integral. Remember that a single-variable definite integral can be interpreted as the signed area between the curve and the $x$ axis. In this section we will study three different techniques for approximating the value of a definite integral.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Numerical Analysis - References</title>
+<title>Numerical Analysis - 8&nbsp; Some Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./theory.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./nmPDE.html" rel="prev">
 <link href="./faviconNA.webp" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -88,10 +70,41 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Numerical Analysis - References">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Numerical Analysis - 8&nbsp; Some Theory">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Numerical Analysis">
-<meta name="twitter:title" content="Numerical Analysis - References">
+<meta name="twitter:title" content="Numerical Analysis - 8&nbsp; Some Theory">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -104,7 +117,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./theory.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Some Theory</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -185,13 +198,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./theory.html" class="sidebar-item-text sidebar-link">
+  <a href="./theory.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Some Theory</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -201,14 +214,33 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-order" id="toc-sec-order" class="nav-link active" data-scroll-target="#sec-order"><span class="header-section-number">8.1</span> Order of Convergence of Iterative Methods</a>
+  <ul>
+  <li><a href="#linear-convergence" id="toc-linear-convergence" class="nav-link" data-scroll-target="#linear-convergence"><span class="header-section-number">8.1.1</span> Linear convergence</a></li>
+  <li><a href="#quadratic-convergence" id="toc-quadratic-convergence" class="nav-link" data-scroll-target="#quadratic-convergence"><span class="header-section-number">8.1.2</span> Quadratic convergence</a></li>
+  <li><a href="#p-th-order-of-convergence" id="toc-p-th-order-of-convergence" class="nav-link" data-scroll-target="#p-th-order-of-convergence"><span class="header-section-number">8.1.3</span> p-th order of convergence</a></li>
+  </ul></li>
+  <li><a href="#sec-truncation" id="toc-sec-truncation" class="nav-link" data-scroll-target="#sec-truncation"><span class="header-section-number">8.2</span> Truncation Errors</a></li>
+  <li><a href="#sec-stiff" id="toc-sec-stiff" class="nav-link" data-scroll-target="#sec-stiff"><span class="header-section-number">8.3</span> Stiff Equations and Stability</a>
+  <ul>
+  <li><a href="#stiff-equations" id="toc-stiff-equations" class="nav-link" data-scroll-target="#stiff-equations"><span class="header-section-number">8.3.1</span> Stiff equations</a></li>
+  <li><a href="#stability-of-solution-methods" id="toc-stability-of-solution-methods" class="nav-link" data-scroll-target="#stability-of-solution-methods"><span class="header-section-number">8.3.2</span> Stability of solution methods</a></li>
+  <li><a href="#implicit-methods" id="toc-implicit-methods" class="nav-link" data-scroll-target="#implicit-methods"><span class="header-section-number">8.3.3</span> Implicit methods</a></li>
+  </ul></li>
+  <li><a href="#sec-stability-heat" id="toc-sec-stability-heat" class="nav-link" data-scroll-target="#sec-stability-heat"><span class="header-section-number">8.4</span> Stability of finite-difference methods for the heat equation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/NumericalAnalysis2024/edit/main/theory.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span id="sec-theory" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Some Theory</span></span></h1>
 </div>
 
 
@@ -225,54 +257,145 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Acton" class="csl-entry" role="listitem">
-Acton, Forman S. 1990. <em>Numerical <span>Methods</span> That
-<span>Work</span></em>. 1St Edition edition. Washington, D.C: The
-Mathematical Association of America.
+<p>In this module we have concentrated on experimentation and discovery, not so much on theoretical development. However there are some theoretical concepts that are so central to Numerical Analysis that they deserve to be presented in a more structured way. In this section we will introduce some of these concepts.</p>
+<section id="sec-order" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-order"><span class="header-section-number">8.1</span> Order of Convergence of Iterative Methods</h2>
+<p>We have met several methods that used fixed-point iteration, in particular Newton’s method for finding roots and the gradient descent method for finding minima. In each case we made log-log plots of the absolute error at the (k+1)st iteration against the absolute error at the k-th iteration. From the slopes of the resulting graphs we were able to determine the order of convergence of the method.</p>
+<p>The fixed point iteration takes the form <span id="eq-theory_fixed_point"><span class="math display">\[
+x_{n+1}=g(n_k).
+\tag{8.1}\]</span></span> When <span class="math inline">\(g\)</span> is suitably chosen, the method will converge to a fixed point <span class="math inline">\(x^*\)</span> of <span class="math inline">\(g\)</span> (such that <span class="math inline">\(g(x^*)=x^*\)</span>) and this fixed point is the desired solution to the problem.</p>
+<p>The absolute error at step the n-th iteration is <span id="eq-theory_error"><span class="math display">\[
+E_n=|x_n-x^*|.
+\tag{8.2}\]</span></span> We are interested in how <span class="math inline">\(E_{n+1}\)</span> is related to <span class="math inline">\(E_n\)</span>. We use the following Taylor expansion of <span class="math inline">\(g\)</span> around <span class="math inline">\(x^*\)</span>: <span id="eq-theory_taylor"><span class="math display">\[\begin{split}
+x_{n+1}=g(x_n)=g(x^*)&amp;+g'(x^*)(x_n-x^*)\\
+&amp;+\frac{g''(x^*)}{2}(x_n-x^*)^2+\cdots\\
+&amp;+\frac{g^{(p)}(\xi)}{p!}(x_n-x^*)^p
+\end{split} \tag{8.3}\]</span></span> for some <span class="math inline">\(\xi\)</span> between <span class="math inline">\(x^*\)</span> and <span class="math inline">\(x_n\)</span>.</p>
+<section id="linear-convergence" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="linear-convergence"><span class="header-section-number">8.1.1</span> Linear convergence</h3>
+<p>In the case where <span class="math inline">\(g'(x^*)\neq 0\)</span>, this shows that <span id="eq-theory_linear"><span class="math display">\[
+\begin{split}
+E_{n+1}&amp;=|x_{n+1}-x^*|=|g'(x^*)||x_n-x^*|+\mathcal{O}(x_n-x^*)^2\\
+&amp;=|g'(x^*)|E_n+\mathcal{O}(x_n-x^*)^2.
+\end{split}
+\tag{8.4}\]</span></span> So as <span class="math inline">\(x_n\to x^*\)</span>, <span id="eq-theory_linear_convergence"><span class="math display">\[
+\frac{E_{n+1}}{E_n}\to |g'(x^*)|.
+\tag{8.5}\]</span></span> The error decreases by a factor of <span class="math inline">\(|g'(x^*)|\)</span> at each iteration in the long run. If <span class="math inline">\(|g'(x^*)|&lt;1\)</span> then the method is said to have linear convergence or 1st order convergence.</p>
+<div id="exm-gradient_descent_order" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.1 (Order of convergence of gradient descent)</strong></span> For the gradient descent method we have <span id="eq-theory_gradient_descent"><span class="math display">\[
+g(x)=x-\alpha f'(x),
+\tag{8.6}\]</span></span> where <span class="math inline">\(\alpha\)</span> is the learning rate. The fixed point of this method is a minimum of <span class="math inline">\(f\)</span>. The derivative of <span class="math inline">\(g\)</span> is where <span class="math inline">\(\alpha\)</span> is the learning rate. So <span id="eq-theory_gradient_descent_derivative"><span class="math display">\[
+g'(x)=1-\alpha f''(x).
+\tag{8.7}\]</span></span> Because this is non-zero, the method is only first-order convergent. The learning rate <span class="math inline">\(\alpha\)</span> must be chosen carefully to ensure convergence.</p>
 </div>
-<div id="ref-Burden_Faires" class="csl-entry" role="listitem">
-Burden, Richard L., and J. Douglas Faires. 2010. <em>Numerical
-<span>Analysis</span></em>. 9th ed. Brooks Cole.
+</section>
+<section id="quadratic-convergence" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="quadratic-convergence"><span class="header-section-number">8.1.2</span> Quadratic convergence</h3>
+<p>In the case where <span class="math inline">\(g'(x^*)=0\)</span> but <span class="math inline">\(g''(x^*)\neq 0\)</span>, we get from the Taylor expansion in <a href="#eq-theory_taylor" class="quarto-xref">Eq.&nbsp;<span>8.3</span></a> that <span class="math display">\[
+\begin{split}
+E_{n+1}&amp;=\frac{|g''(x^*)|}{2}|x_n-x^*|^2+\mathcal{O}(x_n-x^*)^3\\
+&amp;=\frac{|g''(x^*)|}{2}E_n^2+\mathcal{O}(x_n-x^*)^3.
+\end{split}
+\]</span> So in the limit as <span class="math inline">\(x_n\to x^*\)</span>, <span class="math display">\[
+\frac{E_{n+1}}{E_n^2}\to \frac{|g''(x^*)|}{2}.
+\]</span></p>
+<div id="exm-newton_order" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.2 (Order of convergence of Newton’s method)</strong></span> For Newton’s method we have <span id="eq-theory_newton"><span class="math display">\[
+g(x)=x-\frac{f(x)}{f'(x)}.
+\tag{8.8}\]</span></span> The fixed point of this method is a root of <span class="math inline">\(f\)</span>. The derivative of <span class="math inline">\(g\)</span> is <span id="eq-theory_newton_derivative"><span class="math display">\[
+g'(x)=1-\frac{f'(x)f'(x)-f(x)f''(x)}{f'(x)^2}=\frac{f(x)f''(x)}{f'(x)^2}.
+\tag{8.9}\]</span></span> At the fixed point <span class="math inline">\(x^*\)</span> we have <span class="math inline">\(f(x^*)=0\)</span>, so <span class="math inline">\(g'(x^*)=0\)</span>. The second derivative of <span class="math inline">\(g\)</span> is <span id="eq-theory_newton_second_derivative"><span class="math display">\[
+g''(x)=\frac{f(x)f'(x)f''(x)+f(x)^2f'''(x)-2f(x)f''(x)^2}{f'(x)^3}.
+\tag{8.10}\]</span></span> This does generally not vanish at the fixed point. Therefore Newton’s method is second-order convergent.</p>
 </div>
-<div id="ref-Butcher" class="csl-entry" role="listitem">
-Butcher, J. C. 2016. <em>Numerical Methods for Ordinary Differential
-Equations</em>. Third edition. Wiley. <a href="https://yorsearch.york.ac.uk/permalink/f/1kq3a7l/44YORK_ALMA_DS51336126850001381">https://yorsearch.york.ac.uk/permalink/f/1kq3a7l/44YORK_ALMA_DS51336126850001381</a>.
+</section>
+<section id="p-th-order-of-convergence" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="p-th-order-of-convergence"><span class="header-section-number">8.1.3</span> p-th order of convergence</h3>
+<p>In general, if <span class="math inline">\(g'(x^*)=\cdots=g^{(p-1)}(x^*)=0\)</span> but <span class="math inline">\(g^{(p)}(x^*)\neq 0\)</span>, then the method is said to have p-th order convergence. The error at the n-th iteration is then <span class="math display">\[
+E_{n+1}=\frac{|g^{(p)}(x^*)|}{p!}E_n^p+\mathcal{O}((x_n-x^*)^{p+1}).
+\]</span> So in the limit as <span class="math inline">\(x_n\to x^*\)</span>, <span class="math display">\[
+\frac{E_{n+1}}{E_n^p}\to \frac{|g^{(p)}(x^*)|}{p!}.
+\]</span> Generally, if <span class="math display">\[
+\lim_{n\to\infty}\frac{E_{n+1}}{E_n^p}=c
+\]</span> for some constant <span class="math inline">\(c\)</span> then the method is said to have <strong>p-th order convergence</strong>.</p>
+<p>To make the connection with our log-log error plots, we observe that <span class="math display">\[
+\log E_{n+1}=\log\left(\frac{E_{n+1}}{E_n^p}\right)+p\log E_n.
+\]</span> Because <span class="math inline">\(E_{n+1}/E_n^p\to c\)</span>, if the method has p-th order convergence, then the slope of the log-log plot of the error at the (n+1)st iteration against the error at the n-th iteration will be <span class="math inline">\(p\)</span> and the intercept will be <span class="math inline">\(\log c\)</span>.</p>
+</section>
+</section>
+<section id="sec-truncation" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-truncation"><span class="header-section-number">8.2</span> Truncation Errors</h2>
+</section>
+<section id="sec-stiff" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-stiff"><span class="header-section-number">8.3</span> Stiff Equations and Stability</h2>
+<section id="stiff-equations" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="stiff-equations"><span class="header-section-number">8.3.1</span> Stiff equations</h3>
+<p>A differential equation is called “stiff” if the exact solution has a term that decays very rapidly. This is a problem for numerical methods because the step size must be very small to capture the rapid decay. This is a problem because the step size must be small for the entire solution, not just the rapidly decaying part. This can make the solution very slow to compute.</p>
+<p>An example of such a rapidly decaying term would be a term of the form <span class="math inline">\(e^{-\gamma t}\)</span> with <span class="math inline">\(\gamma\)</span> large. As an example consider the ODE <span class="math display">\[
+x'=-10x+\sin t.
+\]</span> This is similar to equations we solved in <a href="nmODE.html" class="quarto-xref"><span>Chapter 6</span></a> just with a larger negative coefficient in front of <span class="math inline">\(x\)</span>. The solution to this equation is <span class="math display">\[
+x(t)=Ce^{-100t}+\frac{100}{10001}\sin t-\frac{1}{10001}\cos t.
+\]</span> The term <span class="math inline">\(e^{-100t}\)</span> decays very rapidly. We refer to such a term in the solution as a “transient” because it becomes irrelevant after a short time.</p>
+</section>
+<section id="stability-of-solution-methods" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="stability-of-solution-methods"><span class="header-section-number">8.3.2</span> Stability of solution methods</h3>
+<p>To test the stability of a method we can apply it to a simple ODE with a known solution. We can then compare the numerical solution to the exact solution. If the numerical solution is stable, then it will converge to the exact solution as the step size goes to zero. If the numerical solution is unstable, then it will diverge from the exact solution as the step size goes to zero.</p>
+<p>The test equation that is always used for this purpose of studying the stability of a numerical method is the linear ODE <span class="math display">\[
+x'=\lambda x.
+\]</span> The exact solution to this equation is <span class="math inline">\(x(t)=x_(0)_0e^{\lambda t}\)</span>. So for negative <span class="math inline">\(\lambda\)</span> the solution decays, and for positive <span class="math inline">\(\lambda\)</span> the solution grows. The stability of a numerical method can be tested by applying it to this equation and comparing the numerical solution to the exact solution.</p>
+<div id="exm-euler_stability" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.3 (Stability of Euler’s method)</strong></span> Euler’s method uses the formula <span class="math inline">\(x_{n+1}=x_n+h f(t_n,x_n)\)</span>. Applying this to the test equation <span class="math inline">\(x'=\lambda x\)</span> gives <span class="math display">\[
+x_{n+1}=x_n+h\lambda x_n=(1+h\lambda)x_n.
+\]</span> So <span class="math display">\[
+x_{n+1}=(1+h\lambda)x_n=(1+h\lambda)^2x_{n-1}=\cdots=(1+h\lambda)^{n+1}x_0.
+\]</span> Because we know the exact solution, we can calculate the absolute error that Euler’s method produces: <span class="math display">\[
+E_n:=|x_n-x(t_n)|=|x_0(1+h\lambda)^n-x_0e^{\lambda t_n}|.
+\]</span> In the case where <span class="math inline">\(\lambda&lt;0\)</span> we have that the exact solution decays to zero as <span class="math inline">\(n\to\infty\)</span>. So the error will be determined by the behaviour of the first term: <span class="math display">\[
+\begin{split}
+\lim_{n\to\infty}E_n&amp;=\lim_{n\to\infty}|x_0(1+h\lambda)^n|\\
+&amp;=\begin{cases}
+0&amp;\text{if }|1+h\lambda|&lt;1\\
+\infty&amp;\text{if }|1+h\lambda|&gt;1.
+\end{cases}
+\end{split}
+\]</span> The error grows exponentially unless <span class="math inline">\(|1+h\lambda|&lt;1\)</span>. This is the stability condition for Euler’s method. It requires us to choose a step size <span class="math display">\[
+h&lt;\frac{2}{|\lambda|}
+\]</span></p>
 </div>
-<div id="ref-Greenbaum" class="csl-entry" role="listitem">
-Greenbaum, Anne, and Tim P. Chartier. 2012. <em>Numerical Methods:
-Design, Analysis, and Computer Implementation of Algorithms</em>.
-Princeton University Press.
-</div>
-<div id="ref-Spayd" class="csl-entry" role="listitem">
-Kimberly Spayd, and James Puckett. 2022.
-<span>“9-020-HeatDiffusion-ModelingScenario.”</span> <a href="https://doi.org/doi:/10.25334/WFSN-Q683">https://doi.org/doi:/10.25334/WFSN-Q683</a>.
-</div>
-<div id="ref-Kincaid" class="csl-entry" role="listitem">
-Kincaid, D. R., and E. W. Cheney. 2009. <em>Numerical
-<span>Analysis</span>: <span>Mathematics</span> of
-<span>Scientific</span> <span>Computing</span></em>. Pure and Applied
-Undergraduate Texts. American Mathematical Society.
-</div>
-<div id="ref-Meerschaert" class="csl-entry" role="listitem">
-Meerschaert, Mark. 2013. <em>Mathematical <span>Modeling</span></em>.
-4th edition. Amsterdam ; Boston: Academic Press.
-</div>
-<div id="ref-Press" class="csl-entry" role="listitem">
-Press, William H., Saul A. Teukolsky, William T. Vetterling, and Brian
-P. Flannery. 2007. <em>Numerical Recipes: The Art of Scientific
-Computing</em>. Cambridge University Press. <a href="https://numerical.recipes/">https://numerical.recipes/</a>.
-</div>
-<div id="ref-ProjectEuler" class="csl-entry" role="listitem">
-<span>“Project Euler.”</span> n.d. Accessed December 14, 2023. <a href="https://projecteuler.net/">https://projecteuler.net/</a>.
-</div>
-<div id="ref-Spindler" class="csl-entry" role="listitem">
-Spindler, Richard. 2022.
-<span>“6-023-DroneHeadingHome-ModelingScenario.”</span> <a href="https://doi.org/doi:/10.25334/F80X-6R33">https://doi.org/doi:/10.25334/F80X-6R33</a>.
-</div>
-</div>
+<p>In general, for a method that, when applied to the test equation <span class="math inline">\(x'=\lambda x\)</span>, gives <span class="math display">\[
+x_{n+1}=Q(h\lambda)x_n
+\]</span> the stability condition is that <span class="math display">\[|Q(h\lambda)|&lt;1.\]</span> Values of <span class="math inline">\(h\lambda =: z\)</span> for which <span class="math inline">\(|Q(z)|&lt;1\)</span> form the *Region of absolute stability** of the method. This is a region in the complex plane, because while the stepsize <span class="math inline">\(h\)</span> is of course always real, in applications the transient term may be oscillatory, corresponding to a complex <span class="math inline">\(\lambda\)</span>.</p>
+<p>::: {#exm-midpoint_stability} #### Stability of the midpoint method The midpoint method uses the formula <span class="math display">\[
+x_{n+1}=x_n+hf(t_n+\frac{h}{2},x_n+\frac{h}{2}f(t_n,x_n)).
+\]</span> Applying this to the test equation <span class="math inline">\(x'=\lambda x\)</span> gives <span class="math display">\[
+x_{n+1}=x_n+h\lambda \left(x_n+\frac{h}{2}\lambda x_n\right)
+=x_n\left(1+h\lambda+\frac{(h\lambda)^2}{2}\right).
+\]</span></p>
+<p>The region of absolute stability is the set of <span class="math inline">\(z\in\mathbb{C}\)</span> for which <span class="math display">\[
+\left|1+z+\frac{z^2}{2}\right|&lt;1.
+\]</span></p>
+</section>
+<section id="implicit-methods" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="implicit-methods"><span class="header-section-number">8.3.3</span> Implicit methods</h3>
+<p>Implicit methods tend to have a larger region of absolute stability, often including the entire left half plane, in which case they are called “unconditionally stable”. Such methods are of course particularly useful for stiff equations because they do not need a particular small step size to remain stable.</p>
+<p>We demonstrate this in the case of the backward Euler method, which uses the formula <span class="math display">\[
+x_{n+1}=x_n+hf(t_{n+1},x_{n+1}).
+\]</span> Applying this to the test equation <span class="math inline">\(x'=\lambda x\)</span> gives <span class="math display">\[
+x_{n+1}=x_n+h\lambda x_{n+1}.
+\]</span> So <span class="math display">\[
+x_{n+1}=\frac{x_n}{1-h\lambda}.
+\]</span> The region of absolute stability is the set of <span class="math inline">\(z\in\mathbb{C}\)</span> for which <span class="math display">\[
+\left|\frac{1}{1-z}\right|&lt;1,
+\]</span> or, equivalently, <span class="math display">\[
+|z-1|&gt;1.
+\]</span> This is almost the entire complex plane, except for the circle of radius 1 around the point <span class="math inline">\(z=1\)</span>. In particular it contains the entire left half plane, so stiff equations do not require any particular choice of step size for the backward Euler method to be stable.</p>
+</section>
+</section>
+<section id="sec-stability-heat" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-stability-heat"><span class="header-section-number">8.4</span> Stability of finite-difference methods for the heat equation</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -682,11 +805,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./theory.html" class="pagination-link  aria-label=" &lt;span="" theory&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Some Theory</span></span>
+      <a href="./nmPDE.html" class="pagination-link  aria-label=" &lt;span="" differential="" equations&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Partial Differential Equations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -694,4 +820,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/NumericalAnalysis2024/edit/main/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/NumericalAnalysis2024/edit/main/theory.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

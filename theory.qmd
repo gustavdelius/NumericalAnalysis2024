@@ -1,0 +1,215 @@
+# Some Theory {#sec-theory}
+In this module we have concentrated on experimentation and discovery, not so much on theoretical development. However there are some theoretical concepts that are so central to Numerical Analysis that they deserve to be presented in a more structured way. In this section we will introduce some of these concepts.
+
+## Order of Convergence of Iterative Methods {#sec-order}
+We have met several methods that used fixed-point iteration, in particular Newton's method for finding roots and the gradient descent method for finding minima. In each case we made log-log plots of the  absolute error at the (k+1)st iteration against the absolute error at the k-th iteration. From the slopes of the resulting graphs we were able to determine the order of convergence of the method.
+
+The fixed point iteration takes the form
+$$
+x_{n+1}=g(n_k).
+$$ {#eq-theory_fixed_point}
+When $g$ is suitably chosen, the method will converge to a fixed point $x^*$ of $g$ (such that $g(x^*)=x^*$) and this fixed point is the desired solution to the problem.
+
+The absolute error at step the n-th iteration is
+$$
+E_n=|x_n-x^*|.
+$$ {#eq-theory_error}
+We are interested in how $E_{n+1}$ is related to $E_n$. We use the following Taylor expansion of $g$ around $x^*$:
+$$\begin{split}
+x_{n+1}=g(x_n)=g(x^*)&+g'(x^*)(x_n-x^*)\\
+&+\frac{g''(x^*)}{2}(x_n-x^*)^2+\cdots\\
+&+\frac{g^{(p)}(\xi)}{p!}(x_n-x^*)^p
+\end{split}$$ {#eq-theory_taylor}
+for some $\xi$ between $x^*$ and $x_n$.
+
+### Linear convergence
+In the case where $g'(x^*)\neq 0$, this shows that
+$$
+\begin{split}
+E_{n+1}&=|x_{n+1}-x^*|=|g'(x^*)||x_n-x^*|+\mathcal{O}(x_n-x^*)^2\\
+&=|g'(x^*)|E_n+\mathcal{O}(x_n-x^*)^2.
+\end{split}
+$$ {#eq-theory_linear}
+So as $x_n\to x^*$,
+$$
+\frac{E_{n+1}}{E_n}\to |g'(x^*)|.
+$$ {#eq-theory_linear_convergence}
+The error decreases by a factor of $|g'(x^*)|$ at each iteration in the long run. If $|g'(x^*)|<1$ then the method is said to have linear convergence or 1st order convergence.
+
+::: {#exm-gradient_descent_order}
+#### Order of convergence of gradient descent
+For the gradient descent method we have
+$$
+g(x)=x-\alpha f'(x),
+$$ {#eq-theory_gradient_descent}
+where $\alpha$ is the learning rate. The fixed point of this method is a minimum of $f$. The derivative of $g$ is where $\alpha$ is the learning rate. So
+$$
+g'(x)=1-\alpha f''(x).
+$$ {#eq-theory_gradient_descent_derivative}
+Because this is non-zero, the method is only first-order convergent. The learning rate $\alpha$ must be chosen carefully to ensure convergence.
+
+:::
+
+### Quadratic convergence
+In the case where $g'(x^*)=0$ but $g''(x^*)\neq 0$, we get from the Taylor expansion in @eq-theory_taylor that
+$$
+\begin{split}
+E_{n+1}&=\frac{|g''(x^*)|}{2}|x_n-x^*|^2+\mathcal{O}(x_n-x^*)^3\\
+&=\frac{|g''(x^*)|}{2}E_n^2+\mathcal{O}(x_n-x^*)^3.
+\end{split}
+$$
+So in the limit as $x_n\to x^*$,
+$$
+\frac{E_{n+1}}{E_n^2}\to \frac{|g''(x^*)|}{2}.
+$$
+
+::: {#exm-newton_order}
+#### Order of convergence of Newton's method
+For Newton's method we have
+$$
+g(x)=x-\frac{f(x)}{f'(x)}.
+$$ {#eq-theory_newton}
+The fixed point of this method is a root of $f$. The derivative of $g$ is
+$$
+g'(x)=1-\frac{f'(x)f'(x)-f(x)f''(x)}{f'(x)^2}=\frac{f(x)f''(x)}{f'(x)^2}.
+$$ {#eq-theory_newton_derivative}
+At the fixed point $x^*$ we have $f(x^*)=0$, so $g'(x^*)=0$. The second derivative of $g$ is
+$$
+g''(x)=\frac{f(x)f'(x)f''(x)+f(x)^2f'''(x)-2f(x)f''(x)^2}{f'(x)^3}.
+$$ {#eq-theory_newton_second_derivative}
+This does generally not vanish at the fixed point. Therefore Newton's method is second-order convergent.
+
+:::
+
+### p-th order of convergence
+In general, if $g'(x^*)=\cdots=g^{(p-1)}(x^*)=0$ but $g^{(p)}(x^*)\neq 0$, then the method is said to have p-th order convergence. The error at the n-th iteration is then
+$$
+E_{n+1}=\frac{|g^{(p)}(x^*)|}{p!}E_n^p+\mathcal{O}((x_n-x^*)^{p+1}).
+$$
+So in the limit as $x_n\to x^*$,
+$$
+\frac{E_{n+1}}{E_n^p}\to \frac{|g^{(p)}(x^*)|}{p!}.
+$$
+Generally, if 
+$$
+\lim_{n\to\infty}\frac{E_{n+1}}{E_n^p}=c
+$$
+for some constant $c$ then the method is said to have **p-th order convergence**.
+
+To make the connection with our log-log error plots, we observe that
+$$
+\log E_{n+1}=\log\left(\frac{E_{n+1}}{E_n^p}\right)+p\log E_n.
+$$
+Because $E_{n+1}/E_n^p\to c$, if the method has p-th order convergence, then the slope of the log-log plot of the error at the (n+1)st iteration against the error at the n-th iteration will be $p$ and the intercept will be $\log c$.
+
+
+
+## Truncation Errors {#sec-truncation}
+
+## Stiff Equations and Stability {#sec-stiff}
+
+### Stiff equations
+
+A differential equation is called "stiff" if the exact solution has a term that decays very rapidly. This is a problem for numerical methods because the step size must be very small to capture the rapid decay. This is a problem because the step size must be small for the entire solution, not just the rapidly decaying part. This can make the solution very slow to compute. 
+
+An example of such a rapidly decaying term would be a term of the form $e^{-\gamma t}$ with $\gamma$ large. As an example consider the ODE
+$$
+x'=-10x+\sin t.
+$$
+This is similar to equations we solved in @sec-ode just with a larger negative coefficient in front of $x$. The solution to this equation is
+$$
+x(t)=Ce^{-100t}+\frac{100}{10001}\sin t-\frac{1}{10001}\cos t.
+$$
+The term $e^{-100t}$ decays very rapidly. We refer to such a term in the solution as a "transient" because it becomes irrelevant after a short time.
+
+### Stability of solution methods
+To test the stability of a method we can apply it to a simple ODE with a known solution. We can then compare the numerical solution to the exact solution. If the numerical solution is stable, then it will converge to the exact solution as the step size goes to zero. If the numerical solution is unstable, then it will diverge from the exact solution as the step size goes to zero.
+
+The test equation that is always used for this purpose of studying the stability of a numerical method is the linear ODE
+$$
+x'=\lambda x.
+$$
+The exact solution to this equation is $x(t)=x_(0)_0e^{\lambda t}$. So for negative $\lambda$ the solution decays, and for positive $\lambda$ the solution grows. The stability of a numerical method can be tested by applying it to this equation and comparing the numerical solution to the exact solution.
+
+::: {#exm-euler_stability}
+#### Stability of Euler's method
+Euler's method uses the formula $x_{n+1}=x_n+h f(t_n,x_n)$.
+Applying this to the test equation $x'=\lambda x$ gives
+$$
+x_{n+1}=x_n+h\lambda x_n=(1+h\lambda)x_n.
+$$
+So
+$$
+x_{n+1}=(1+h\lambda)x_n=(1+h\lambda)^2x_{n-1}=\cdots=(1+h\lambda)^{n+1}x_0.
+$$
+Because we know the exact solution, we can calculate the absolute error that Euler's method produces:
+$$
+E_n:=|x_n-x(t_n)|=|x_0(1+h\lambda)^n-x_0e^{\lambda t_n}|.
+$$
+In the case where $\lambda<0$ we have that the exact solution decays to zero as $n\to\infty$. So the error will be determined by the behaviour of the first term:
+$$
+\begin{split}
+\lim_{n\to\infty}E_n&=\lim_{n\to\infty}|x_0(1+h\lambda)^n|\\
+&=\begin{cases}
+0&\text{if }|1+h\lambda|<1\\
+\infty&\text{if }|1+h\lambda|>1.
+\end{cases}
+\end{split}
+$$
+The error grows exponentially unless $|1+h\lambda|<1$. This is the stability condition for Euler's method. It requires us to choose a step size
+$$
+h<\frac{2}{|\lambda|}
+$$
+:::
+
+In general, for a method that, when applied to the test equation $x'=\lambda x$, gives
+$$
+x_{n+1}=Q(h\lambda)x_n
+$$
+the stability condition is that 
+$$|Q(h\lambda)|<1.$$
+Values of $h\lambda =: z$ for which $|Q(z)|<1$ form the *Region of absolute stability** of the method. This is a region in the complex plane, because while the stepsize $h$ is of course always real, in applications the transient term may be oscillatory, corresponding to a complex $\lambda$.
+
+::: {#exm-midpoint_stability}
+#### Stability of the midpoint method
+The midpoint method uses the formula
+$$
+x_{n+1}=x_n+hf(t_n+\frac{h}{2},x_n+\frac{h}{2}f(t_n,x_n)).
+$$
+Applying this to the test equation $x'=\lambda x$ gives
+$$
+x_{n+1}=x_n+h\lambda \left(x_n+\frac{h}{2}\lambda x_n\right)
+=x_n\left(1+h\lambda+\frac{(h\lambda)^2}{2}\right).
+$$
+
+The region of absolute stability is the set of $z\in\mathbb{C}$ for which
+$$
+\left|1+z+\frac{z^2}{2}\right|<1.
+$$
+
+### Implicit methods
+Implicit methods tend to have a larger region of absolute stability, often including the entire left half plane, in which case they are called "unconditionally stable". Such methods are of course particularly useful for stiff equations because they do not need a particular small step size to remain stable. 
+
+We demonstrate this in the case of the backward Euler method, which uses the formula
+$$
+x_{n+1}=x_n+hf(t_{n+1},x_{n+1}).
+$$
+Applying this to the test equation $x'=\lambda x$ gives
+$$
+x_{n+1}=x_n+h\lambda x_{n+1}.
+$$
+So
+$$
+x_{n+1}=\frac{x_n}{1-h\lambda}.
+$$
+The region of absolute stability is the set of $z\in\mathbb{C}$ for which
+$$
+\left|\frac{1}{1-z}\right|<1,
+$$
+or, equivalently,
+$$
+|z-1|>1.
+$$
+This is almost the entire complex plane, except for the circle of radius 1 around the point $z=1$. In particular it contains the entire left half plane, so stiff equations do not require any particular choice of step size for the backward Euler method to be stable.
+
+## Stability of finite-difference methods for the heat equation {#sec-stability-heat}

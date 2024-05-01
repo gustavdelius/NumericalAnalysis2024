@@ -43,6 +43,7 @@ book:
     - nmOptimization.qmd
     - nmODE.qmd
     - nmPDE.qmd
+    - theory.qmd
     - references.qmd
 
 bibliography: references.bib

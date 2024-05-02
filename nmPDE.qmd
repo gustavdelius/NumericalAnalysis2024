@@ -516,7 +516,7 @@ Before we start let us define the coefficient $a = D \Delta t / \Delta x^2.$ Thi
 
 1.  Rearrange the new finite difference scheme so that all of the terms at the $(n+1)^{st}$ time step are on the left-hand side and all of the term at the $n^{th}$ time step are on the right-hand side. 
 \begin{equation}
-(\underline{\hspace{0.25in}}) U_{i-1}^{n+1} + (\underline{\hspace{0.5in}}) U_{i}^{n+1} + (\underline{\hspace{0.25in}}) U_{i-1}^{n+1} = \underline{\hspace{0.25in}} U_i^n
+(\underline{\hspace{0.25in}}) U_{i-1}^{n+1} + (\underline{\hspace{0.5in}}) U_{i}^{n+1} + (\underline{\hspace{0.25in}}) U_{i+1}^{n+1} = \underline{\hspace{0.25in}} U_i^n
 \end{equation}
 
 
@@ -530,7 +530,9 @@ Before we start let us define the coefficient $a = D \Delta t / \Delta x^2.$ Thi
 
     2.  Notice that we aready know $U_0^{n+1}$ and $U_5^{n+1}$ since these are dictated by the boundary conditions (assuming Dirichlet boundary conditions). Hence we can move these known quantities to the right-hand side of the equations and hence rewrite the system of equations as: 
 \begin{equation}
-\begin{aligned} (\text{for $x_1$: }) &\quad \underline{\hspace{0.5in}} U_1^{n+1} + \underline{\hspace{0.25in}} U_2^{n+1} = \underline{\hspace{0.25in}} U_1^{n} + \underline{\hspace{0.25in}} U_0^{n+1}\\ (\text{for $x_2$: }) &\quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} + \underline{\hspace{0.25in}} U_3^{n+1} = \underline{\hspace{0.25in}} U_2^{n} \\ (\text{for $x_3$: }) &\quad \underline{\hspace{0.25in}} U_2^{n+1} + \underline{\hspace{0.5in}} U_3^{n+1} + \underline{\hspace{0.25in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_3^{n} \\ (\text{for $x_4$: }) &\quad \underline{\hspace{0.25in}} U_3^{n+1} + \underline{\hspace{0.5in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_4^{n} + \underline{\hspace{0.25in}} U_5^{n+1} \\ \end{aligned}
+\begin{aligned} 
+(\text{for $x_1$: }) &\quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} = \underline{\hspace{0.25in}} U_1^{n} + \underline{\hspace{0.25in}} U_0^{n+1}\\ 
+(\text{for $x_2$: }) &\quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} + \underline{\hspace{0.25in}} U_3^{n+1} = \underline{\hspace{0.25in}} U_2^{n} \\ (\text{for $x_3$: }) &\quad \underline{\hspace{0.25in}} U_2^{n+1} + \underline{\hspace{0.5in}} U_3^{n+1} + \underline{\hspace{0.25in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_3^{n} \\ (\text{for $x_4$: }) &\quad \underline{\hspace{0.25in}} U_3^{n+1} + \underline{\hspace{0.5in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_4^{n} + \underline{\hspace{0.25in}} U_5^{n+1} \\ \end{aligned}
 \end{equation}
 
 
@@ -616,7 +618,7 @@ for n in range(len(t)-1):
 #### The Crank-Nicolson Method
 We conclude this section with one more implicit scheme: the **Crank-Nicolson Method**. In this method we approximate the temporal derivative with a forward difference just like always, but we approximate the spatial derivative as the average of the central difference at the current time step and the central difference at the new time step. That is: 
 \begin{equation}
-\frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{i+1}^n - 2U_i^n + U_{i+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{i+1}^{n+1} - 2U_i^{n+1} + U_{i+1}^{n+1}}{\Delta x^2} \right) \right].
+\frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{i-1}^n - 2U_i^n + U_{i+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{i-1}^{n+1} - 2U_i^{n+1} + U_{i+1}^{n+1}}{\Delta x^2} \right) \right].
 \end{equation}
  Letting $r = D \Delta t / (2\Delta x^2)$ we can rearrange to get 
 \begin{equation}

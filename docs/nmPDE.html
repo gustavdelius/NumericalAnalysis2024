@@ -1440,20 +1440,19 @@ u(0,y)=0, \quad u(1,y) = 0, \quad u(x,0) = -\sin(\pi x), \quad u(x,1) = 0.
 <p>In this section we propose several ideas for projects related to numerical partial differential equations. These projects are meant to be open ended, to encourage creative mathematics, to push your coding skills, and to require you to write and communicate your mathematics.</p>
 <section id="hunting-and-diffusion" class="level3" data-number="7.8.1">
 <h3 data-number="7.8.1" class="anchored" data-anchor-id="hunting-and-diffusion"><span class="header-section-number">7.8.1</span> Hunting and Diffusion</h3>
-<p>Let <span class="math inline">\(u\)</span> be a function modelling a mobile population that in an environment where it has a growth rate of <span class="math inline">\(r\%\)</span> per year with a carrying capacity of <span class="math inline">\(K\)</span>. If we were only worried about the size of the population we could solve the differential equation <span class="math display">\[\begin{equation}
+<p>Let <span class="math inline">\(u\)</span> be a function modelling a mobile population in an environment where it has an intrinsic growth rate of <span class="math inline">\(r\)</span> and a carrying capacity of <span class="math inline">\(K\)</span>. If we were only worried about the size of the population we could solve the differential equation <span class="math display">\[\begin{equation}
 \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right),
 \end{equation}\]</span> but there is more to the story.</p>
-<p>Hunters harvest <span class="math inline">\(h\)</span>% of the population per year so we can append the differential equation with the harvesting term “<span class="math inline">\(-h u\)</span>” to arrive at the ordinary differential equation <span class="math display">\[\begin{equation}
+<p>Hunters harvest the population at a per-capita rate <span class="math inline">\(h\)</span> so we can append the differential equation with the harvesting term <span class="math inline">\(-h u\)</span> to arrive at the ordinary differential equation <span class="math display">\[\begin{equation}
 \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right) - hu.
 \end{equation}\]</span></p>
 <p>Since the population is mobile let us make a few assumptions about the environment that they are in and how the individuals move.</p>
 <ul>
-<li><p>Food is abundant in the entire environment.</p></li>
-<li><p>Individuals in the population like to spread out so that they do not interfere with each others’ hunt for food.</p></li>
-<li><p>It is equally easy for the individuals to travel in any direction in the environment.</p></li>
+<li><p>The growing conditions for the population are the same everywhere</p></li>
+<li><p>Individuals move around randomly.</p></li>
 </ul>
-<p>Clearly some of these assumptions are unreasonable for real populations and real environments, but let us go with it for now. Given the nature of these assumptions we assume that a diffusion term models the spread of the individuals in the population. Hence, the PDE model is <span class="math display">\[\begin{equation}
-\frac{\partial u}{\partial t} = ru\left( 1-\frac{u}{K} \right) - hu + D \left( u_{xx} + u_{yy|} \right).
+<p>Clearly these assumptions imply that our model is a simplification of real populations and real environments, but let us go with it for now. Given the nature of these assumptions we assume that a diffusion term models the spread of the individuals in the population. Hence, the PDE model is <span class="math display">\[\begin{equation}
+\frac{\partial u}{\partial t} = ru\left( 1-\frac{u}{K} \right) - hu + D \left( u_{xx} + u_{yy} \right).
 \end{equation}\]</span></p>
 <ol type="1">
 <li><p>Use any of your ODE codes to solve the ordinary differential equation with harvesting. Give a complete description of the parameter space.</p></li>

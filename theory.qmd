@@ -102,11 +102,69 @@ $$
 $$
 Because $E_{n+1}/E_n^p\to c$, if the method has p-th order convergence, then the slope of the log-log plot of the error at the (n+1)st iteration against the error at the n-th iteration will be $p$ and the intercept will be $\log c$.
 
-
+There is [a recording of my discussion of this material in a class session](https://york.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7b43623b-c07f-4673-9a67-b147009b7761).
 
 ## Truncation Errors {#sec-truncation}
+Many of the approximation methods in Numerical Analysis are based on Taylor series expansions and then dropping higher-order terms in the series. The error that is introduced by truncating a Taylor series in this way is called the truncation error.
 
+Let us recall Taylor's formula for a function $f$ that is $p$ times differentiable at a point $x$:
+$$\begin{multline}
+f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots\\+\frac{f^{(p-1)}(x_0)}{(p-1)!}(x-x_0)^{p-1}+\frac{f^{(p)}(\xi)}{p!}(x-x_0)^{p}
+\end{multline}$$
+for some $\xi$ between $x$ and $x_0$. The error introduced by truncating the series after the $p$-th term is
+$$
+|R_p(x)|=\left|\frac{f^{(p)}(\xi)}{p!}(x-x_0)^{p}\right|.
+$$
+We had first discussed this in @sec-Taylor.
 
+### Truncation error in finite-difference formulae
+In the finite-difference formulae for derivatives that we discussed in @sec-differentiation, we approximated the derivative of a function $f$ at a point $x$ by a linear combination of function values at points close to $x$. For example, the forward difference formula for the first derivative is
+$$\begin{split}
+f'(x)&\approx \frac{f(x+h)-f(x)}{h}\\
+&=\frac{f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\cdots-f(x)}{h}\\
+&=f'(x)+\frac{h}{2}f''(\xi).
+\end{split}$$
+for some $\xi$ between $x$ and $x+h$. We see that the truncation error is proportional to the stepsize $h$. We say that the trunction error is of order $h$ and that this forward-difference approximation is a first-order approximation. This means that in order to halve the size of the error we need to halve the stepsize.
+
+You can now do a similar analysis for the other finite-difference formulae that we discussed in @sec-differentiation.
+
+### Truncation error in numerical integration
+In numerical integration we approximate the integral of a function $f$ over an interval $[a,b]$ by splitting the interval into many subintervals. So we introduce a grid of points $x_j=x_0+jh$ for $j=0,\ldots,N$ with $x_0=a$ and $x_N=b$ and $h=(b-a)/N$ and write the integral as a sum
+$$
+\int_a^b f(x)dx=\sum_{j=1}^{N}\int_{x_{j-1}}^{x_{j}}f(x)dx.
+$$
+
+The simplest numerical integration method is the Riemann sum, where we approximate the function on each subinterval by the value of the function at the endpoint of the interval. So for the right Riemann sum we have
+$$
+I_j=\int_{x_{j-1}}^{x_{j}}f(x)dx\approx \int_{x_{j-1}}^{x_{j}}f(x_j)dx=f(x_j)h=A_j.
+$$
+The **local truncation error** is defined as the absolute error made in each subinterval, divided by the width of the subinterval:
+$$
+\tau_j=\frac{1}{h}|I_j-A_j|.
+$$
+For the right Riemann sum we have
+$$\begin{split}
+I_j-A_j&=\int_{x_{j-1}}^{x_{j}}\left(f(x)-f(x_j)\right)dx\\
+&=\int_{x_{j-1}}^{x_{j}}\left(f(x_j)+f'(\xi_j)(x-x_j)-f(x_j)\right)dx\\
+&=f'(\xi_j)\int_{x_{j-1}}^{x_{j}}(x-x_j)dx\\
+&=f'(\xi_j)\frac{h^2}{2}\\
+\end{split}$$
+for some $\xi_j$ between $x_{j-1}$ and $x_j$. So the local truncation error is
+$$
+\tau_j=\frac{1}{h}\left|f'(\xi_j)\frac{h^2}{2}\right|=\frac{h}{2}|f'(\xi_j)|.
+$$
+We see that the local truncation error is of order $h$ and that the right Riemann sum is a first-order approximation. The reason for dividing by $h$ in the definition of the local truncation error is that the power of $h$ in the local truncation error is the same as in the  **global truncation error** $\tau$ is obtained by summing over the errors from all subintervals. For the Riemann sum we have for some $\xi$ between $a$ and $b$ that
+$$\begin{split}
+\tau&=\left|\sum_{j=1}^{N}\frac{h^2}2f'(\xi_j)\right|
+\leq \left|\sum_{j=1}^{N}\frac{h^2}2f'(\xi)\right|\\
+&\leq \sum_{j=1}^{N}\left|\frac{h^2}2f'(\xi)\right|
+=N\frac{h^2}2|f'(\xi)|\\
+&=\frac{h}{2}|f'(\xi_j)|.
+\end{split}$$
+
+You can now do a similar analysis for the trapezoidal rule and Simpson's rule.
+
+There is [a recording of my discussion of this material in a class session](https://york.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9133f728-5dbc-4797-b873-b14e009bf83e).
 
 ## Stiff Equations and Stability {#sec-stiff}
 

@@ -224,7 +224,11 @@ window.Quarto = {
   <li><a href="#quadratic-convergence" id="toc-quadratic-convergence" class="nav-link" data-scroll-target="#quadratic-convergence"><span class="header-section-number">8.1.2</span> Quadratic convergence</a></li>
   <li><a href="#p-th-order-of-convergence" id="toc-p-th-order-of-convergence" class="nav-link" data-scroll-target="#p-th-order-of-convergence"><span class="header-section-number">8.1.3</span> p-th order of convergence</a></li>
   </ul></li>
-  <li><a href="#sec-truncation" id="toc-sec-truncation" class="nav-link" data-scroll-target="#sec-truncation"><span class="header-section-number">8.2</span> Truncation Errors</a></li>
+  <li><a href="#sec-truncation" id="toc-sec-truncation" class="nav-link" data-scroll-target="#sec-truncation"><span class="header-section-number">8.2</span> Truncation Errors</a>
+  <ul>
+  <li><a href="#truncation-error-in-finite-difference-formulae" id="toc-truncation-error-in-finite-difference-formulae" class="nav-link" data-scroll-target="#truncation-error-in-finite-difference-formulae"><span class="header-section-number">8.2.1</span> Truncation error in finite-difference formulae</a></li>
+  <li><a href="#truncation-error-in-numerical-integration" id="toc-truncation-error-in-numerical-integration" class="nav-link" data-scroll-target="#truncation-error-in-numerical-integration"><span class="header-section-number">8.2.2</span> Truncation error in numerical integration</a></li>
+  </ul></li>
   <li><a href="#sec-stiff" id="toc-sec-stiff" class="nav-link" data-scroll-target="#sec-stiff"><span class="header-section-number">8.3</span> Stiff Equations and Stability</a>
   <ul>
   <li><a href="#stiff-equations" id="toc-stiff-equations" class="nav-link" data-scroll-target="#stiff-equations"><span class="header-section-number">8.3.1</span> Stiff equations</a></li>
@@ -321,10 +325,52 @@ E_{n+1}=\frac{|g^{(p)}(x^*)|}{p!}E_n^p+\mathcal{O}((x_n-x^*)^{p+1}).
 <p>To make the connection with our log-log error plots, we observe that <span class="math display">\[
 \log E_{n+1}=\log\left(\frac{E_{n+1}}{E_n^p}\right)+p\log E_n.
 \]</span> Because <span class="math inline">\(E_{n+1}/E_n^p\to c\)</span>, if the method has p-th order convergence, then the slope of the log-log plot of the error at the (n+1)st iteration against the error at the n-th iteration will be <span class="math inline">\(p\)</span> and the intercept will be <span class="math inline">\(\log c\)</span>.</p>
+<p>There is <a href="https://york.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=7b43623b-c07f-4673-9a67-b147009b7761">a recording of my discussion of this material in a class session</a>.</p>
 </section>
 </section>
 <section id="sec-truncation" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-truncation"><span class="header-section-number">8.2</span> Truncation Errors</h2>
+<p>Many of the approximation methods in Numerical Analysis are based on Taylor series expansions and then dropping higher-order terms in the series. The error that is introduced by truncating a Taylor series in this way is called the truncation error.</p>
+<p>Let us recall Taylor’s formula for a function <span class="math inline">\(f\)</span> that is <span class="math inline">\(p\)</span> times differentiable at a point <span class="math inline">\(x\)</span>: <span class="math display">\[\begin{multline}
+f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots\\+\frac{f^{(p-1)}(x_0)}{(p-1)!}(x-x_0)^{p-1}+\frac{f^{(p)}(\xi)}{p!}(x-x_0)^{p}
+\end{multline}\]</span> for some <span class="math inline">\(\xi\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(x_0\)</span>. The error introduced by truncating the series after the <span class="math inline">\(p\)</span>-th term is <span class="math display">\[
+|R_p(x)|=\left|\frac{f^{(p)}(\xi)}{p!}(x-x_0)^{p}\right|.
+\]</span> We had first discussed this in <a href="nmApprox.html#sec-Taylor" class="quarto-xref"><span>Section 2.4</span></a>.</p>
+<section id="truncation-error-in-finite-difference-formulae" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="truncation-error-in-finite-difference-formulae"><span class="header-section-number">8.2.1</span> Truncation error in finite-difference formulae</h3>
+<p>In the finite-difference formulae for derivatives that we discussed in <a href="nmCalculus.html#sec-differentiation" class="quarto-xref"><span>Section 4.2</span></a>, we approximated the derivative of a function <span class="math inline">\(f\)</span> at a point <span class="math inline">\(x\)</span> by a linear combination of function values at points close to <span class="math inline">\(x\)</span>. For example, the forward difference formula for the first derivative is <span class="math display">\[\begin{split}
+f'(x)&amp;\approx \frac{f(x+h)-f(x)}{h}\\
+&amp;=\frac{f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\cdots-f(x)}{h}\\
+&amp;=f'(x)+\frac{h}{2}f''(\xi).
+\end{split}\]</span> for some <span class="math inline">\(\xi\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(x+h\)</span>. We see that the truncation error is proportional to the stepsize <span class="math inline">\(h\)</span>. We say that the trunction error is of order <span class="math inline">\(h\)</span> and that this forward-difference approximation is a first-order approximation. This means that in order to halve the size of the error we need to halve the stepsize.</p>
+<p>You can now do a similar analysis for the other finite-difference formulae that we discussed in <a href="nmCalculus.html#sec-differentiation" class="quarto-xref"><span>Section 4.2</span></a>.</p>
+</section>
+<section id="truncation-error-in-numerical-integration" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="truncation-error-in-numerical-integration"><span class="header-section-number">8.2.2</span> Truncation error in numerical integration</h3>
+<p>In numerical integration we approximate the integral of a function <span class="math inline">\(f\)</span> over an interval <span class="math inline">\([a,b]\)</span> by splitting the interval into many subintervals. So we introduce a grid of points <span class="math inline">\(x_j=x_0+jh\)</span> for <span class="math inline">\(j=0,\ldots,N\)</span> with <span class="math inline">\(x_0=a\)</span> and <span class="math inline">\(x_N=b\)</span> and <span class="math inline">\(h=(b-a)/N\)</span> and write the integral as a sum <span class="math display">\[
+\int_a^b f(x)dx=\sum_{j=1}^{N}\int_{x_{j-1}}^{x_{j}}f(x)dx.
+\]</span></p>
+<p>The simplest numerical integration method is the Riemann sum, where we approximate the function on each subinterval by the value of the function at the endpoint of the interval. So for the right Riemann sum we have <span class="math display">\[
+I_j=\int_{x_{j-1}}^{x_{j}}f(x)dx\approx \int_{x_{j-1}}^{x_{j}}f(x_j)dx=f(x_j)h=A_j.
+\]</span> The <strong>local truncation error</strong> is defined as the absolute error made in each subinterval, divided by the width of the subinterval: <span class="math display">\[
+\tau_j=\frac{1}{h}|I_j-A_j|.
+\]</span> For the right Riemann sum we have <span class="math display">\[\begin{split}
+I_j-A_j&amp;=\int_{x_{j-1}}^{x_{j}}\left(f(x)-f(x_j)\right)dx\\
+&amp;=\int_{x_{j-1}}^{x_{j}}\left(f(x_j)+f'(\xi_j)(x-x_j)-f(x_j)\right)dx\\
+&amp;=f'(\xi_j)\int_{x_{j-1}}^{x_{j}}(x-x_j)dx\\
+&amp;=f'(\xi_j)\frac{h^2}{2}\\
+\end{split}\]</span> for some <span class="math inline">\(\xi_j\)</span> between <span class="math inline">\(x_{j-1}\)</span> and <span class="math inline">\(x_j\)</span>. So the local truncation error is <span class="math display">\[
+\tau_j=\frac{1}{h}\left|f'(\xi_j)\frac{h^2}{2}\right|=\frac{h}{2}|f'(\xi_j)|.
+\]</span> We see that the local truncation error is of order <span class="math inline">\(h\)</span> and that the right Riemann sum is a first-order approximation. The reason for dividing by <span class="math inline">\(h\)</span> in the definition of the local truncation error is that the power of <span class="math inline">\(h\)</span> in the local truncation error is the same as in the <strong>global truncation error</strong> <span class="math inline">\(\tau\)</span> is obtained by summing over the errors from all subintervals. For the Riemann sum we have for some <span class="math inline">\(\xi\)</span> between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> that <span class="math display">\[\begin{split}
+\tau&amp;=\left|\sum_{j=1}^{N}\frac{h^2}2f'(\xi_j)\right|
+\leq \left|\sum_{j=1}^{N}\frac{h^2}2f'(\xi)\right|\\
+&amp;\leq \sum_{j=1}^{N}\left|\frac{h^2}2f'(\xi)\right|
+=N\frac{h^2}2|f'(\xi)|\\
+&amp;=\frac{h}{2}|f'(\xi_j)|.
+\end{split}\]</span></p>
+<p>You can now do a similar analysis for the trapezoidal rule and Simpson’s rule.</p>
+<p>There is <a href="https://york.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9133f728-5dbc-4797-b873-b14e009bf83e">a recording of my discussion of this material in a class session</a>.</p>
+</section>
 </section>
 <section id="sec-stiff" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="sec-stiff"><span class="header-section-number">8.3</span> Stiff Equations and Stability</h2>

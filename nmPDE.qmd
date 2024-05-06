@@ -69,9 +69,9 @@ In the remainder of this section we will use a technique called **the finite dif
 ### In One Spatial Dimensions {#sec-heat1d}
 
 For the sake of simplicity we will start by considering the heat equation in 1 spatial dimension:
-\begin{equation}
+$$
  \frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2}. 
-\end{equation}
+$$
 
 
 ::: {#exr-6.29}
@@ -84,33 +84,33 @@ First we need to introduce some notation for the numerical solution. As you will
 Next we need to approximate both derivatives $u_t$ and $u_{xx}$ in the PDE using methods that we have used before. Now would be a good time to go back to [Chapter -@sec-calculus] and refresh your memory for how we build approximations of derivatives.
 
 (a)  Use the forward-difference formula to approximate the time derivative $u_t$ at the point $t=t_n$ and $x=x_i$.
-\begin{equation}
+$$
  u_t(t_n,x_i) \approx \frac{??? - ???}{???}. 
-\end{equation}
+$$
 
 
 (b)  Use the centred-difference formula to approximate the second spatial derivative $u_{xx}$ at the point $t=t_n$ and $x=x_i$.
-\begin{equation}
+$$
  u_{xx}(t_n,x_i) \approx \frac{??? - ??? + ???}{???}.
-\end{equation}
+$$
 
 
 (c)  Put your answers from parts (a) and (b) together using the 1D heat equation 
-\begin{equation}
+$$
 \frac{??? - ???}{\Delta t} = D \left( \frac{??? - ??? + ???}{\Delta x^2} \right).
-\end{equation}
+$$
  Be sure that your indexing is correct: the superscript $n$ is the index for time and the subscript $i$ is the index for space.
 
 (d)  Rearrange your result from part (c) to solve for $U_i^{n+1}$: 
-\begin{equation}
+$$
 \begin{aligned} U_i^{n+1} = ??? + \frac{D \Delta t}{\Delta x^2} \left( ??? - ??? + ??? \right). \end{aligned}
-\end{equation}
+$$
  The iterative scheme which you just derived is called a **finite difference scheme** for the heat equation. Notice that the term on the left is the only term at the next time step $n+1$. So, for every spatial point $x_i$ we can build $U_i^{n+1}$ by evaluating the right-hand side of the finite difference scheme.
 
 (e)  The numerical errors made by using the finite difference scheme we just built come from two sources: from the approximation of the time derivative and from the approximation of the second spatial derivative. Fill in the question marks in the powers of the following expression: 
-\begin{equation}
+$$
  \text{Numerical Error} = \mathcal{O}(\Delta t^{???}) + \mathcal{O}(\Delta x^{???}). 
-\end{equation}
+$$
 
 (f)  Explain what the result from part e means in plain English?
 
@@ -126,13 +126,13 @@ There are many different finite difference schemes due to the fact that there ar
 
 ::: {#exr-6.30}
 Now we want to implement your answer to part (d) of the previous exercise to approximate the solution to the following problem: 
-\begin{equation}
+$$
 \text{Solve: } u_t = 0.01u_{xx}
-\end{equation}
+$$
  with 
-\begin{equation}
+$$
  x \in [0,1], \, u(0,x) = \sin(2 \pi x), \, u(t,0) = 0, \, \text{and} \, u(t,1) = 0.
-\end{equation}
+$$
  Some partial code is given below to get you started.
 
 -   First we import the proper libraries, set up the time domain, and set up the spatial domain.
@@ -203,9 +203,9 @@ You may have found that you did not get a sensible solution out for the previous
 
 ::: {#exr-6.32}
 Consider the one dimensional heat equation with diffusion coefficient $D=1$: 
-\begin{equation}
+$$
  u_t = u_{xx}. 
-\end{equation}
+$$
  We want to solve this equation on the domain $x \in [0,1]$ and $t\in [0,0.1]$ subject to the initial condition $u(0,x) = \sin(\pi x)$ and the boundary conditions $u(t,0)=u(t,1) = 0$.
 
 (a)  Show that the function $u(t,x) = e^{-\pi^2 t} \sin(\pi x)$ is a solution to this heat equation, satisfies the initial condition, and satisfies the boundary conditions.
@@ -263,9 +263,9 @@ Consider the 1D heat equation $u_t = u_{xx}$ with boundary conditions $u_x(t,0)=
 (a)  Draw several images of what the solution to the PDE should look like as time evolves. Be sure that all boundary conditions are satisfied and that your solution appears to solve the heat equation.
 
 (b)  The Neumann boundary condition $u_x(t,0) = 0$ can be approximated with the first order approximation 
-\begin{equation}
+$$
  u_x(t_n,0) \approx \frac{U_1^n - U_0^n}{\Delta x}. 
-\end{equation}
+$$
  If we set this approximation to 0 (since $u_x(t,0)=0$) and solve for $U_0^n$ we get an additional constraint at every time step of the numerical solution to the heat equation. What is this new equation.
 
 (c)  Modify your 1D heat equation code to implement this Neumann boundary condition, plot the numerical solution and verify visually that the Neumann boundary is satisfied.
@@ -289,13 +289,13 @@ Modify your 1D heat equation code to plot an approximate solution of the Fisher-
 ### In Two Spatial Dimensions {#sec-heat2d}
 
 Now we transition to the two dimensional heat equation. Instead of thinking of this as heating a long metal rod we can think of heating a thin plate of metal (like a flat cookie sheet). The heat equation models the propagation of the heat energy throughout the 2D surface. In two spatial dimensions the heat equation is 
-\begin{equation}
+$$
  \frac{\partial u}{\partial t} = D \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right),
-\end{equation}
+$$
  or, using subscript notation for the partial derivatives, 
-\begin{equation}
+$$
  u_t = D\left( u_{xx} + u_{yy} \right). 
-\end{equation}
+$$
 
 ------------------------------------------------------------------------
 
@@ -303,34 +303,34 @@ Now we transition to the two dimensional heat equation. Instead of thinking of t
 Let us build a numerical solution to the 2D heat equation. We need to make a minor modification to our notation since there is now one more spatial dimension to keep track of. Let $U_{i,j}^n$ be the approximation to $u$ at the point $(t_n, x_i, y_j)$. For example, $U_{2,3}^4$ will be the approximation to the solution at the point $(t_4,x_2,y_3)$.
 
 (a)  We already know how to approximate the time derivative in the heat equation: 
-\begin{equation}
+$$
  u_t(t_{n}, x_i, y_j) \approx \frac{U_{i,j}^{n+1} - U_{i,j}^n}{\Delta t}. 
-\end{equation}
+$$
  The new challenge now is that we have two spatial partial derivatives: one in $x$ and one in $y$. Use what you learned in [Chapter -@sec-calculus] to write the approximations of $u_{xx}$ and $u_{yy}$. 
-\begin{equation}
+$$
  u_{xx}(t_n,x_i,y_j) \approx \frac{??? - ??? + ???}{\Delta x^2} 
-\end{equation}
-\begin{equation}
+$$
+$$
  u_{yy}(t_n,x_i,y_j) \approx \frac{??? - ??? + ???}{\Delta y^2} 
-\end{equation}
+$$
  Take careful note that the index $i$ is the only one that changes for the $x$ derivative. Similarly, the index $j$ is the only one that changes for the $y$ derivative.
 
 (b)  Put your answers to part (a) together with the 2D heat equation 
-\begin{equation}
+$$
  \frac{U_{i,j}^{n+1} - U_{i,j}^n}{\Delta t} = D \left( \frac{??? - ??? + ???}{\Delta x^2} + \frac{??? - ??? + ???}{\Delta y^2} \right). 
-\end{equation}
+$$
 
 
 (c)  Let us make one simplifying assumption. Choose the partition of the domain so that $\Delta x = \Delta y$. Note that we can usually do this in square domains. In more complicated domains we will need to be more careful. Simplify the right-hand side of your answer to part (b) under this assumption. 
-\begin{equation}
+$$
  \frac{U_{i,j}^{n+1} - U_{i,j}^n}{\Delta t} = D \left( \frac{??? + ??? - ??? + ??? + ???}{???} \right). 
-\end{equation}
+$$
 
 
 (d)  Now solve your result from part (c) for $U_{i,j}^{n+1}$. Your answer is the explicit finite difference scheme for the 2D heat equation. 
-\begin{equation}
+$$
  U_{i,j}^{n+1} = U_{???,???}^{???} + \frac{D \cdot ???}{???} \left( ??? + ??? - ??? + ??? + ??? \right) 
-\end{equation}
+$$
 
 
 :::
@@ -503,43 +503,43 @@ It is actually possible to beat the stability criteria given in the previous exe
 ::: {#exr-6.43}
 #### Implicit Finite Difference Scheme
 For the 1D heat equation $u_t = D u_{xx}$ we have been finding the numerical solution using the explicit finite difference scheme 
-\begin{equation}
+$$
 \frac{U_i^{n+1} - U_i^n}{\Delta t} = D \frac{U_{i+1}^{n} - 2U_i^{n} + U_{i-1}^{n}}{\Delta x^2}
-\end{equation}
+$$
  where we approximate the time derivative with the usual forward difference and we approximate the spatial derivative with the usual centred difference. If, however, we use the spatial derivative at time step $n+1$ instead of time step $n$ we get the finite difference scheme 
-\begin{equation}
+$$
 \frac{U_i^{n+1} - U_i^n}{\Delta t} = D \frac{U_{i+1}^{n+1} - 2U_i^{n+1} + U_{i-1}^{n+1}}{\Delta x^2}.
-\end{equation}
+$$
  This may seem completely ridiculous since we do not yet know the information at time step $n+1$ but some algebraic rearrangement shows that we can treat this as a system of linear equations which can be solved (using something like `np.linalg.solve()`) for the $(n+1)^{st}$ time step.
 
 Before we start let us define the coefficient $a = D \Delta t / \Delta x^2.$ This will save a little bit of writing in the coming steps.
 
 1.  Rearrange the new finite difference scheme so that all of the terms at the $(n+1)^{st}$ time step are on the left-hand side and all of the term at the $n^{th}$ time step are on the right-hand side. 
-\begin{equation}
+$$
 (\underline{\hspace{0.25in}}) U_{i-1}^{n+1} + (\underline{\hspace{0.5in}}) U_{i}^{n+1} + (\underline{\hspace{0.25in}}) U_{i+1}^{n+1} = \underline{\hspace{0.25in}} U_i^n
-\end{equation}
+$$
 
 
 2.  Now we are going to build a very small example with only 6 spatial points so that you can clearly see the structure of the resulting linear system.
 
     1.  If we have 6 total points in the spatial grid ($x_0, x_1, \ldots, x_5$) then we have the following equations (fill in the blanks): 
-\begin{equation}
+$$
 \begin{aligned} (\text{for $x_1$: }) \quad \underline{\hspace{0.25in}} U_0^{n+1} + \underline{\hspace{0.5in}} U_1^{n+1} + \underline{\hspace{0.25in}} U_2^{n+1} &= \underline{\hspace{0.25in}} U_1^{n} \\ (\text{for $x_2$: }) \quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} + \underline{\hspace{0.25in}} U_3^{n+1} &= \underline{\hspace{0.25in}} U_2^{n} \\ (\text{for $x_3$: }) \quad \underline{\hspace{0.25in}} U_2^{n+1} + \underline{\hspace{0.5in}} U_3^{n+1} + \underline{\hspace{0.25in}} U_4^{n+1} &= \underline{\hspace{0.25in}} U_3^{n} \\ (\text{for $x_4$: }) \quad \underline{\hspace{0.25in}} U_3^{n+1} + \underline{\hspace{0.5in}} U_4^{n+1} + \underline{\hspace{0.25in}} U_5^{n+1} &= \underline{\hspace{0.25in}} U_4^{n} \\ \end{aligned}
-\end{equation}
+$$
 
 
     2.  Notice that we aready know $U_0^{n+1}$ and $U_5^{n+1}$ since these are dictated by the boundary conditions (assuming Dirichlet boundary conditions). Hence we can move these known quantities to the right-hand side of the equations and hence rewrite the system of equations as: 
-\begin{equation}
+$$
 \begin{aligned} 
 (\text{for $x_1$: }) &\quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} = \underline{\hspace{0.25in}} U_1^{n} + \underline{\hspace{0.25in}} U_0^{n+1}\\ 
 (\text{for $x_2$: }) &\quad \underline{\hspace{0.25in}} U_1^{n+1} + \underline{\hspace{0.5in}} U_2^{n+1} + \underline{\hspace{0.25in}} U_3^{n+1} = \underline{\hspace{0.25in}} U_2^{n} \\ (\text{for $x_3$: }) &\quad \underline{\hspace{0.25in}} U_2^{n+1} + \underline{\hspace{0.5in}} U_3^{n+1} + \underline{\hspace{0.25in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_3^{n} \\ (\text{for $x_4$: }) &\quad \underline{\hspace{0.25in}} U_3^{n+1} + \underline{\hspace{0.5in}} U_4^{n+1} = \underline{\hspace{0.25in}} U_4^{n} + \underline{\hspace{0.25in}} U_5^{n+1} \\ \end{aligned}
-\end{equation}
+$$
 
 
     3.  Now we can leverage linear algebra and write this as a matrix equation. 
-\begin{equation}
+$$
 \begin{pmatrix} \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} & 0 & 0 \\ \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} & 0 \\ 0 & \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} \\ 0 & 0 & \underline{\hspace{0.25in}} & \underline{\hspace{0.25in}} \end{pmatrix}\begin{pmatrix} U_1^{n+1} \\ U_2^{n+1} \\ U_3^{n+1} \\ U_4^{n+1} \end{pmatrix} = \begin{pmatrix} U_1^{n} \\ U_2^{n} \\ U_3^{n} \\ U_4^{n} \end{pmatrix} + \begin{pmatrix} \underline{\hspace{0.25in}} U_0^{n+1} \\ 0 \\ 0 \\ \underline{\hspace{0.25in}} U_5^{n+1} \end{pmatrix}
-\end{equation}
+$$
 
 
 3.  At this point the structure of the coefficient matrix on the left and the vector sum on the right should be clear (even for more spatial points). It is time for us to start writing some code. we will start with the basic setup of the problem.
@@ -570,7 +570,7 @@ U[:,-1] = BCright(t) # set up the right boundary condition
 
 ``` python         
 def coeffMatrix(M,a): # we are using M=len(x) as the first input
-  A = np.matrix( np.zeros( (M-2,M-2) ) ) 
+  A = np.zeros( (M-2,M-2) )
   # why are we using M-2 X M-2 for the size?
   A[0,0] = # top left entry
   A[0,1] = # entry in the first row second column
@@ -596,7 +596,7 @@ plt.show()
 for n in range(len(t)-1):
   b1 = U[n,???] 
   # b1 is a vector of U at step n for the inner spatial nodes
-  b2 = np.zeros_like(b1) # set up the second right-hand vector
+  b2 = np.zeros(length(b1)) # set up the second right-hand vector
   b2[0] = ???*BCleft(t[n+1]) # fill in the correct first entry
   b2[-1] = ???*BCright(t[n+1]) # fill in the correct last entry
   b = b1 + b2 # The vector "b" is the right side of the equation
@@ -617,45 +617,45 @@ for n in range(len(t)-1):
 ::: {#exr-6.44}
 #### The Crank-Nicolson Method
 We conclude this section with one more implicit scheme: the **Crank-Nicolson Method**. In this method we approximate the temporal derivative with a forward difference just like always, but we approximate the spatial derivative as the average of the central difference at the current time step and the central difference at the new time step. That is: 
-\begin{equation}
+$$
 \frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{i-1}^n - 2U_i^n + U_{i+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{i-1}^{n+1} - 2U_i^{n+1} + U_{i+1}^{n+1}}{\Delta x^2} \right) \right].
-\end{equation}
+$$
  Letting $r = D \Delta t / (2\Delta x^2)$ we can rearrange to get 
-\begin{equation}
+$$
 \underline{\hspace{0.25in}} U_{i-1}^{n+1} + \underline{\hspace{0.25in}} U_{i}^{n+1} + \underline{\hspace{0.25in}} U_{i+1}^{n+1} = \underline{\hspace{0.25in}} U_{i-1}^{n} + \underline{\hspace{0.25in}} U_{i}^{n} + \underline{\hspace{0.25in}} U_{i+1}^{n}.
-\end{equation}
+$$
  This can now be viewed as a system of equations. Let us build this system carefully and then write code to solve the heat equation from the previous problems with the Crank-Nicolson method. For this problem we will assume fixed Dirichlet boundary conditions on both the left- and right-hand sides of the domain.
 
 1.  First let us write the equations for several values of $i$. 
-\begin{equation}
+$$
 \begin{aligned} (\text{$x_1$ }): \quad \underline{\hspace{0.15in}} U_0^{n+1} + \underline{\hspace{0.15in}} U^{n+1}_1 + \underline{\hspace{0.15in}} U^{n+1}_2 &= \underline{\hspace{0.15in}}U^n_0 + \underline{\hspace{0.15in}} U^n_1 + \underline{\hspace{0.15in}}U^n_2 \\ (\text{$x_2$ }): \quad \underline{\hspace{0.15in}} U_1^{n+1} + \underline{\hspace{0.15in}} U^{n+1}_2 + \underline{\hspace{0.15in}}U^{n+1}_3 &= \underline{\hspace{0.15in}}U^n_1 + \underline{\hspace{0.15in}} U^n_2 + \underline{\hspace{0.15in}}U^n_3 \\ (\text{$x_3$ }): \quad \underline{\hspace{0.15in}} U_2^{n+1} + \underline{\hspace{0.15in}} U^{n+1}_3 + \underline{\hspace{0.15in}}U^{n+1}_4 &= \underline{\hspace{0.15in}}U^n_2 + \underline{\hspace{0.15in}} U^n_3 + \underline{\hspace{0.15in}}U^n_4 \\ \qquad \vdots & \qquad \vdots \\ (\text{$x_{M-2}$ }): \quad \underline{\hspace{0.1in}} U_{M-3}^{n+1} + \underline{\hspace{0.1in}} U^{n+1}_{M-2} + \underline{\hspace{0.1in}}U^{n+1}_{M-1} &= \underline{\hspace{0.1in}}U^n_{M-3} + \underline{\hspace{0.1in}} U^n_{M-2} + \underline{\hspace{0.1in}}U^n_{M-1} \end{aligned}
-\end{equation}
+$$
  where $M$ is the number of spatial points (enumerated $x_0, x_1, x_2, \ldots, x_{M-1}$).
 
 2.  The first and last equations can be simplified since we are assuming that we have Dirichlet boundary conditions. Therefore for $x_1$ we can rearrange to move the $U_0^{n+1}$ term to the right-hand side since it is given for all time. Similarly for $x_{M-2}$ we can move the $U_{M-1}^{n+1}$ term to the right-hand side since it is fixed for all time. Rewrite these two equations.
 
-3.  Verify that the left-hand side of the equations that we have built in parts (a) and (b) can be written as the following matrix-vector product: 
-\begin{equation}
+3.  Verify that the left-hand side of the equations that we have built in parts (1) and (2) can be written as the following matrix-vector product: 
+$$
 \begin{aligned} \begin{pmatrix} (1+2r) & -r & 0 & 0 & \cdots & 0 \\ -r & (1+2r) & -r & 0 & \cdots & 0 \\ 0 & -r & (1+2r) & -r & \cdots & 0 \\ \vdots & & & & & 0 \\ 0 & \cdots & & 0 & -r & (1+2r) \end{pmatrix} \begin{pmatrix} U^{n+1}_1 \\ U^{n+1}_2 \\ U^{n+1}_3 \\ \vdots \\U^{n+1}_{M-2} \end{pmatrix} \end{aligned}
-\end{equation}
+$$
 
 
-4.  Verify that the right-hand side of the equations that we built in parts (a) and (b) can be written as 
-\begin{equation}
-\begin{aligned} \begin{pmatrix} (1-2r) & r & 0 & 0 & \cdots & 0 \\ r & (1-2r) & r & 0 & \cdots & 0 \\ 0 & r & (1-2r) & r & & 0 \\ \vdots & & & & & \\ & & & & r & (1-2r) \end{pmatrix} \begin{pmatrix} U^{n}_1 \\ U^{n}_2 \\ U_3^n \\ \vdots \\U^{n}_{M-2} \end{pmatrix} + \begin{pmatrix} rU_0^{n+1} \\ 0 \\ \vdots \\ 0 \\ rU_{M-1}^{n+1} \end{pmatrix} \end{aligned}
-\end{equation}
+4.  Verify that the right-hand side of the equations that we built in parts (1) and (2) can be written as 
+$$
+\begin{multline} \begin{pmatrix} (1-2r) & r & 0 & 0 & \cdots & 0 \\ r & (1-2r) & r & 0 & \cdots & 0 \\ 0 & r & (1-2r) & r & & 0 \\ \vdots & & & & & \\ & & & & r & (1-2r) \end{pmatrix} \begin{pmatrix} U^{n}_1 \\ U^{n}_2 \\ U_3^n \\ \vdots \\U^{n}_{M-2} \end{pmatrix}\\ + \begin{pmatrix} r(U_0^{n+1}+U_0^{n}) \\ 0 \\ \vdots \\ 0 \\ r(U_{M-1}^{n}+U_{M-1}^{n+1}) \end{pmatrix} \end{multline}
+$$
 
 
 5.  Now for the wonderful part! The entire system of equations from part (a) can be written as 
-\begin{equation}
+$$
 A \mathcal{U}^{n+1} = B \mathcal{U}^n + D.
-\end{equation}
+$$
  What are the matrices $A$ and $B$ and what are the vectors $\mathcal{U}^{n+1}$, $\mathcal{U}^n$, and $D$?
 
 6.  To solve for $\mathcal{U}^{n+1}$ at each time step we simply need to do a linear solve: 
-\begin{equation}
+$$
 \mathcal{U}^{n+1} = A^{-1} \left( B \mathcal{U}^n + D \right).
-\end{equation}
+$$
  Of course, we will never do a matrix inverse on a computer. Instead we can lean on tools such as `np.linalg.solve()` to do the linear solve for us.
 
 7.  Finally. Write code to solve the 1D Heat Equation implementing the Crank Nicolson method described in this problem. The setup of your code should be largely the same as for the implicit method from @exr-6.43. You will need to construct the matrices $A$ and $B$ as well as the vector $D$. Then your time stepping loop will contain the code from part 6 of this problem.
@@ -673,9 +673,9 @@ To graphically show the Crank Nicolson method we can again use a finite differen
 ## The Wave Equation
 
 The problems that we have dealt with thus far all model natural diffusion processes: heat transport, molecular diffusion, etc. Another interesting physical phenomenon is that of wave propagation. The 1D *wave equation* is 
-\begin{equation}
+$$
 \begin{aligned} u_{tt} = c u_{xx} \label{eqn:wave1D} \end{aligned}
-\end{equation}
+$$
  where $c$ is a parameter modelling the stiffness of the medium the wave is travelling through. With homogeneous Dirichlet boundary conditions we can think of this as the behaviour of a guitar string after it has been plucked. If the boundaries are in motion then the model might be of someone wiggling a taught string from one end.
 
 ------------------------------------------------------------------------
@@ -684,21 +684,21 @@ The problems that we have dealt with thus far all model natural diffusion proces
 Let us write code to numerically solve the 1D wave equation. As before, we use the notation $U_i^n$ to represent the approximate solution $u(t,x)$ at the point $t=t_n$ and $x=x_i$.
 
 1.  Give a reasonable discretization of the second derivative in time: 
-\begin{equation}
+$$
  u_{tt}(t_{n}, x_i) \approx \underline{\hspace{1in}}. 
-\end{equation}
+$$
 
 
 2.  Give a reasonable discretization of the second derivative in space: 
-\begin{equation}
+$$
  u_{xx}(t_n, x_i) \approx \underline{\hspace{1in}}. 
-\end{equation}
+$$
 
 
 3.  Put your answers to parts (a) and (b) together with the wave equation to get 
-\begin{equation}
+$$
  \frac{??? - ??? + ???}{\Delta t^2} = c \frac{??? - ??? + ???}{\Delta x^2}. 
-\end{equation}
+$$
 
 
 4.  Solve the equation from part 3 for $U_i^{n+1}$. The resulting difference equation is the finite difference scheme for the 1D wave equation.
@@ -742,9 +742,9 @@ What is the expected error in the finite difference scheme for the 1D wave equat
 
 ::: {#exr-6.50}
 Use your finite difference code to solve the 1D wave equation 
-\begin{equation}
+$$
  u_{tt} = c u_{xx} 
-\end{equation}
+$$
  with boundary conditions $u(t,0) = u(t,1) = 0$, initial condition $u(0,x) = 4x(1-x)$, and zero initial velocity. Experiment with different values of $c$. What does the parameter $c$ to the wave? Give a physical interpretation of $c$.
 
 :::
@@ -753,9 +753,9 @@ Use your finite difference code to solve the 1D wave equation
 
 ::: {#exr-6.51}
 Solve the 1D wave equation 
-\begin{equation}
+$$
  u_{tt} = u_{xx} 
-\end{equation}
+$$
  with Dirichlet boundary conditions $u(t,0) = 0.4 \sin(\pi t)$ and $u(t,1) = 0$ along with initial condition $u(0,x) = 0$ and zero initial velocity. This time the left-hand boundary is being controlled externally and the string starts off at equilibrium. Give a physical situation where this sort of setup might arise. Then modify your solution so that both sides of the string are being wiggled at different frequencies.
 
 :::
@@ -764,9 +764,9 @@ Solve the 1D wave equation
 
 ::: {#exr-6.52}
 Now consider the 2D wave equation 
-\begin{equation}
+$$
  u_{tt} = c\left( u_{xx} + u_{yy} \right). 
-\end{equation}
+$$
  We want to build a numerical solution to this new PDE. Just like with the 2D heat equation we propose the notation $U_{i,j}^n$ for the approximation of the function $u(t,x,y)$ at the point $t=t_n$, $x=x_i$, and $y=y_j$.
 
 1.  Give discretizations of the derivatives $u_{tt}$, $u_{xx}$, and $u_{yy}$.
@@ -795,9 +795,9 @@ Solve the 2D wave equation on the unit square with $u$ starting at rest and bein
 ## The Travelling Wave Equation
 
 Now we turn our attention to a new PDE: the transport equation 
-\begin{equation}
+$$
  u_t + v u_x = 0. 
-\end{equation}
+$$
 
  In this equation $u(t,x)$ is the height of a wave at time $t$ and spatial location $x$. The parameter $v$ is the velocity of the wave. Imagine this as sending a single solitary wave pulsing down a taught rope or as sending a single pulse of light down a fibre optic cable.
 
@@ -806,9 +806,9 @@ Now we turn our attention to a new PDE: the transport equation
 
 ::: {#exr-6.55}
 Consider the PDE $u_t + v u_x = 0$. There is a very easy way to get an analytic solution to this equation that describes a travelling wave. If we have the initial condition $u(0,x) = f(x) = e^{-(x-4)^2}$ then we claim that $u(t,x) = f(x-vt)$ is an analytic solution to the PDE. More explicitly, we are claiming that 
-\begin{equation}
+$$
  u(t,x) = e^{-(x-vt-4)^2} 
-\end{equation}
+$$
  is the analytic solution to the PDE. Let us prove this.
 
 1.  Take the $t$ derivative of $u(t,x)$.
@@ -905,9 +905,9 @@ You should have noticed in the previous exercise that you cannot reasonably stab
 
 ::: {#exr-6.60}
 One of the troubles with the finite difference scheme that we have built for the travelling wave equation is that we are using the information at our present spatial location and the next spatial location to the right to propagate the solution forward in time. The trouble here is that the wave is moving from left to right, so the interesting information about the next time step's solution is actually coming from the left, not the right. We call this "looking upwind" since you can think of a fictitious *wind* blowing from left to right, and we need to look "upwind" to see what is coming at us. If we write the spatial derivative as 
-\begin{equation}
+$$
  u_x \approx \frac{U_i^n - U_{i-1}^n}{\Delta x} 
-\end{equation}
+$$
  we still have a first-order approximation of the derivative but we are now looking left instead of right for our spatial derivative. Make this modification in your finite difference code for the travelling wave equation (call it the "upwind method"). Approximate the solution to the same PDE as we worked with in the previous exercises. What do you notice now?
 
 :::
@@ -935,37 +935,37 @@ Complete the following sentences:
 Neither the downwind nor the upwind solutions for the travelling wave equation are satisfactory. They completely miss the interesting dynamics of the analytic solution to the PDE. Some ideas for stabilizing the finite difference solution for the travelling wave equation are as follows. Implement each of these ideas and discuss pros and cons of each. Also draw a finite difference stencil for each of these methods.
 
 1.  Perhaps one of the issues is that we are using first-order methods to approximate $u_t$ and $u_x$. What if we used a second-order approximation for these first derivatives 
-\begin{equation}
+$$
  u_t \approx \frac{U_i^{n+1} - U_i^{n-1}}{2\Delta t} \quad \text{ and } \quad u_x \approx \frac{U_{i+1}^n - U_{i-1}^n}{2\Delta x}? 
-\end{equation}
+$$
  Solve for $U_i^{n+1}$ and implement this method. This is called the **leapfrog method.**
 
 2.  For this next method let us stick with the second-order approximation of $u_x$ but we will do something clever for $u_t$. For the time derivative we originally used 
-\begin{equation}
+$$
  u_t \approx \frac{U_i^{n+1} - U_i^n}{\Delta t} 
-\end{equation}
+$$
  what happens if we replace $U_i^n$ with the average value from the two surrounding spatial points 
-\begin{equation}
+$$
  U_i^n \approx \frac{1}{2} \left( U_{i+1}^n + U_{i-1}^n \right)? 
-\end{equation}
+$$
  This would make our approximation of the time derivative 
-\begin{equation}
+$$
  u_t \approx \frac{U_i^{n+1} - \frac{1}{2} \left( U_{i+1}^n + U_{i-1}^n \right)}{\Delta t}. 
-\end{equation}
+$$
  Solve this modified finite difference equation for $U_i^{n+1}$ and implement this method. This is called the **Lax-Friedrichs** method.
 
 3.  Finally we will do something very clever (and very counter intuitive). What if we inserted some artificial diffusion into the problem? You know from your work with the heat equation that diffusion spreads a solution out. The downwind scheme seemed to have the issue that it was *bunching up* at the beginning and end of the wave, so artificial diffusion might smooth this out. The **Lax-Wendroff method** does exactly that: take a regular Euler-type step in time 
-\begin{equation}
+$$
  u_t \approx \frac{U_i^{n+1} - U_i^n}{\Delta t}, 
-\end{equation}
+$$
  use a second-order centred difference scheme in space to approximate $u_x$ 
-\begin{equation}
+$$
  u_x \approx \frac{U_{i+1}^n - U_{i-1}^n}{2\Delta x}, 
-\end{equation}
+$$
  but add on the term 
-\begin{equation}
+$$
  \left( \frac{v^2 \Delta t^2}{2\Delta x^2} \right) \left( U_{i-1}^n - 2 U_i^n + U_{i+1}^n \right) 
-\end{equation}
+$$
  to the right-hand side of the equation. Notice that this new term is a scalar multiple of the second-order approximation of the second derivative $u_{xx}$. Solve this equation for $U_i^{n+1}$ and implement the Lax-Wendroff method.
 :::
 
@@ -1020,13 +1020,13 @@ Now consider the forced 2D heat equation $u_t = u_{xx} + u_{yy} + 10e^{-(x-0.5)^
 ------------------------------------------------------------------------
 
 Up to this point we have studied PDEs that all depend on time. In many applications, however, we are not interested in the transient (time dependent) behaviour of a system. Instead we are often interested in the steady state solution when the forces in question are in static equilibrium. Two very famous time-independent PDEs are the Laplace Equation 
-\begin{equation}
+$$
  u_{xx} + u_{yy} + u_{zz} = 0 
-\end{equation}
+$$
  and the Poisson equation 
-\begin{equation}
+$$
  u_{xx} + u_{yy} + u_{zz} = f(x,y,z). 
-\end{equation}
+$$
  Notice that both the Laplace and Poisson equations are the equations that we get when we consider the limit $u_t \to 0$. In the limit when the time rate of change goes to zero we are actually just looking at the eventual steady state heat profile resulting from the initial and boundary conditions of the heat equation. In the previous exercises you already wrote code that will show the steady state profiles in a few setups. The trouble with the approach of letting the time-dependent simulation run for a *long time* is that the finite difference solution for the heat equation is known to have stability issues. Moreover, it may take a lot of computational time for the solution to reach the eventual steady state. In the remainder of this section we look at methods of solving for the steady state directly -- without examining any of the transient behaviour. We will first examine a 1D version of the Laplace and Poisson equations.
 
 ------------------------------------------------------------------------
@@ -1049,13 +1049,13 @@ Since there are no external sources of heat we model the steady-state heat profi
 (a)  To get an exact solution of the Laplace equation in this situation we simply need to integrate twice. Do the integration and write the analytic solution (there should be no surprises here).
 
 (b)  To get a numerical solution we first need to partition the domain into finitely many point. For the sake of simplicity let us say that we subdivide the interval into 5 equal sub intervals (so there are 6 points including the endpoints). Furthermore, we know that we can approximate $u_{xx}$ as 
-\begin{equation}
+$$
  u_{xx} \approx \frac{U_{i+1} - 2U_i + U_{i-1}}{\Delta x^2}. 
-\end{equation}
+$$
  Thus we have 6 linear equations: 
-\begin{equation}
+$$
 \begin{aligned} U_0 &= 1 \quad \text{(left boundary condition)}\\ \frac{U_2 - 2U_1 + U_0}{\Delta x^2} &= 0 \\ \frac{U_3 - 2U_2 + U_1}{\Delta x^2} &= 0 \\ \frac{U_4 - 2U_3 + U_2}{\Delta x^2} &= 0 \\ \frac{U_5 - 2U_4 + U_3}{\Delta x^2} &= 0 \\ U_5 &= 0 \quad \text{(right boundary condition).} \end{aligned}
-\end{equation}
+$$
  Notice that there are really only four unknowns since the boundary conditions dictate two of the temperature values. Rearrange this system of equations into a matrix equation and solve for the unknowns $U_1$, $U_2$, $U_3$, and $U_4$. Your coefficient matrix should be $4 \times 4$.
 
 (c)  Compare your answers from parts (a) and (b).
@@ -1080,9 +1080,9 @@ How would we analytically solve the Poisson equation $u_{xx} = f(x)$ in one spat
 
 ::: {#exr-6.70}
 Now we can solve the Poisson equation from the previous problem numerically. Let us again build this with a partition that contains only 6 points just like we did with the Laplace equation a few exercise ago. We know the approximation for $u_{xx}$ so we have the linear system 
-\begin{equation}
+$$
 \begin{aligned} U_0 &= 2 \quad \text{(left boundary condition)}\\ \frac{U_2 - 2U_1 + U_0}{\Delta x^2} &= f(x_1) \\ \frac{U_3 - 2U_2 + U_1}{\Delta x^2} &= f(x_2) \\ \frac{U_4 - 2U_3 + U_2}{\Delta x^2} &= f(x_3) \\ \frac{U_5 - 2U_4 + U_3}{\Delta x^2} &= f(x_4) \\ U_5 &= 0.5 \quad \text{(right boundary condition).} \end{aligned}
-\end{equation}
+$$
 
 
 (a)  Rearrange the system of equations as a matrix equation and then solve the system for $U_1, U_2, U_3$, and $U_4$. There are really only four equations so your matrix should be $4 \times 4$.
@@ -1097,17 +1097,17 @@ Now we can solve the Poisson equation from the previous problem numerically. Let
 
 ::: {#exr-6.71}
 The previous exercises only account for Dirichlet boundary conditions (fixed boundary conditions). We would now like to modify our Poisson solution to allow for a Neumann condition: where we know the derivative of $u$ at one of the boundaries. The statement of the problem is as follows: 
-\begin{equation}
+$$
 \text{Solve: } u_{xx} = f(x) \quad \text{on} \quad x \in (0,1) \quad \text{with} \quad u_x(0) = \alpha \quad \text{and} \quad u(1) = \beta.
-\end{equation}
+$$
  The derivative condition on the boundary can be approximated by using a first-order approximation of the derivative, and as a consequence we have one new equation. Specifically, if we know that $u_x(0) = \alpha$ then we can approximate this condition as 
-\begin{equation}
+$$
  \frac{U_1 - U_0}{\Delta x} = \alpha, 
-\end{equation}
+$$
  and we simply need to add this equation to the system that we were solving in the previous exercise. If we go back to our example of a partition with 6 points the system becomes 
-\begin{equation}
+$$
 \begin{aligned} \frac{U_1 - U_0}{\Delta x} &= \alpha \quad \text{(left boundary condition)}\\ \frac{U_2 - 2U_1 + U_0}{\Delta x^2} &= f(x_1) \\ \frac{U_3 - 2U_2 + U_1}{\Delta x^2} &= f(x_2) \\ \frac{U_4 - 2U_3 + U_2}{\Delta x^2} &= f(x_3) \\ \frac{U_5 - 2U_4 + U_3}{\Delta x^2} &= f(x_4) \\ U_5 &= \beta \quad \text{(right boundary condition).} \end{aligned}
-\end{equation}
+$$
  There are 5 equations this time.
 
 (a)  With a 6 point grid solve the Poisson equation $u_{xx} = 5\sin(2\pi x)$ with $u_x(0) = 0$ and $u(1) = 3$.
@@ -1129,27 +1129,27 @@ numerically.
 We are going to start with a $6 \times 6$ grid of points and explicitly write down all of the equations. In @fig-6.14 the red stars represent boundary points where the value of $u(x,y)$ is known and the blue interior points are the ones where $u(x,y)$ is yet unknown. It should be clear that we should have two indices for each point (one for the $x$ position and one for the $y$ position), but it should also be clear that this will cause problems when writing down the resulting system of equations as a matrix equation (stop and think carefully about this). Therefore, in @fig-6.14 we propose an index, $k$, starting at the top left of the unknown nodes and reading left to right (just like we do with Python arrays).
 
 (a)  Start by discretizing the 2D Poisson equation $u_{xx} + u_{yy} = f(x,y)$. For simplicity we assume that $\Delta x = \Delta y$ so that we can combine like terms from the $x$ derivative and the $y$ derivative. Fill in the missing coefficients and indices below. 
-\begin{equation}
+$$
 U_{i+1,j} + U_{i,j-1} - (\underline{\hspace{0.2in}}) U_{\underline{\hspace{0.2in}},\underline{\hspace{0.2in}}} + U_{\underline{\hspace{0.2in}},\underline{\hspace{0.2in}}} + U_{\underline{\hspace{0.2in}},\underline{\hspace{0.2in}}} = \Delta x^2 f(x_i,y_i)
-\end{equation}
+$$
 
 
 (b)  In @fig-6.14 we see that there are 16 total equations resulting from the discretization of the Poisson equation. Your first task is to write all 16 of these equations. we will get you started:
-\begin{equation}
+$$
 \begin{aligned} \text{$k=0$: } &\quad U_{k=1} + {\color{red} U_{i=1,j=0} } - 4U_{k=0} + {\color{red} U_{i=0,j=1} } + U_{k=4} = \Delta x^2 f(x_1,y_1) \\ \text{$k=1$: } &\quad U_{k=2} + U_{k=0} - 4U_{k=1} + {\color{red} U_{i=0,j=2} } + U_{k=5} = \Delta x^2 f(x_1,y_2) \\ & \qquad \vdots \\ \text{$k=15$: } &\quad {\color{red} U_{i=4,j=5}} + U_{k=14} - 4 U_{k=15} + U_{k=11} + {\color{red} U_{i=5,j=4}} = \Delta x^2 f(x_4,y_4) \end{aligned}
-\end{equation}
+$$
 In this particular example we have homogeneous Dirichlet boundary conditions so all of the boundary values are zero. If this was not the case then every boundary value would need to be moved to the right-hand sides of the equations. 
 
 (c)  We now have a $16 \times 16$ matrix equation to write based on the equations from part (b). Each row and column of the matrix equation is indexed by $k$. The coefficient matrix $A$ is started for you below. Write the whole thing out and fill in the blanks. Notice that this matrix has a much more complicated structure than the coefficient matrix in the 1D Poisson and Laplace equations.
-\begin{equation}
+$$
 A = \begin{pmatrix} -4 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & \cdots & 0 \\ 1 & -4 & 1 & 0 & 0 & 1 & 0 & 0 & \cdots & 0 \\ 0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 & \cdots & 0 \\ 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 & & \\ 1 & 0 & 0 & 0 & -4 & 1 & 0 & 0 & \ddots & \\ 0 & & & & & & & & & \\ \vdots & & & & & & & & & \\ & & & & & & & & & \\ & & & & & & & & & -4 \\ \end{pmatrix}
-\end{equation}
+$$
 
 
 (d)  In the coefficient matrix from part (c) notice that the small matrix 
-\begin{equation}
+$$
 \begin{pmatrix} -4 & 1 & 0 & 0 \\ 1 & -4 & 1 & 0 \\ 0 & 1 & -4 & 1 \\ 0 & 0 & 1 & -4 \end{pmatrix}
-\end{equation}
+$$
  shows up in blocks along the main diagonal. If you have a hard copy of the matrix go back and draw a box around these blocks in the coefficient matrix. Also notice that there are diagonal bands of $1^s$. Discuss the following:
 
   1. Why are the blocks $4 \times 4$?
@@ -1161,9 +1161,9 @@ A = \begin{pmatrix} -4 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & \cdots & 0 \\ 1 & -4 & 1 & 
   4. Why is it helpful to notice this structure?
 
 (e)  The right-hand side of the matrix equation resulting the your system of equations from part (b) is 
-\begin{equation}
+$$
 \boldsymbol{b} = \Delta x^2 \begin{pmatrix} f(x_1,y_1) \\ f(x_1,y_2) \\ f(x_1,y_3) \\ f(x_1,y_4) \\ f(x_2,y_1) \\ f(x_2,y_2) \\ \vdots \\ \\ f(x_4,y_y) \end{pmatrix}.
-\end{equation}
+$$
  Notice the structure of this vector. Why is it structured this way? Why is it useful to notice this?
 
 (f)  Write Python code to solve the problem at hand. Recall that $f(x,y) = -20\exp\left(-\frac{-(x-0.5)^2+(y-0.5)^2}{0.05}\right)$. Show a contour plot of your solution. This will take a little work changing the indices back from $k$ to $i$ and $j$. Think carefully about how you want to code this before you put fingers to keyboard. You might want to use the `np.block()` command to build the coefficient matrix efficiently or you can use loops with carefully chosen indices.
@@ -1246,13 +1246,13 @@ Show the full mathematical details for numerically solving the 1D Laplace and Po
 
 ::: {#exr-6.85}
 In this problem we will solve a more realistic 1D heat equation. We will allow the diffusivity to change spatially, so $D = D(x)$ and we want to solve 
-\begin{equation}
+$$
 u_t = \left( D(x) u_x \right)_x
-\end{equation}
+$$
  on $x \in (0,1)$ with Dirichlet boundary conditions $u(t,0) = u(t,1) = 0$ and initial condition $u(0,x) = \sin(2 \pi x)$. This is "more realistic" since it would be rare to have a perfectly homogeneous medium, and the function $D$ reflects any heterogeneities in the way the diffusion occurs. In this problem we will take $D(x)$ to be the parabola $D(x)= x^3(1-x)$. We start by doing some calculus to rewrite the differential equation: 
-\begin{equation}
+$$
 u_t = D(x) u_{xx}(x) + D'(x) u_x(x).
-\end{equation}
+$$
 
 
 Your jobs are:
@@ -1364,13 +1364,13 @@ data = np.array(pd.read_csv(URL+'1dheatdata.csv'))
 ::: {#exr-6.91}
 You may recall from your differential equations class that population growth under limited resources is governed by the logistic equation $x' = k_1x(1-x/k_2)$ where $x=x(t)$ is the population, $k_1$ is the intrinsic growth rate of the population, and $k_2$ is the carrying capacity of the population. The carrying capacity is the maximum population that can be supported by the environment. The trouble with this model is that the species is presumed to be fixed to a spatial location. Let us make a modification to this model that allows the species to spread out over time while they reproduce. We have seen throughout this chapter that the heat equation $u_t = D(u_{xx} + u_{yy})$ models the diffusion of a substance (like heat or concentration). We therefore propose the model\
 
-\begin{equation}
+$$
  \frac{\partial u}{\partial t} = k_1 u \left( 1 - \frac{u}{k_2} \right) + D \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right) 
-\end{equation}
+$$
  where $u(t,x,y)$ is the population density of the species at time $t$ and spatial point $(x,y)$, $(x,y)$ is a point in some square spatial domain, $k_1$ is the growth rate of the population, $k_2$ is the carrying capacity of the population, and $D$ is the rate of diffusion. Develop a finite difference scheme to solve this PDE. Experiment with this model showing the interplay between the parameters $D$, $k_1$, and $k_2$. Take an initial condition of 
-\begin{equation}
+$$
  u(0,x,y) = e^{-( (x-0.5)^2 + (y-0.5)^2)/0.05}. 
-\end{equation}
+$$
 
 :::
 
@@ -1378,9 +1378,9 @@ You may recall from your differential equations class that population growth und
 
 ::: {#exr-6.92}
 In @exr-6.72 you solved the Poisson equation, $u_{xx} + u_{yy} = f(x,y)$, on the unit square with homogeneous Dirichlet boundary conditions and a forcing function $f(x,y) = -20 \exp\left(-\frac{(x-0.5)^2 + (y-0.5)^2}{0.05} \right)$. Use a $10 \times 10$ grid of points to solve the Poisson equation on the same domain with the same forcing function but with boundary conditions 
-\begin{equation}
+$$
 u(0,y)=0, \quad u(1,y) = 0, \quad u(x,0) = -\sin(\pi x), \quad u(x,1) = 0.
-\end{equation}
+$$
  Show a contour plot of your solution.
 :::
 
@@ -1391,15 +1391,15 @@ In this section we propose several ideas for projects related to numerical parti
 ### Hunting and Diffusion
 
 Let $u$ be a function modelling a mobile population in an environment where it has an intrinsic growth rate of $r$ and a carrying capacity of $K$. If we were only worried about the size of the population we could solve the differential equation 
-\begin{equation}
+$$
 \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right),
-\end{equation}
+$$
  but there is more to the story.
 
 Hunters harvest the population at a per-capita rate $h$ so we can append the differential equation with the harvesting term $-h u$ to arrive at the ordinary differential equation 
-\begin{equation}
+$$
 \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right) - hu.
-\end{equation}
+$$
 
 Since the population is mobile let us make a few assumptions about the environment that they are in and how the individuals move.
 
@@ -1408,10 +1408,9 @@ Since the population is mobile let us make a few assumptions about the environme
 -   Individuals move around randomly.
 
 Clearly these assumptions imply that our model is a simplification of real populations and real environments, but let us go with it for now. Given the nature of these assumptions we assume that a diffusion term models the spread of the individuals in the population. Hence, the PDE model is 
-\begin{equation}
+$$
 \frac{\partial u}{\partial t} = ru\left( 1-\frac{u}{K} \right) - hu + D \left( u_{xx} + u_{yy} \right).
-\end{equation}
-
+$$
 
 1.  Use any of your ODE codes to solve the ordinary differential equation with harvesting. Give a complete description of the parameter space.
 
@@ -1422,9 +1421,9 @@ Clearly these assumptions imply that our model is a simplification of real popul
 ### Heating Adobe Houses
 
 Adobe houses, typically built in desert climates, are known for their great thermal efficiency. The heat equation 
-\begin{equation}
+$$
 \frac{\partial T}{\partial t} = \frac{k}{c_p \rho} \left( T_{xx} + T_{yy} + T_{zz} \right),
-\end{equation}
+$$
  where $c_p$ is the specific heat of the adobe, $\rho$ is the mass density of the adobe, and $k$ is the thermal conductivity of the adobe, can be used to model the heat transfer through the adobe from the outside of the house to the inside. Clearly, the thicker the adobe walls the better, but there is a trade off to be considered:
 
 -   it would be prohibitively expensive to build walls so think that the inside temperature was (nearly) constant, and

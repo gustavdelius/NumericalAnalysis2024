@@ -42,7 +42,7 @@ For the gradient descent method we have
 $$
 g(x)=x-\alpha f'(x),
 $$ {#eq-theory_gradient_descent}
-where $\alpha$ is the learning rate. The fixed point of this method is a minimum of $f$. The derivative of $g$ is where $\alpha$ is the learning rate. So
+where $\alpha$ is the learning rate. The fixed point of this method is a minimum of $f$. The derivative of $g$ is
 $$
 g'(x)=1-\alpha f''(x).
 $$ {#eq-theory_gradient_descent_derivative}

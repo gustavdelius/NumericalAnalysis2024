@@ -288,7 +288,7 @@ E_{n+1}&amp;=|x_{n+1}-x^*|=|g'(x^*)||x_n-x^*|+\mathcal{O}(x_n-x^*)^2\\
 <div id="exm-gradient_descent_order" class="theorem example">
 <p><span class="theorem-title"><strong>Example 8.1 (Order of convergence of gradient descent)</strong></span> For the gradient descent method we have <span id="eq-theory_gradient_descent"><span class="math display">\[
 g(x)=x-\alpha f'(x),
-\tag{8.6}\]</span></span> where <span class="math inline">\(\alpha\)</span> is the learning rate. The fixed point of this method is a minimum of <span class="math inline">\(f\)</span>. The derivative of <span class="math inline">\(g\)</span> is where <span class="math inline">\(\alpha\)</span> is the learning rate. So <span id="eq-theory_gradient_descent_derivative"><span class="math display">\[
+\tag{8.6}\]</span></span> where <span class="math inline">\(\alpha\)</span> is the learning rate. The fixed point of this method is a minimum of <span class="math inline">\(f\)</span>. The derivative of <span class="math inline">\(g\)</span> is <span id="eq-theory_gradient_descent_derivative"><span class="math display">\[
 g'(x)=1-\alpha f''(x).
 \tag{8.7}\]</span></span> Because this is non-zero, the method is only first-order convergent. The learning rate <span class="math inline">\(\alpha\)</span> must be chosen carefully to ensure convergence.</p>
 </div>
